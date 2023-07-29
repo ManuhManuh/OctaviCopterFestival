@@ -6,19 +6,18 @@ public class Fly : MonoBehaviour
 
     
 {
-    public bool Flying => Flying;
+    public bool Flying => flying;
 
-    [SerializeField] GameObject UFO;
-    [SerializeField] float speed;
+    [SerializeField] GameObject octaviCopter;
     [SerializeField] HingeJoint hinge;
-
-    private float stickOffset;
+    [SerializeField] float speed;
+    [SerializeField] float angleCoefficient;
     private bool flying;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        flying = false;
     }
 
     // Update is called once per frame
@@ -42,15 +41,17 @@ public class Fly : MonoBehaviour
     public void FlyUp()
     {
         // Fly up
-        UFO.transform.Translate(Vector3.up * speed * Time.deltaTime);
-        //gameObject.transform.Translate(Vector3.up * speed * Time.deltaTime);
+        Debug.Log($"Angle: { hinge.angle}");
+        float speedModifier = hinge.angle * angleCoefficient;
+        octaviCopter.transform.Translate(Vector3.up * speed * speedModifier * Time.deltaTime);
     }
 
     public void FlyDown()
     {
         // Fly down
-        UFO.transform.Translate(Vector3.down * speed * Time.deltaTime);
-        //gameObject.transform.Translate(Vector3.up * speed * Time.deltaTime);
+        Debug.Log($"Angle: { hinge.angle}");
+        float speedModifier = hinge.angle * -angleCoefficient;
+        octaviCopter.transform.Translate(Vector3.down * speed * speedModifier * Time.deltaTime);
     }
 
     public void OnStickHeld()
@@ -58,18 +59,13 @@ public class Fly : MonoBehaviour
 
         flying = true;
 
-        // remove constraints on the stick so it can come along
-        //hinge.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationY | 
-        //                                                         RigidbodyConstraints.FreezeRotationZ;
     }
 
     public void OnStickReleased()
     {
         flying = false;
 
-        // replace stick constraints
-        //hinge.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY | 
-        //                                                         RigidbodyConstraints.FreezeRotationY | 
-        //                                                         RigidbodyConstraints.FreezeRotationZ;
     }
+
+   
 }
