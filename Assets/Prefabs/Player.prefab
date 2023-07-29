@@ -737,7 +737,7 @@ GameObject:
   - component: {fileID: 7959021745467485527}
   - component: {fileID: 7959021745467485526}
   - component: {fileID: 7959021745467485521}
-  - component: {fileID: 5241638302405388702}
+  - component: {fileID: 8201682948943116898}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -782,7 +782,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.01
+  near clip plane: 0.1
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -828,7 +828,7 @@ MonoBehaviour:
   m_TrackingType: 0
   m_UpdateType: 0
   m_UseRelativeTransform: 0
---- !u!114 &5241638302405388702
+--- !u!114 &8201682948943116898
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
