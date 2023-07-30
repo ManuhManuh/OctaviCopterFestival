@@ -2702,11 +2702,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: OctaviCopterComplete
       objectReference: {fileID: 0}
-    - target: {fileID: 9041424627829484173, guid: 4e5825f89822e7a49ae04b8ac2aa4031,
-        type: 3}
-      propertyPath: speed
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e5825f89822e7a49ae04b8ac2aa4031, type: 3}
 --- !u!1001 &9136014409353971539
@@ -2775,6 +2770,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Anrena
+      objectReference: {fileID: 0}
+    - target: {fileID: 9136014409318921767, guid: b39f01ba84aaf4440aa04f2f80f43e32,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b39f01ba84aaf4440aa04f2f80f43e32, type: 3}
