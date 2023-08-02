@@ -4,18 +4,42 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public int currentLevelID;
+    public Level CurrentLevel => levels[currentLevelIndex];
+    public float arenaWidth;
+    public float arenaHeight;
+    public float arenaDepth;
 
     [SerializeField] public List<Level> levels = new List<Level>();
+    [SerializeField] private LevelManager levelManagerPrefab;
+    private LevelManager currentLevelManager;
+    private int currentLevelIndex;
 
+
+    private void Awake()
+    {
+        currentLevelIndex = -1;
+    }
+
+    private void Start()
+    {
+        OnLevelCompleted();
+    }
     public void OnLevelCompleted()
     {
-        currentLevelID++;
-        if (currentLevelID == levels.Count)
+        if(currentLevelManager != null) Destroy(currentLevelManager);
+
+        currentLevelIndex++;
+        if (currentLevelIndex == levels.Count)
         {
             // There are no more levels
-            currentLevelID = -1;
+            currentLevelIndex = -1;
             GameOver();
+        }
+        else
+        {
+            // create a new level
+            currentLevelManager = Instantiate(levelManagerPrefab);
+            Debug.Log($"Instantiating level manager for {levels[currentLevelIndex].name}");
         }
 
     }
@@ -23,5 +47,6 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         // TODO: Update UI with game over content
+        Debug.Log("Game over!!");
     }
 }

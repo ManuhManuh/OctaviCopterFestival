@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Note : MonoBehaviour
 {
+    public float height;
 
     [SerializeField] private string noteName;
     [SerializeField] private AudioClip audioClip;
@@ -16,6 +17,7 @@ public class Note : MonoBehaviour
         if (collision.gameObject.CompareTag("OctaviCopter"))
         {
             collected = true;
+            
         }
     }
 
