@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Fly : MonoBehaviour
 
@@ -9,9 +10,11 @@ public class Fly : MonoBehaviour
     public bool Flying => flying;
 
     [SerializeField] GameObject octaviCopter;
-    [SerializeField] HingeJoint hinge;
+    //[SerializeField] HingeJoint hinge;
+    [SerializeField] GameObject stick;
     [SerializeField] float speed;
     [SerializeField] float angleCoefficient;
+ 
     private bool flying;
 
     // Start is called before the first frame update
@@ -25,33 +28,44 @@ public class Fly : MonoBehaviour
     {
         if (flying)
         {
-            if(hinge.angle < 0)
+            float stickAngle = stick.transform.rotation.eulerAngles.x;
+
+            // if(hinge.angle < 0)
+            if(stickAngle < 180)     // pushing away
             {
-                 FlyUp();
-                Debug.Log("Flying up!");
+                 FlyUp(stickAngle);
+                //Debug.Log("Flying up!");
             }
-            else
+            if(stickAngle > 180)
             {
-                 FlyDown();
-                Debug.Log("Flying down!");
+                 FlyDown(stickAngle - 360);
+                //Debug.Log("Flying down!");
             }
         }
     }
 
-    public void FlyUp()
+    public void FlyUp(float stickAngle)
     {
         // Fly up
-        Debug.Log($"Angle: { hinge.angle}");
-        float speedModifier = hinge.angle * angleCoefficient;
+
+        // float speedModifier = hinge.angle * angleCoefficient;
+        float speedModifier = stickAngle * angleCoefficient;
         octaviCopter.transform.Translate(Vector3.up * speed * speedModifier * Time.deltaTime);
+    
     }
 
-    public void FlyDown()
+    public void FlyDown(float stickAngle)
     {
         // Fly down
-        Debug.Log($"Angle: { hinge.angle}");
-        float speedModifier = hinge.angle * -angleCoefficient;
+    
+        // float speedModifier = hinge.angle * -angleCoefficient;
+        if(stickAngle > 270)
+        {
+
+        }
+        float speedModifier = stickAngle * -angleCoefficient;
         octaviCopter.transform.Translate(Vector3.down * speed * speedModifier * Time.deltaTime);
+      
     }
 
     public void OnStickHeld()
@@ -64,6 +78,7 @@ public class Fly : MonoBehaviour
     public void OnStickReleased()
     {
         flying = false;
+        stick.transform.rotation = Quaternion.identity;
 
     }
 
