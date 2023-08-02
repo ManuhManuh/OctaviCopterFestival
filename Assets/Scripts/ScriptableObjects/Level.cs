@@ -9,10 +9,7 @@ public class Level : ScriptableObject
     public int levelID;
     public string levelName;
     public Note[] requiredNotes;
-    public float minXNotePosition = -3;
-    public float maxXNotePosition = 3;
-    public float minYNotePosition = -3;
-    public float maxYNotePosition = 3;
-    public float minZNotePosition = -3;
-    public float maxZNotePosition = 3;
+    public float noteSpacing;
+    public float xPosition;
+    public bool randomNoteSpawn;
 }

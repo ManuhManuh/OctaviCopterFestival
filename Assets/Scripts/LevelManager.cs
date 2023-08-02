@@ -26,8 +26,12 @@ public class LevelManager : MonoBehaviour
         // Get reference to game manager
         gameManager = FindObjectOfType<GameManager>();
 
+
         // Set the initial state and starting values of flags and indexes
-        ResetLevel();
+        currentLevel = gameManager.CurrentLevel;
+        currentNoteIndex = 0;
+        GotoState(LevelState.LoadingLevel);
+
     }
 
     private void OnStateEntered(LevelState state)
@@ -114,22 +118,50 @@ public class LevelManager : MonoBehaviour
     {
 
         // get a reference to the SO for the current level
-        currentLevel = gameManager.levels[gameManager.currentLevelID];
-        foreach(Note note in currentLevel.requiredNotes)
+        currentLevel = gameManager.CurrentLevel;
+
+        if (currentLevel.randomNoteSpawn)
         {
-            Instantiate(note, GetRandomPosition(), Quaternion.identity);
+            RandomNoteSpawn();
+        }
+        else
+        {
+            FixedNoteSpawn();
         }
 
         GotoState(LevelState.LookingForNote);
     }
 
-    private Vector3 GetRandomPosition()
+    private void FixedNoteSpawn()
     {
-        float x = Random.Range(currentLevel.minXNotePosition, currentLevel.maxXNotePosition);
-        float y = Random.Range(currentLevel.minYNotePosition, currentLevel.maxYNotePosition);
-        float z = Random.Range(currentLevel.minZNotePosition, currentLevel.maxZNotePosition);
+        float zPosition = 0;
 
-        return new Vector3(x, y, z);
+        foreach (Note note in currentLevel.requiredNotes)
+        {
+            zPosition = zPosition + currentLevel.noteSpacing;
+            Vector3 notePosition = new Vector3(currentLevel.xPosition, note.height, zPosition);
+            Instantiate(note, notePosition, Quaternion.identity);
+        }
+    }
+
+    private void RandomNoteSpawn()
+    {
+
+        foreach (Note note in currentLevel.requiredNotes)
+        {
+            float xPosition = RandomPosition(gameManager.arenaWidth);
+            float yPosition = Mathf.Abs(RandomPosition(gameManager.arenaHeight));
+            float zPosition = RandomPosition(gameManager.arenaDepth);
+
+            Vector3 notePosition = new Vector3(xPosition, yPosition, zPosition);
+            Instantiate(note, notePosition, Quaternion.identity);
+        }
+        
+    }
+
+    private float RandomPosition(float fullDimension)
+    {
+        return Random.Range(fullDimension * -0.5f, fullDimension * 0.5f);
     }
 
     private void LookingForNoteEntered()
@@ -138,6 +170,7 @@ public class LevelManager : MonoBehaviour
         targetNote = currentLevel.requiredNotes[currentNoteIndex];
 
         // TODO: Update UI with note to be found
+        Debug.Log($"Note to find: {targetNote}");
     }
 
     
@@ -157,6 +190,7 @@ public class LevelManager : MonoBehaviour
     private void LookingForNoteLeft()
     {
         // TODO: Update UI to show correct hit
+        Debug.Log("Correct hit!");
     }
 
     private void EvaluatingLevelEntered()
@@ -179,22 +213,18 @@ public class LevelManager : MonoBehaviour
         // let gameManager know that level is complete
         gameManager.OnLevelCompleted();
 
-        // see if we need to do another level
-        if (gameManager.currentLevelID != -1)
-        {
-            ResetLevel();
-        }
     }
 
     private void ResetLevel()
     {
-        currentNoteIndex = 0;
-        GotoState(LevelState.LoadingLevel);
+
+        
 
     }
 
     private void LevelOverEntered()
     {
         // TODO: Update UI with Level Over content
+        Debug.Log($"Level {currentLevel.name} over!");
     }
 }
