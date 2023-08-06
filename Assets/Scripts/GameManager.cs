@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public Level CurrentLevel => levels[currentLevelIndex];
-    public float arenaWidth;
-    public float arenaHeight;
-    public float arenaDepth;
 
     [SerializeField] public List<Level> levels = new List<Level>();
     [SerializeField] private LevelManager levelManagerPrefab;
+    
     private LevelManager currentLevelManager;
     private int currentLevelIndex;
 

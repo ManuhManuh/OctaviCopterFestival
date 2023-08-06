@@ -8,8 +8,11 @@ public class Level : ScriptableObject
 {
     public int levelID;
     public string levelName;
-    public Note[] requiredNotes;
+    public Track[] tracks;
+    public Track winningTrack;
+    public int pointValue;
+    public float trackSpacing;
     public float noteSpacing;
-    public float xPosition;
-    public bool randomNoteSpawn;
+    public float trackStartDistance;
+    public float clueTiming;
 }
