@@ -17,15 +17,15 @@ public class Note : MonoBehaviour
     {
         audioSource = gameObject.GetComponentInChildren<AudioSource>();
     }
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
         // object check not required - collision controlled through physics matrix
-
         NoteHitActivities();
     }
-
     private void NoteHitActivities()
     {
+        // Debug.Log($"Triggered {this.name}: tell {OnNoteCollected.GetInvocationList().Length} subscribers");
         audioSource.Play();
         collected = true;
         OnNoteCollected?.Invoke(this);

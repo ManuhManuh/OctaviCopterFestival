@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c605a6d43594cbb4e934cc00e22d371c, type: 3}
-  m_Name: Level1
+  m_Name: Level2
   m_EditorClassIdentifier: 
   levelID: 0
-  levelName: Basic 5th
+  levelName: 
   tracks:
-  - {fileID: 11400000, guid: 4e46d7c666b449a4e81305c1be2153e0, type: 2}
-  - {fileID: 11400000, guid: 1067574e270c86c409e677883eb6342d, type: 2}
-  - {fileID: 11400000, guid: aff8fdd764cad1b4e99858bc06e20b03, type: 2}
-  winningTrack: {fileID: 11400000, guid: 4e46d7c666b449a4e81305c1be2153e0, type: 2}
-  pointValue: 10
+  - {fileID: 11400000, guid: fd772075d4ca81e4bb7d34bb62301a0f, type: 2}
+  - {fileID: 11400000, guid: 83aa58d42d17d614fbc3f88778cf72ed, type: 2}
+  - {fileID: 11400000, guid: 50269c49d6960f34fb8d483d64fefc38, type: 2}
+  winningTrack: {fileID: 11400000, guid: 50269c49d6960f34fb8d483d64fefc38, type: 2}
+  pointValue: 15
   trackSpacing: 5
   noteSpacing: 10
   trackStartDistance: 10

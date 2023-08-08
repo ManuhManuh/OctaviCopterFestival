@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,8 +12,8 @@ public class LevelManager : MonoBehaviour
         None,
         LoadingLevel,
         FlyingTrack,
-        EvaluatingLevel,
-        LevelOver
+        EvaluatingLevel
+      
     }
 
     private GameManager gameManager;
@@ -20,20 +21,28 @@ public class LevelManager : MonoBehaviour
     private LevelState currentState;
     private Level currentLevel;
     private GameObject player;
+    private Vector3 playerStartPosition;
     private Text feedback;
-    private List<Note> selectedTrackNotes = new List<Note>();
-    private List<Note> winningTrackNotes = new List<Note>();
+    private Dictionary<Note, bool> levelNotes = new Dictionary<Note, bool>();
+    private int correctNotesCollected;
     private int notesCollected;
+    private int notesPerTrack;
 
     private void Start()
     {
         // Get reference to game manager
         gameManager = FindObjectOfType<GameManager>();
         player = GameObject.FindGameObjectWithTag("Player");
+        player.transform.position = gameManager.PlayerStartPosition.transform.position;
 
         // Set the initial state and starting values of flags and indexes
         currentLevel = gameManager.CurrentLevel;
         feedback = GameObject.Find("Feedback").GetComponent<Text>();
+
+        if (currentLevel.environmentAsset != null)
+        {
+            Instantiate(currentLevel.environmentAsset);
+        }
 
         GotoState(LevelState.LoadingLevel);
 
@@ -55,16 +64,12 @@ public class LevelManager : MonoBehaviour
 
             case LevelState.FlyingTrack:
                 {
+                    PresentFeedback($"Start flying!");
                     break;
                 }
             case LevelState.EvaluatingLevel:
                 {
                     EvaluatingLevelEntered();
-                    break;
-                }
-            case LevelState.LevelOver:
-                {
-                    LevelOverEntered();
                     break;
                 }
         }
@@ -103,13 +108,15 @@ public class LevelManager : MonoBehaviour
 
     private void LoadingLevelEntered()
     {
+        // make sure we're starting with a clean slate
+        InitializeLevel();
 
         // get a reference to the SO for the current level
         currentLevel = gameManager.CurrentLevel;
-        feedback.text = ($"Starting {currentLevel.name}!");
+        PresentFeedback($"Starting {currentLevel.name}!");
 
         // collect a list of the tracks in the level
-        float playerPos = player.transform.position.x;
+        float playerPos = gameManager.PlayerStartPosition.position.x;
         float startPosition = currentLevel.tracks.Length % 2 == 0 ?
                                 playerPos - (currentLevel.trackSpacing * (currentLevel.tracks.Length / 2)) - (currentLevel.trackSpacing / 2) :
                                 playerPos - (currentLevel.trackSpacing * (currentLevel.tracks.Length / 2));
@@ -128,6 +135,7 @@ public class LevelManager : MonoBehaviour
         {
             int randomTrack = Random.Range(0, createTracks.Count - 1);
 
+            notesPerTrack = 0;  // will keep the value found for the last track (all should be the same count)
             InstantiateTrack(createTracks[randomTrack], currentTrackPosition);
 
             createTracks.RemoveAt(randomTrack);
@@ -136,17 +144,24 @@ public class LevelManager : MonoBehaviour
         }
 
         // Give player note clue
-
         StartCoroutine(PerformTrackHint());
 
-        
+    }
+
+    private void InitializeLevel()
+    {
+        // reset all control variables
+        levelNotes = new Dictionary<Note, bool>();
+        correctNotesCollected = 0;
+        notesCollected = 0;
+
     }
 
     private void InstantiateTrack(Track track, float trackXPosition)
     {
         float yPosition;
         float zPosition = currentLevel.trackStartDistance - currentLevel.noteSpacing;
-        bool isWinningTrack = track.name == currentLevel.winningTrack.name;
+        bool needToCollect = track.name == currentLevel.winningTrack.name;
 
         foreach(Note note in track.notes)
         {
@@ -155,81 +170,73 @@ public class LevelManager : MonoBehaviour
             Vector3 notePosition = new Vector3(trackXPosition, yPosition, zPosition);
 
             Note newNote = Instantiate(note, notePosition, Quaternion.identity);
-            if (isWinningTrack)
-            {
-                // collect and subscribe to the note
-                winningTrackNotes.Add(note);
-                note.OnNoteCollected += CheckNote;
-            }
-            
+
+            // collect and subscribe to the note
+            levelNotes.Add(newNote, needToCollect);
+            newNote.OnNoteCollected += CheckNote;
 
         }
 
-    }
-    
-    private void EvaluatingLevelEntered()
-    {
+        notesPerTrack = track.notes.Length;
 
-        // check to see if we are done the level
-        if (winningTrackNotes.Count == 0)
-        {
-            GotoState(LevelState.LevelOver);
-        }
-        else
-        {
-            feedback.text = "Oops - this was the wrong track! Try again!";
-            GotoState(LevelState.FlyingTrack);
-        }
-    }
-
-    private void AllNotesFoundEntered()
-    {
-
-        // let gameManager know that level is complete
-        gameManager.OnLevelCompleted();
-
-    }
-
-    private void LevelOverEntered()
-    {
-        // TODO: Update UI with Level Over content
-        feedback.text = ($"Level {currentLevel.name} over!");
     }
 
     private void CheckNote(Note hitNote)
     {
         notesCollected++;
-        feedback.text = ($"Hit {hitNote.noteName}");
+        PresentFeedback($"Hit {hitNote.noteName}: current value is: {levelNotes[hitNote]}");
 
-        foreach(Note note in winningTrackNotes)
+        if (levelNotes[hitNote])
         {
-            if(note == hitNote)
-            {
-                winningTrackNotes.Remove(note);
-               
-            }
-            
+            correctNotesCollected++;
         }
 
-        if (notesCollected == winningTrackNotes.Count)
+        // if we've collected our quota of notes
+        if (notesCollected == notesPerTrack)
         {
             GotoState(LevelState.EvaluatingLevel);
         }
 
     }
 
+    private void EvaluatingLevelEntered()
+    {
+
+        // check to see if we collected the correct notes
+        PresentFeedback($"Evaluating level: {correctNotesCollected} winning notes collected");
+        gameManager.OnLevelCompleted(correctNotesCollected == notesPerTrack);
+
+    }
+
+
     private IEnumerator PerformTrackHint()
     {
-        
-        foreach(Note note in winningTrackNotes)
-        {
+        PresentFeedback($"Giving {currentLevel.name} hint");
+        yield return new WaitForSeconds(currentLevel.clueTiming);
 
-            note.audioSource.Play();
+        foreach (Note note in levelNotes.Keys)
+        {
+            // if the Value of the note (needs to be collected) is true 
+            if(levelNotes[note]) note.audioSource.Play();
 
             // if visual clues become a thing (i.e., keyboard keys light up) it can go here too
             yield return new WaitForSeconds(currentLevel.clueTiming);
         }
 
         if(currentState == LevelState.LoadingLevel) GotoState(LevelState.FlyingTrack);
+    }
+
+    private void PresentFeedback(string message)
+    {
+        feedback.text = (message);
+        Debug.Log(message);
+    }
+
+    private void OnDisable()
+    {
+        foreach(KeyValuePair<Note, bool> note in levelNotes)
+        {
+            note.Key.OnNoteCollected += CheckNote;
+        }
     }
 }

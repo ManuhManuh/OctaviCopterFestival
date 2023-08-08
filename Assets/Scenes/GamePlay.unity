@@ -339,10 +339,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc2842598a13bc419dee5c82bda5e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startLevelActionReference: {fileID: 3049924841469882078, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
   levels:
   - {fileID: 11400000, guid: 8ff7a27bb1667c947954eec011bddef2, type: 2}
+  - {fileID: 11400000, guid: 4cdd32057caa85940b812aae5f1b2b06, type: 2}
   levelManagerPrefab: {fileID: 9098552129751637603, guid: a6b784b0db1ac8544a3ffc2e8302d579,
     type: 3}
+  timeBetweenLevels: 1
+  timeBeforeRestartAllowed: 10
 --- !u!4 &457355963
 Transform:
   m_ObjectHideFlags: 0
@@ -383,16 +388,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 711776315}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 25.6}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 36.2}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 135308432}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0.5, y: -10.4}
-  m_SizeDelta: {x: -884.73, y: 30}
+  m_AnchoredPosition: {x: 1.6300049, y: 23.03}
+  m_SizeDelta: {x: -651.96, y: 62.66}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &711776317
 MonoBehaviour:
@@ -407,7 +412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.066037714, g: 0.06385723, b: 0.06385723, a: 1}
+  m_Color: {r: 0.8862745, g: 0.1327514, b: 0.0862745, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -416,16 +421,16 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 10
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 1
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 'Level:'
 --- !u!222 &711776318
@@ -610,6 +615,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1311457217842350882, guid: 8791408c37d534548b427de8b6475d39,
+        type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311457219192340944, guid: 8791408c37d534548b427de8b6475d39,
+        type: 3}
+      propertyPath: m_ActionAssets.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311457219192340944, guid: 8791408c37d534548b427de8b6475d39,
+        type: 3}
+      propertyPath: m_ActionAssets.Array.data[1]
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f,
+        type: 3}
     - target: {fileID: 1311457219192340945, guid: 8791408c37d534548b427de8b6475d39,
         type: 3}
       propertyPath: m_Name
@@ -738,7 +759,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1611797448}
   - component: {fileID: 1611797449}
-  m_Layer: 0
+  - component: {fileID: 1611797450}
+  m_Layer: 6
   m_Name: NoteCollector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -753,7 +775,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1611797447}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.139, z: 1.646}
+  m_LocalPosition: {x: 0, y: 0.1, z: 1.646}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 982776819}
@@ -772,3 +794,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &1611797450
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611797447}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
