@@ -8,16 +8,17 @@ public class GameManager : MonoBehaviour
 {
     public InputActionReference startLevelActionReference = null;
     public Level CurrentLevel => levels[currentLevelIndex];
-    public Transform PlayerStartPosition => playerStartPosition;
+    public Vector3 PlayerStartPosition => playerStartPosition;
 
     [SerializeField] public List<Level> levels = new List<Level>();
     [SerializeField] private LevelManager levelManagerPrefab;
     [SerializeField] private float timeBetweenLevels;
     [SerializeField] private float timeBeforeRestartAllowed;
-    
+    [SerializeField] GameObject player;
+
     private LevelManager currentLevelManager;
     private int currentLevelIndex;
-    private Transform playerStartPosition;
+    private Vector3 playerStartPosition;
     private Text feedback;
     private bool restartAllowed;
 
@@ -28,9 +29,14 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        playerStartPosition = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerStartPosition = player.transform.position;
+
         feedback = GameObject.Find("Feedback").GetComponent<Text>();
-        StartLevel();
+
+        restartAllowed = true;
+        PresentFeedback("Press X or A to start!");
+
     }
 
     private void Update()
@@ -42,47 +48,58 @@ public class GameManager : MonoBehaviour
             StartLevel();
 
         }
-        else
-        {
-            Debug.Log($"Button value: {buttonPressValue}");
-        }
     }
 
     public void OnLevelCompleted(bool successful)
     {
-     //   if(currentLevelManager != null) Destroy(currentLevelManager);
+        if(currentLevelManager != null) Destroy(currentLevelManager);
 
-        if(successful)
+        Note[] notes = FindObjectsOfType<Note>();
+        if(notes.Length == 0)
         {
-            currentLevelIndex++;
-            if (currentLevelIndex == levels.Count)
+            if (successful)
             {
-                // There are no more levels
-                currentLevelIndex = -1;
-                GameOver();
+                currentLevelIndex++;
+                if (currentLevelIndex == levels.Count)
+                {
+                    // There are no more levels
+                    currentLevelIndex = -1;
+                    GameOver();
+                }
+                else
+                {
+                    PresentFeedback("Level completed successfully! Press X or A to start next level");
+                    restartAllowed = true;
+                }
             }
             else
             {
-                PresentFeedback("Level completed successfully! Press X or A to start next level");
+                PresentFeedback("Level failed! Press X or A to retry");
+                restartAllowed = true;
             }
         }
         else
         {
-            PresentFeedback("Level failed! Press X or A to retry");
-        }
+            PresentFeedback($"There are still {notes.Length} notes in the scene - not ready for next level yet");
 
+        }
 
     }
 
     public void StartLevel()
     {
+        restartAllowed = false;
+
         if (currentLevelManager != null) Destroy(currentLevelManager);
 
         // create a new level
         currentLevelManager = Instantiate(levelManagerPrefab);
-        PresentFeedback($"Instantiating level manager for {levels[currentLevelIndex].name}");
-        restartAllowed = false;
-        StartCoroutine(MinimumWaitForRestart(timeBeforeRestartAllowed));
+
+        // reset player
+        RelocatePlayer(playerStartPosition);
+
+        // pause before allowing a reset
+        // StartCoroutine(MinimumWaitForRestart(timeBeforeRestartAllowed));
     }
 
     
@@ -102,6 +119,14 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(restartDelay);
         restartAllowed = true;
+
+    }
+
+    private void RelocatePlayer(Vector3 newPosition)
+    {
+        // this may need to be a fade in/out vignette if it is too disorienting to just teleport back to the beginning
+
+        player.transform.position = newPosition;
 
     }
 }

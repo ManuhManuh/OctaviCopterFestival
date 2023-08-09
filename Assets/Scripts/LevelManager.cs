@@ -20,7 +20,6 @@ public class LevelManager : MonoBehaviour
 
     private LevelState currentState;
     private Level currentLevel;
-    private GameObject player;
     private Vector3 playerStartPosition;
     private Text feedback;
     private Dictionary<Note, bool> levelNotes = new Dictionary<Note, bool>();
@@ -32,8 +31,6 @@ public class LevelManager : MonoBehaviour
     {
         // Get reference to game manager
         gameManager = FindObjectOfType<GameManager>();
-        player = GameObject.FindGameObjectWithTag("Player");
-        player.transform.position = gameManager.PlayerStartPosition.transform.position;
 
         // Set the initial state and starting values of flags and indexes
         currentLevel = gameManager.CurrentLevel;
@@ -111,12 +108,8 @@ public class LevelManager : MonoBehaviour
         // make sure we're starting with a clean slate
         InitializeLevel();
 
-        // get a reference to the SO for the current level
-        currentLevel = gameManager.CurrentLevel;
-        PresentFeedback($"Starting {currentLevel.name}!");
-
         // collect a list of the tracks in the level
-        float playerPos = gameManager.PlayerStartPosition.position.x;
+        float playerPos = gameManager.PlayerStartPosition.x;
         float startPosition = currentLevel.tracks.Length % 2 == 0 ?
                                 playerPos - (currentLevel.trackSpacing * (currentLevel.tracks.Length / 2)) - (currentLevel.trackSpacing / 2) :
                                 playerPos - (currentLevel.trackSpacing * (currentLevel.tracks.Length / 2));
@@ -142,7 +135,6 @@ public class LevelManager : MonoBehaviour
             currentTrackPosition += currentLevel.trackSpacing;
 
         }
-
         // Give player note clue
         StartCoroutine(PerformTrackHint());
 
@@ -184,7 +176,7 @@ public class LevelManager : MonoBehaviour
     private void CheckNote(Note hitNote)
     {
         notesCollected++;
-        PresentFeedback($"Hit {hitNote.noteName}: current value is: {levelNotes[hitNote]}");
+        PresentFeedback($"You hit {hitNote.noteName}");
 
         if (levelNotes[hitNote])
         {
@@ -201,24 +193,29 @@ public class LevelManager : MonoBehaviour
 
     private void EvaluatingLevelEntered()
     {
-
-        // check to see if we collected the correct notes
-        PresentFeedback($"Evaluating level: {correctNotesCollected} winning notes collected");
-        gameManager.OnLevelCompleted(correctNotesCollected == notesPerTrack);
+        StartCoroutine(CleanUpAndEndLevel());
 
     }
 
 
     private IEnumerator PerformTrackHint()
     {
+        
+        yield return new WaitForSeconds(1); 
+
         PresentFeedback($"Giving {currentLevel.name} hint");
-        yield return new WaitForSeconds(currentLevel.clueTiming);
+        List<Note> playNotes = new List<Note>();
 
         foreach (Note note in levelNotes.Keys)
         {
             // if the Value of the note (needs to be collected) is true 
-            if(levelNotes[note]) note.audioSource.Play();
+            if (levelNotes[note]) playNotes.Add(note);
 
+        }
+
+        foreach(Note note in playNotes)
+        {
+            note.audioSource.Play();
             // if visual clues become a thing (i.e., keyboard keys light up) it can go here too
             yield return new WaitForSeconds(currentLevel.clueTiming);
         }
@@ -232,11 +229,20 @@ public class LevelManager : MonoBehaviour
         Debug.Log(message);
     }
 
-    private void OnDisable()
+    private IEnumerator CleanUpAndEndLevel()
     {
-        foreach(KeyValuePair<Note, bool> note in levelNotes)
+        yield return new WaitForSeconds(3); // time for sound from last note collected to decay
+        // destroy the notes, thereby also removing the subscriptions to them ;)
+        Note[] notes = FindObjectsOfType<Note>();
+        foreach(Note note in notes)
         {
-            note.Key.OnNoteCollected += CheckNote;
+            Destroy(note.gameObject);
         }
+
+        yield return new WaitForSeconds(1);
+
+        // pass whether we collected the correct notes
+        gameManager.OnLevelCompleted(correctNotesCollected == notesPerTrack);
+
     }
 }

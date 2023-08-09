@@ -20,8 +20,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: aff8fdd764cad1b4e99858bc06e20b03, type: 2}
   winningTrack: {fileID: 11400000, guid: 4e46d7c666b449a4e81305c1be2153e0, type: 2}
   pointValue: 10
-  trackSpacing: 5
-  noteSpacing: 10
+  trackSpacing: 10
+  noteSpacing: 75
   trackStartDistance: 10
   clueTiming: 2
   environmentAsset: {fileID: 9136014409318921767, guid: b39f01ba84aaf4440aa04f2f80f43e32,
