@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &9005665248969536309
+--- !u!1001 &3163451026963647053
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -9,9 +9,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -9030394631572952112, guid: c3745aaa4841b474483b4f10a2532a1d,
         type: 3}
-      propertyPath: noteName
-      value: A
+      propertyPath: height
+      value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: -9030394631572952112, guid: c3745aaa4841b474483b4f10a2532a1d,
+        type: 3}
+      propertyPath: noteName
+      value: F3
+      objectReference: {fileID: 0}
+    - target: {fileID: 267281915261008867, guid: c3745aaa4841b474483b4f10a2532a1d,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 093548659dedd4e2e9a11b87055b468f, type: 3}
     - target: {fileID: 2366707234814017993, guid: c3745aaa4841b474483b4f10a2532a1d,
         type: 3}
       propertyPath: m_RootOrder
@@ -71,11 +81,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d57339d03cd8b5a42918357aab762a2f, type: 2}
+      objectReference: {fileID: 2100000, guid: a035029c622b20e43a493df16d6e4a28, type: 2}
     - target: {fileID: 8042678946878426875, guid: c3745aaa4841b474483b4f10a2532a1d,
         type: 3}
       propertyPath: m_Name
-      value: A
+      value: F3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3745aaa4841b474483b4f10a2532a1d, type: 3}

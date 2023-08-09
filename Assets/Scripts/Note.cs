@@ -1,32 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class Note : MonoBehaviour
 {
-    public float height;
-
-    [SerializeField] private string noteName;
-    [SerializeField] private AudioClip audioClip;
-
+    
+    public event Action<Note> OnNoteCollected;
     public bool Collected => collected;
+    public float height;
+    public string noteName;
+    public AudioSource audioSource;
+
     private bool collected = false;
 
-    private void OnCollisionEnter(Collision collision)
+    private void Start()
     {
-        if (collision.gameObject.CompareTag("OctaviCopter"))
-        {
-            collected = true;
-            
-        }
+        audioSource = gameObject.GetComponentInChildren<AudioSource>();
     }
 
-    public void ResetCollectedStatus()
+    private void OnTriggerEnter(Collider other)
     {
-        // This is called by the Level Manager once it knows the note was hit
-        // in case it appears multiple times in a level
-
-        collected = false;
+        // object check not required - collision controlled through physics matrix
+        NoteHitActivities();
     }
+    private void NoteHitActivities()
+    {
+        // Debug.Log($"Triggered {this.name}: tell {OnNoteCollected.GetInvocationList().Length} subscribers");
+        audioSource.Play();
+        collected = true;
+        OnNoteCollected?.Invoke(this);
 
+    }
 }

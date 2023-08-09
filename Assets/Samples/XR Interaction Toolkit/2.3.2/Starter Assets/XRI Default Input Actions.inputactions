@@ -2052,6 +2052,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "LevelControl",
+            "id": "97949956-fa61-4f0b-aa51-99a1a105e69f",
+            "actions": [
+                {
+                    "name": "StartLevel",
+                    "type": "Button",
+                    "id": "5560f5fa-d41e-4197-ad58-1164a8ffed37",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "fb6277ee-c25e-472a-8f5b-e09eb44bf282",
+                    "path": "<OculusTouchController>/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StartLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
