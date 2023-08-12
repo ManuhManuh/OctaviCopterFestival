@@ -158,8 +158,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc2842598a13bc419dee5c82bda5e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevelID: 0
-  levels: []
+  arenaWidth: 0
+  arenaHeight: 0
+  arenaDepth: 0
+  levels:
+  - {fileID: 11400000, guid: 8ff7a27bb1667c947954eec011bddef2, type: 2}
+  levelManagerPrefab: {fileID: 9098552129751637603, guid: a6b784b0db1ac8544a3ffc2e8302d579,
+    type: 3}
 --- !u!4 &888366224
 Transform:
   m_ObjectHideFlags: 0
@@ -563,6 +568,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HotCrossBuns
       objectReference: {fileID: 0}
+    - target: {fileID: 2619651613644883853, guid: 8ec53d8eb5b38bd43b231eebeb8b24f6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ec53d8eb5b38bd43b231eebeb8b24f6, type: 3}
 --- !u!20 &7959021743981005847 stripped
@@ -596,7 +606,7 @@ GameObject:
   - component: {fileID: 7959021745532323557}
   m_Layer: 0
   m_Name: OctaviCopter
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
@@ -9,27 +11,36 @@ public class LevelManager : MonoBehaviour
     {
         None,
         LoadingLevel,
-        LookingForNote,
-        EvaluatingLevel,
-        AllNotesFound,
-        LevelOver
+        FlyingTrack,
+        EvaluatingLevel
+      
     }
+
+    private GameManager gameManager;
 
     private LevelState currentState;
     private Level currentLevel;
-    private int currentNoteIndex = 0;
-    private Note targetNote;
-    private GameManager gameManager;
+    private Vector3 playerStartPosition;
+    private Text feedback;
+    private Dictionary<Note, bool> levelNotes = new Dictionary<Note, bool>();
+    private int correctNotesCollected;
+    private int notesCollected;
+    private int notesPerTrack;
 
     private void Start()
     {
         // Get reference to game manager
         gameManager = FindObjectOfType<GameManager>();
 
-
         // Set the initial state and starting values of flags and indexes
         currentLevel = gameManager.CurrentLevel;
-        currentNoteIndex = 0;
+        feedback = GameObject.Find("Feedback").GetComponent<Text>();
+
+        if (currentLevel.environmentAsset != null)
+        {
+            Instantiate(currentLevel.environmentAsset);
+        }
+
         GotoState(LevelState.LoadingLevel);
 
     }
@@ -47,24 +58,15 @@ public class LevelManager : MonoBehaviour
                     LoadingLevelEntered();
                     break;
                 }
-            case LevelState.LookingForNote:
+
+            case LevelState.FlyingTrack:
                 {
-                    LookingForNoteEntered();
+                    PresentFeedback($"Start flying!");
                     break;
                 }
             case LevelState.EvaluatingLevel:
                 {
                     EvaluatingLevelEntered();
-                    break;
-                }
-            case LevelState.AllNotesFound:
-                {
-                    AllNotesFoundEntered();
-                    break;
-                }
-            case LevelState.LevelOver:
-                {
-                    LevelOverEntered();
                     break;
                 }
         }
@@ -82,16 +84,12 @@ public class LevelManager : MonoBehaviour
                 {
                     break;
                 }
-            case LevelState.LookingForNote:
+
+            case LevelState.FlyingTrack:
                 {
-                    currentNoteIndex++;
                     break;
                 }
             case LevelState.EvaluatingLevel:
-                {
-                    break;
-                }
-            case LevelState.AllNotesFound:
                 {
                     break;
                 }
@@ -105,126 +103,146 @@ public class LevelManager : MonoBehaviour
         OnStateEntered(currentState);
     }
 
-    public void Update()
-    {
-        if(currentState == LevelState.LookingForNote)
-        {
-            LookingForNoteUpdate();
-        }
-        
-    }
-
     private void LoadingLevelEntered()
     {
+        // make sure we're starting with a clean slate
+        InitializeLevel();
 
-        // get a reference to the SO for the current level
-        currentLevel = gameManager.CurrentLevel;
+        // collect a list of the tracks in the level
+        float playerPos = gameManager.PlayerStartPosition.x;
+        float startPosition = currentLevel.tracks.Length % 2 == 0 ?
+                                playerPos - (currentLevel.trackSpacing * (currentLevel.tracks.Length / 2)) - (currentLevel.trackSpacing / 2) :
+                                playerPos - (currentLevel.trackSpacing * (currentLevel.tracks.Length / 2));
 
-        if (currentLevel.randomNoteSpawn)
+        List<Track> createTracks = new List<Track>();
+
+        for(int i = 0; i < currentLevel.tracks.Length; i++)
         {
-            RandomNoteSpawn();
+            createTracks.Add(currentLevel.tracks[i]);
         }
-        else
+
+        float currentTrackPosition = startPosition;
+
+        // instantiate the tracks for the level
+        for (int i = 0; i < currentLevel.tracks.Length; i++)
         {
-            FixedNoteSpawn();
+            int randomTrack = Random.Range(0, createTracks.Count - 1);
+
+            notesPerTrack = 0;  // will keep the value found for the last track (all should be the same count)
+            InstantiateTrack(createTracks[randomTrack], currentTrackPosition);
+
+            createTracks.RemoveAt(randomTrack);
+            currentTrackPosition += currentLevel.trackSpacing;
+
+        }
+        // Give player note clue
+        StartCoroutine(PerformTrackHint());
+
+    }
+
+    private void InitializeLevel()
+    {
+        // reset all control variables
+        levelNotes = new Dictionary<Note, bool>();
+        correctNotesCollected = 0;
+        notesCollected = 0;
+
+    }
+
+    private void InstantiateTrack(Track track, float trackXPosition)
+    {
+        float yPosition;
+        float zPosition = currentLevel.trackStartDistance - currentLevel.noteSpacing;
+        bool needToCollect = track.name == currentLevel.winningTrack.name;
+
+        foreach(Note note in track.notes)
+        {
+            yPosition = note.height;
+            zPosition += currentLevel.noteSpacing;
+            Vector3 notePosition = new Vector3(trackXPosition, yPosition, zPosition);
+
+            Note newNote = Instantiate(note, notePosition, Quaternion.identity);
+
+            // collect and subscribe to the note
+            levelNotes.Add(newNote, needToCollect);
+            newNote.OnNoteCollected += CheckNote;
+
         }
 
-        GotoState(LevelState.LookingForNote);
+        notesPerTrack = track.notes.Length;
+
     }
 
-    private void FixedNoteSpawn()
+    private void CheckNote(Note hitNote)
     {
-        float zPosition = 0;
+        notesCollected++;
+        PresentFeedback($"You hit {hitNote.noteName}");
 
-        foreach (Note note in currentLevel.requiredNotes)
+        if (levelNotes[hitNote])
         {
-            zPosition = zPosition + currentLevel.noteSpacing;
-            Vector3 notePosition = new Vector3(currentLevel.xPosition, note.height, zPosition);
-            Instantiate(note, notePosition, Quaternion.identity);
+            correctNotesCollected++;
         }
-    }
 
-    private void RandomNoteSpawn()
-    {
-
-        foreach (Note note in currentLevel.requiredNotes)
+        // if we've collected our quota of notes
+        if (notesCollected == notesPerTrack)
         {
-            float xPosition = RandomPosition(gameManager.arenaWidth);
-            float yPosition = Mathf.Abs(RandomPosition(gameManager.arenaHeight));
-            float zPosition = RandomPosition(gameManager.arenaDepth);
-
-            Vector3 notePosition = new Vector3(xPosition, yPosition, zPosition);
-            Instantiate(note, notePosition, Quaternion.identity);
-        }
-        
-    }
-
-    private float RandomPosition(float fullDimension)
-    {
-        return Random.Range(fullDimension * -0.5f, fullDimension * 0.5f);
-    }
-
-    private void LookingForNoteEntered()
-    {
-        // Set the target note
-        targetNote = currentLevel.requiredNotes[currentNoteIndex];
-
-        // TODO: Update UI with note to be found
-        Debug.Log($"Note to find: {targetNote}");
-    }
-
-    
-    private void LookingForNoteUpdate()
-    {
-        
-        // check to see if the next note we need has been hit
-        if (targetNote.Collected)
-        {
-            // Reset its hit flag in case it is used multiple times in a level
-            targetNote.ResetCollectedStatus();
             GotoState(LevelState.EvaluatingLevel);
         }
 
     }
 
-    private void LookingForNoteLeft()
-    {
-        // TODO: Update UI to show correct hit
-        Debug.Log("Correct hit!");
-    }
-
     private void EvaluatingLevelEntered()
     {
-        // check to see if we are done the level
-        if (currentNoteIndex == currentLevel.requiredNotes.Length)
-        {
-            GotoState(LevelState.AllNotesFound);
-        }
-        else
-        {
-            currentNoteIndex++;
-            GotoState(LevelState.LookingForNote);
-        }
-    }
-
-    private void AllNotesFoundEntered()
-    {
-
-        // let gameManager know that level is complete
-        gameManager.OnLevelCompleted();
+        StartCoroutine(CleanUpAndEndLevel());
 
     }
 
-    private void ResetLevel()
-    {
 
+    private IEnumerator PerformTrackHint()
+    {
         
+        yield return new WaitForSeconds(1); 
 
+        PresentFeedback($"Giving {currentLevel.name} hint");
+        List<Note> playNotes = new List<Note>();
+
+        foreach (Note note in levelNotes.Keys)
+        {
+            // if the Value of the note (needs to be collected) is true 
+            if (levelNotes[note]) playNotes.Add(note);
+
+        }
+
+        foreach(Note note in playNotes)
+        {
+            note.audioSource.Play();
+            // if visual clues become a thing (i.e., keyboard keys light up) it can go here too
+            yield return new WaitForSeconds(currentLevel.clueTiming);
+        }
+
+        if(currentState == LevelState.LoadingLevel) GotoState(LevelState.FlyingTrack);
     }
 
-    private void LevelOverEntered()
+    private void PresentFeedback(string message)
     {
-        // TODO: Update UI with Level Over content
-        Debug.Log($"Level {currentLevel.name} over!");
+        feedback.text = (message);
+        Debug.Log(message);
+    }
+
+    private IEnumerator CleanUpAndEndLevel()
+    {
+        yield return new WaitForSeconds(3); // time for sound from last note collected to decay
+        // destroy the notes, thereby also removing the subscriptions to them ;)
+        Note[] notes = FindObjectsOfType<Note>();
+        foreach(Note note in notes)
+        {
+            Destroy(note.gameObject);
+        }
+
+        yield return new WaitForSeconds(1);
+
+        // pass whether we collected the correct notes
+        gameManager.OnLevelCompleted(correctNotesCollected == notesPerTrack);
+
     }
 }
