@@ -590,7 +590,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1311457217725253390}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.63, y: 0.71, z: 0.77}
+  m_LocalPosition: {x: -0.05, y: 0, z: 0.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8955156620496491343}
@@ -1450,7 +1450,7 @@ MonoBehaviour:
   m_OriginBaseGameObject: {fileID: 1311457219192340945}
   m_CameraFloorOffsetObject: {fileID: 1311457217725253390}
   m_RequestedTrackingOriginMode: 1
-  m_CameraYOffset: 0.68
+  m_CameraYOffset: 1.1
 --- !u!114 &1311457219192340944
 MonoBehaviour:
   m_ObjectHideFlags: 0
