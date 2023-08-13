@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c605a6d43594cbb4e934cc00e22d371c, type: 3}
   m_Name: Level2
   m_EditorClassIdentifier: 
-  levelID: 0
-  levelName: 
+  levelID: 1
+  name: C Chord
+  instructions: Listen to the tones and fly the path that matches them
   tracks:
   - {fileID: 11400000, guid: fd772075d4ca81e4bb7d34bb62301a0f, type: 2}
   - {fileID: 11400000, guid: 83aa58d42d17d614fbc3f88778cf72ed, type: 2}
@@ -22,6 +23,7 @@ MonoBehaviour:
   pointValue: 15
   trackSpacing: 10
   noteSpacing: 40
+  maxHeight: 60
   trackStartDistance: 10
   clueTiming: 2
   environmentAsset: {fileID: 9136014409318921767, guid: b39f01ba84aaf4440aa04f2f80f43e32,
