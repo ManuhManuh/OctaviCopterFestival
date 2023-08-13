@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public InputActionReference startLevelActionReference = null;
     public Level CurrentLevel => levels[currentLevelIndex];
     public Vector3 PlayerStartPosition => playerStartPosition;
 
+    [SerializeField] private InputActionReference startLevelActionReference;
     [SerializeField] public List<Level> levels = new List<Level>();
     [SerializeField] private LevelManager levelManagerPrefab;
     [SerializeField] private float timeBetweenLevels;
@@ -19,7 +20,7 @@ public class GameManager : MonoBehaviour
     private LevelManager currentLevelManager;
     private int currentLevelIndex;
     private Vector3 playerStartPosition;
-    private Text feedback;
+    private TMP_Text feedback;
     private bool restartAllowed;
 
     private void Awake()
@@ -32,7 +33,7 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerStartPosition = player.transform.position;
 
-        feedback = GameObject.Find("Feedback").GetComponent<Text>();
+        feedback = GameObject.Find("Feedback").GetComponent<TMP_Text>();
 
         restartAllowed = true;
         PresentFeedback("Press X or A to start!");
@@ -42,11 +43,12 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         float buttonPressValue = startLevelActionReference.action.ReadValue<float>();
-
+   
         if ((buttonPressValue > 0) && restartAllowed)
         {
+            PresentFeedback("");
             StartLevel();
-
+            
         }
     }
 

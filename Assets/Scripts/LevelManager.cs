@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
@@ -16,16 +17,22 @@ public class LevelManager : MonoBehaviour
       
     }
 
-    private GameManager gameManager;
+    public float LevelHeight => levelHeight;
+    private float levelHeight;
 
+    private GameManager gameManager;
     private LevelState currentState;
     private Level currentLevel;
     private Vector3 playerStartPosition;
-    private Text feedback;
+    
     private Dictionary<Note, bool> levelNotes = new Dictionary<Note, bool>();
     private int correctNotesCollected;
     private int notesCollected;
     private int notesPerTrack;
+
+    private TMP_Text levelTitle;
+    private TMP_Text levelInstructions;
+    private TMP_Text feedback;
 
     private void Start()
     {
@@ -34,7 +41,10 @@ public class LevelManager : MonoBehaviour
 
         // Set the initial state and starting values of flags and indexes
         currentLevel = gameManager.CurrentLevel;
-        feedback = GameObject.Find("Feedback").GetComponent<Text>();
+
+        levelTitle = GameObject.Find("LevelTitle").GetComponent<TMP_Text>();
+        levelInstructions = GameObject.Find("LevelInstructions").GetComponent<TMP_Text>();
+        feedback = GameObject.Find("Feedback").GetComponent<TMP_Text>();
 
         if (currentLevel.environmentAsset != null)
         {
@@ -135,6 +145,11 @@ public class LevelManager : MonoBehaviour
             currentTrackPosition += currentLevel.trackSpacing;
 
         }
+
+        //levelHeight = currentLevel.maxHeight;
+        //levelTitle.text = currentLevel.name;
+        //levelInstructions.text = currentLevel.instructions;
+
         // Give player note clue
         StartCoroutine(PerformTrackHint());
 
@@ -146,6 +161,10 @@ public class LevelManager : MonoBehaviour
         levelNotes = new Dictionary<Note, bool>();
         correctNotesCollected = 0;
         notesCollected = 0;
+
+        levelHeight = currentLevel.maxHeight;
+        levelTitle.text = currentLevel.name;
+        levelInstructions.text = currentLevel.instructions;
 
     }
 
