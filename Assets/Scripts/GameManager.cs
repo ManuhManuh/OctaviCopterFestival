@@ -9,13 +9,15 @@ public class GameManager : MonoBehaviour
 {
     public Level CurrentLevel => levels[currentLevelIndex];
     public Vector3 PlayerStartPosition => playerStartPosition;
+    public GameObject player;
 
     [SerializeField] private InputActionReference startLevelActionReference;
     [SerializeField] public List<Level> levels = new List<Level>();
     [SerializeField] private LevelManager levelManagerPrefab;
     [SerializeField] private float timeBetweenLevels;
     [SerializeField] private float timeBeforeRestartAllowed;
-    [SerializeField] GameObject player;
+    [SerializeField] private GameObject backgroundAsset;
+    
 
     private LevelManager currentLevelManager;
     private int currentLevelIndex;
@@ -35,7 +37,8 @@ public class GameManager : MonoBehaviour
         {
             lifetimePoints = PlayerPrefs.GetInt("LifetimePoints");
         }
-            
+
+        backgroundAsset.SetActive(true);
     }
 
     private void Start()
@@ -65,7 +68,9 @@ public class GameManager : MonoBehaviour
 
     public void OnLevelCompleted(bool successful, int maxPoints)
     {
-        if(currentLevelManager != null) Destroy(currentLevelManager);
+        backgroundAsset.SetActive(true);
+
+        if (currentLevelManager != null) Destroy(currentLevelManager);
         int pointsEarned;
 
         if (successful)
@@ -113,6 +118,8 @@ public class GameManager : MonoBehaviour
 
     public void StartLevel()
     {
+        backgroundAsset.SetActive(false);  // will be replaced by level environment asset
+
         restartAllowed = false;
         if (currentLevelManager != null) Destroy(currentLevelManager);
 

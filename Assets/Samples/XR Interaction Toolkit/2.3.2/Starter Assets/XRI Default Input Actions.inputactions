@@ -2065,6 +2065,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CycleTracks",
+                    "type": "Button",
+                    "id": "a3532a15-2718-42cf-bbe1-e8ba3430b8fa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "StartFlying",
+                    "type": "Button",
+                    "id": "e531e549-df7b-4fca-8f78-e4cd0c9effbd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -2076,6 +2094,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "StartLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "787df868-fa59-47cb-b7b5-26da87558c7c",
+                    "path": "<OculusTouchController>/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CycleTracks",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8a7086a4-a90c-4088-b0a1-ba30e3a575ad",
+                    "path": "<OculusTouchController>/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StartFlying",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
