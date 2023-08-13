@@ -261,7 +261,7 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         // pass whether we collected the correct notes
-        gameManager.OnLevelCompleted(correctNotesCollected == notesPerTrack);
+        gameManager.OnLevelCompleted(correctNotesCollected == notesPerTrack, currentLevel.pointValue);
 
     }
 }
