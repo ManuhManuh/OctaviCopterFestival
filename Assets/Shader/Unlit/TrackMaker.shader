@@ -1,4 +1,4 @@
-Shader "Unlit/ScaleRainbowShader"
+Shader "Unlit/TrackMaker"        
 {
     Properties // ownDefined inputData   
     {
@@ -9,10 +9,23 @@ Shader "Unlit/ScaleRainbowShader"
     SubShader 
     {
         Tags { "RenderType"="Opaque" }
-          
 
+/*
+        Tags 
+        { 
+            "RenderType"="Transparent"
+            "Queue"="Transparent"
+
+        }
+*/
         Pass 
         {
+/*
+            Cull Off
+            ZWrite Off
+            Blend One One
+    */        
+            
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
@@ -21,8 +34,8 @@ Shader "Unlit/ScaleRainbowShader"
             #include "UnityCG.cginc"
 
             
-           float4 _Color;
-           float _Scale;
+            float4 _Color;
+            float _Scale;
 
             // automatically filled out by unity
             struct MeshData  // perVertex meshData    
@@ -34,32 +47,32 @@ Shader "Unlit/ScaleRainbowShader"
             };
 
             struct Interpolaters // v2f    
-            { 
+            {
                 
                 float4 vertex : SV_POSITION; // clipSpacePosition of the vertex 
-                float3 normal : TEXCOORD0;      
+                float3 normal : TEXCOORD0;
 
-                float2 uv : TEXCOORD1; 
-            };   
+                float2 uv : TEXCOORD1;
+            };
 
                                   
 
-            Interpolaters vert (MeshData v)                                                          
+            Interpolaters vert(MeshData v)
             {
                 Interpolaters o;
                 o.vertex = UnityObjectToClipPos(v.vertex); // localSpace to clipSpace 
                 o.normal = UnityObjectToWorldNormal(v.normals); // show normals of the object -> visualize normalDirections           
 
-                o.uv = v.uv0 * _Scale; 
-                return o;  
+                o.uv = v.uv0 * _Scale * 1;
+                return o;
             }
 
             
-
+    
             // actual fragmentShader 
-            float4 frag (Interpolaters i) : SV_Target
-            {          
-                return float4(i.uv,0,1);
+            float4 frag(Interpolaters i) : SV_Target
+            {
+                return float4(i.uv, 0.5, 0.5);
             }
             ENDCG 
         }
