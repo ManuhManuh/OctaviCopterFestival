@@ -35,7 +35,7 @@ public class LevelManager : MonoBehaviour
     private int notesCollected;
     private int notesPerTrack;
     private List<float> trackXPositions = new List<float>();
-    private List<GameObject> trackObjects;
+    private List<GameObject> trackObjects = new List<GameObject>();
     private GameObject noteCollector;
     private int selectedTrack;
     private bool cycleEnabled;
