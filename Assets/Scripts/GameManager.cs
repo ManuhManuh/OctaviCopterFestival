@@ -95,7 +95,14 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                PresentFeedback($"Correct! You have earned {pointsEarned} points for completing the level in {levelAttempts} tries! Your session total is {sessionPoints}. Press X or A to start next level");
+                if(levelAttempts == 1)
+                {
+                    PresentFeedback($"Correct! You have earned {pointsEarned} points for completing the level in 1 try! Your session total is {sessionPoints}. Press X or A to start next level");
+                }
+                else
+                {
+                    PresentFeedback($"Correct! You have earned {pointsEarned} points for completing the level in {levelAttempts} tries! Your session total is {sessionPoints}. Press X or A to start next level");
+                }
                 restartAllowed = true;
                 levelAttempts = 1;
 
