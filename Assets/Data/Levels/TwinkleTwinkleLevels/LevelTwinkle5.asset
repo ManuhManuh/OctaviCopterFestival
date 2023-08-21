@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c605a6d43594cbb4e934cc00e22d371c, type: 3}
+  m_Name: LevelTwinkle5
+  m_EditorClassIdentifier: 
+  levelID: 5
+  name: Twinkle
+  instructions: Fly through the song Part 5
+  tracks:
+  - {fileID: 11400000, guid: e5516dac331231a4d96f184b5f41e8a8, type: 2}
+  winningTrack: {fileID: 11400000, guid: 211c06b35d1cca34989e5505e62d0383, type: 2}
+  pointValue: 15
+  trackSpacing: 10
+  noteSpacing: 40
+  maxHeight: 60
+  trackStartDistance: 10
+  clueTiming: 1
+  environmentAsset: {fileID: 9136014409318921767, guid: b39f01ba84aaf4440aa04f2f80f43e32,
+    type: 3}
+  trackHeight: 0

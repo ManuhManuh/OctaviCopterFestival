@@ -17,3 +17,5 @@ MonoBehaviour:
   notes:
   - {fileID: 9103775103540746469, guid: 3845fb20a94210d498b9d98dc4befd02, type: 3}
   - {fileID: 5302081556471405031, guid: 36e34c50ec9922648a883985a1afaefe, type: 3}
+  trackObject: {fileID: 1897964790918302570, guid: bb1d3e54bddb2ca44abdee2387e1b708,
+    type: 3}

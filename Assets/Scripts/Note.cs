@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Security.Cryptography;
+
 public class Note : MonoBehaviour
 {
-    
+
     public event Action<Note> OnNoteCollected;
     public bool Collected => collected;
     public float height;
@@ -13,9 +15,22 @@ public class Note : MonoBehaviour
 
     private bool collected = false;
 
+    // added for rotation
+    private bool rotated = false;
+
     private void Start()
     {
         audioSource = gameObject.GetComponentInChildren<AudioSource>();
+    }
+
+    // added for rotation
+    private void Update()
+    {
+        if (!rotated) 
+        {
+            transform.rotation *= Quaternion.Euler(90f, 0f, 0f);
+            rotated = true;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
