@@ -9,4 +9,5 @@ public class Track : ScriptableObject
     public int trackID;
     public string trackDescription;
     public Note[] notes;
+    public GameObject trackObject;
 }

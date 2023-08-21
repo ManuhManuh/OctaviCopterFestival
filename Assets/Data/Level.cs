@@ -18,5 +18,6 @@ public class Level : ScriptableObject
     public float trackStartDistance;
     public float clueTiming;
     public GameObject environmentAsset;
+    public float trackHeight;
     
 }

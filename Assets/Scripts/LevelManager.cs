@@ -35,6 +35,7 @@ public class LevelManager : MonoBehaviour
     private int notesCollected;
     private int notesPerTrack;
     private List<float> trackXPositions = new List<float>();
+    private List<GameObject> trackObjects = new List<GameObject>();
     private GameObject noteCollector;
     private int selectedTrack;
     private bool cycleEnabled;
@@ -233,6 +234,13 @@ public class LevelManager : MonoBehaviour
 
         }
 
+        if (track.trackObject != null)
+        {
+            float trackObjectZPosition = currentLevel.trackStartDistance - currentLevel.noteSpacing;
+            Vector3 trackObjectPosition = new Vector3(trackXPosition, currentLevel.trackHeight, trackObjectZPosition);
+            trackObjects.Add(Instantiate(track.trackObject, trackObjectPosition, Quaternion.identity));
+        }
+
         notesPerTrack = track.notes.Length;
 
     }
@@ -308,7 +316,14 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(note.gameObject);
         }
-
+        if (trackObjects.Count > 0)
+        {
+            foreach (GameObject track in trackObjects)
+            {
+                Destroy(track);
+            }
+        }
+        
         yield return new WaitForSeconds(1);
 
         Destroy(environmentAsset);
