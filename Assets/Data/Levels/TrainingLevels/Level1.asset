@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c605a6d43594cbb4e934cc00e22d371c, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  levelID: 0
+  levelID: 1
   name: Basic 5th
   instructions: Listen to the tones and fly the path that matches them
   tracks:
@@ -24,7 +24,8 @@ MonoBehaviour:
   trackSpacing: 10
   noteSpacing: 75
   maxHeight: 60
-  trackStartDistance: 10
+  trackStartDistance: 15
   clueTiming: 2
   environmentAsset: {fileID: 9136014409318921767, guid: b39f01ba84aaf4440aa04f2f80f43e32,
     type: 3}
+  trackHeight: 0
