@@ -35,6 +35,7 @@ public class LevelManager : MonoBehaviour
     private int notesCollected;
     private int notesPerTrack;
     private List<float> trackXPositions = new List<float>();
+    private List<float> trackYPositions = new List<float>();
     private List<GameObject> trackObjects = new List<GameObject>();
     private GameObject noteCollector;
     private int selectedTrack;
@@ -219,10 +220,15 @@ public class LevelManager : MonoBehaviour
         float yPosition;
         float zPosition = currentLevel.trackStartDistance - currentLevel.noteSpacing;
         bool needToCollect = track.name == currentLevel.winningTrack.name;
+        float firstNotePosition = -999;
 
         foreach(Note note in track.notes)
         {
             yPosition = note.height;
+            if (firstNotePosition == -999)
+            {
+                firstNotePosition = note.height;
+            }
             zPosition += currentLevel.noteSpacing;
             Vector3 notePosition = new Vector3(trackXPosition, yPosition, zPosition);
 
@@ -241,6 +247,7 @@ public class LevelManager : MonoBehaviour
             trackObjects.Add(Instantiate(track.trackObject, trackObjectPosition, Quaternion.identity));
         }
 
+        trackYPositions.Add(firstNotePosition);
         notesPerTrack = track.notes.Length;
 
     }
@@ -338,7 +345,7 @@ public class LevelManager : MonoBehaviour
 
         // find out where the player is currently 
         float currentPlayerX = gameManager.player.transform.position.x;
-        int positionIndex = 0; // start at the beginning if player is not in front of a track (i.e, was reconnaissance flying)
+        int positionIndex = 0; // start at the beginning if player is not in front of a track (i.e., was reconnaissance flying)
 
         // select the next position for the player
         for(int i = 0; i < trackXPositions.Count; i++)
@@ -352,7 +359,7 @@ public class LevelManager : MonoBehaviour
 
         // move to next available track
         float newPlayerXPosition = trackXPositions[selectedTrack];
-        float newPlayerYPosition = gameManager.PlayerStartPosition.y;
+        float newPlayerYPosition = trackYPositions[selectedTrack];
         float newPlayerZPostion = gameManager.PlayerStartPosition.z;
 
         gameManager.player.transform.position = new Vector3(newPlayerXPosition, newPlayerYPosition, newPlayerZPostion);

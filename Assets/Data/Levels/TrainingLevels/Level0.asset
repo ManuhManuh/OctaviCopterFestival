@@ -10,19 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c605a6d43594cbb4e934cc00e22d371c, type: 3}
-  m_Name: Level2
+  m_Name: Level0
   m_EditorClassIdentifier: 
-  levelID: 2
-  name: C Chord
-  instructions: Listen to the tones and fly the path that matches them
+  levelID: 0
+  name: Testing Starts
+  instructions: Wing it!
   tracks:
-  - {fileID: 11400000, guid: fd772075d4ca81e4bb7d34bb62301a0f, type: 2}
-  - {fileID: 11400000, guid: 83aa58d42d17d614fbc3f88778cf72ed, type: 2}
-  - {fileID: 11400000, guid: 50269c49d6960f34fb8d483d64fefc38, type: 2}
-  winningTrack: {fileID: 11400000, guid: 50269c49d6960f34fb8d483d64fefc38, type: 2}
-  pointValue: 15
+  - {fileID: 11400000, guid: 1067574e270c86c409e677883eb6342d, type: 2}
+  - {fileID: 11400000, guid: 4e46d7c666b449a4e81305c1be2153e0, type: 2}
+  - {fileID: 11400000, guid: 5f7976ef1b57f4043acfef0978835f3f, type: 2}
+  - {fileID: 11400000, guid: 5a9c762a473f9b04c81607b888044942, type: 2}
+  winningTrack: {fileID: 11400000, guid: 5f7976ef1b57f4043acfef0978835f3f, type: 2}
+  pointValue: 20
   trackSpacing: 10
-  noteSpacing: 40
+  noteSpacing: 75
   maxHeight: 60
   trackStartDistance: 15
   clueTiming: 2
