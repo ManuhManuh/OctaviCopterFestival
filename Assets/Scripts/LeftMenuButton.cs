@@ -6,6 +6,10 @@ using UnityEngine.InputSystem;
 public class LeftMenuButton : MonoBehaviour
 {
     [SerializeField] InputActionReference returnToMainAction;
+    [SerializeField] Animator windowAnimation;
+    [SerializeField] Animator roofAnimation;
+
+    private bool open = false;
 
     private void Start()
     {
@@ -19,6 +23,20 @@ public class LeftMenuButton : MonoBehaviour
         if (!this.gameObject.activeInHierarchy) return;
 
         Debug.Log("Main menu button pushed - add code to open the main menu once there is one");
+
+        if (open)
+        {
+            windowAnimation.SetTrigger("CloseWindows");
+            roofAnimation.SetTrigger("CloseRoof");
+            open = false;
+        }
+        else
+        {
+            windowAnimation.SetTrigger("OpenWindows");
+            roofAnimation.SetTrigger("OpenRoof");
+            open = true;
+        }
+        
         
     }
     
