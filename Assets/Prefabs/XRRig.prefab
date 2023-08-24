@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2648539768572773630}
   - component: {fileID: 2648539768572773601}
   - component: {fileID: 2648539768572773600}
-  - component: {fileID: 2648539768572773631}
+  - component: {fileID: 4393108882859497834}
   m_Layer: 0
   m_Name: RightHand
   m_TagString: Untagged
@@ -310,8 +310,8 @@ MonoBehaviour:
   m_HapticHoverCancelIntensity: 0
   m_HapticHoverCancelDuration: 0
   m_AllowHoverHapticsWhileSelecting: 1
---- !u!65 &2648539768572773631
-BoxCollider:
+--- !u!135 &4393108882859497834
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -321,8 +321,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.06649925, y: 0.02961897, z: 0.103678}
-  m_Center: {x: 0.03227156, y: 0.03519057, z: 0.00187666}
+  m_Radius: 0.009
+  m_Center: {x: 0.015, y: -0.015, z: 0.055}
 --- !u!1 &2648539769330093882
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +336,7 @@ GameObject:
   - component: {fileID: 2648539769330093885}
   - component: {fileID: 2648539769330093884}
   - component: {fileID: 2648539769330093887}
+  - component: {fileID: 729849596095951592}
   m_Layer: 0
   m_Name: LeftHand
   m_TagString: Untagged
@@ -661,6 +662,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   returnToMainAction: {fileID: -5090206116268991743, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
+  windowAnimation: {fileID: 0}
+  roofAnimation: {fileID: 0}
+--- !u!135 &729849596095951592
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2648539769330093882}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.009
+  m_Center: {x: -0.017, y: -0.013, z: 0.055}
 --- !u!1 &2648539769821896321
 GameObject:
   m_ObjectHideFlags: 0
