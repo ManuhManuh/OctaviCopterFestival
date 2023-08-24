@@ -8,6 +8,7 @@ public class LeftMenuButton : MonoBehaviour
     [SerializeField] InputActionReference returnToMainAction;
     [SerializeField] Animator windowAnimation;
     [SerializeField] Animator roofAnimation;
+    [SerializeField] AudioSource audioSourceRoof;
 
     private bool open = false;
 
@@ -29,15 +30,23 @@ public class LeftMenuButton : MonoBehaviour
             windowAnimation.SetTrigger("CloseWindows");
             roofAnimation.SetTrigger("CloseRoof");
             open = false;
+            StartCoroutine(DoorSwish(0.65f));
         }
         else
         {
             windowAnimation.SetTrigger("OpenWindows");
             roofAnimation.SetTrigger("OpenRoof");
             open = true;
+            StartCoroutine(DoorSwish(0.25f));
         }
         
         
+    }
+
+    private IEnumerator DoorSwish(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        audioSourceRoof.PlayOneShot(audioSourceRoof.clip);
     }
     
 }
