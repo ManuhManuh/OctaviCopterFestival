@@ -8,7 +8,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public Level CurrentLevel => levels[currentLevelIndex];
-    public string Mode => Mode;
+    public string Mode => mode;
     public Vector3 PlayerStartPosition => playerStartPosition;
     public GameObject player;
 
