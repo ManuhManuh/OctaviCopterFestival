@@ -8,6 +8,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public Level CurrentLevel => levels[currentLevelIndex];
+    public string Mode => Mode;
     public Vector3 PlayerStartPosition => playerStartPosition;
     public GameObject player;
 
@@ -27,7 +28,7 @@ public class GameManager : MonoBehaviour
     private int levelAttempts;
     private int sessionPoints;
     private int lifetimePoints;
-
+    private string mode = "beginner";
     private void Awake()
     {
         currentLevelIndex = 0;
