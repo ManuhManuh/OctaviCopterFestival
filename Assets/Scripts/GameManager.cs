@@ -152,7 +152,7 @@ public class GameManager : MonoBehaviour
     private void PresentFeedback(string message)
     {
         feedback.text = (message);
-        Debug.Log(message);
+        //Debug.Log(message);
     }
 
     private IEnumerator MinimumWaitForRestart(float restartDelay)

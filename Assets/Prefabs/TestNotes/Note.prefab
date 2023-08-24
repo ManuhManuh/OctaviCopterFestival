@@ -112,6 +112,8 @@ MonoBehaviour:
   height: 0
   noteName: 
   audioSource: {fileID: 267281915261008867}
+  hapticAmplitude: 0.5
+  hapticDuration: 0.1
 --- !u!82 &267281915261008867
 AudioSource:
   m_ObjectHideFlags: 0
