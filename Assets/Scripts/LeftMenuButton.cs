@@ -23,7 +23,7 @@ public class LeftMenuButton : MonoBehaviour
 
         if (!this.gameObject.activeInHierarchy) return;
 
-        Debug.Log("Main menu button pushed - add code to open the main menu once there is one");
+        //Debug.Log("Main menu button pushed - add code to open the main menu once there is one");
 
         if (open)
         {

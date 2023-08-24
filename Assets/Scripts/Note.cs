@@ -12,8 +12,12 @@ public class Note : MonoBehaviour
     public float height;
     public string noteName;
     public AudioSource audioSource;
+    public float hapticAmplitude;
+    public float hapticDuration;
+  
 
     private bool collected = false;
+    private HapticOutput hapticOutput;
 
     // added for rotation
     private bool rotated = false;
@@ -21,6 +25,8 @@ public class Note : MonoBehaviour
     private void Start()
     {
         audioSource = gameObject.GetComponentInChildren<AudioSource>();
+        hapticOutput = FindObjectOfType<HapticOutput>();
+       
     }
 
     // added for rotation
@@ -42,8 +48,16 @@ public class Note : MonoBehaviour
     {
         // Debug.Log($"Triggered {this.name}: tell {OnNoteCollected.GetInvocationList().Length} subscribers");
         audioSource.Play();
+        StartCoroutine(HapticsWithDelay(0.2f));
+
         collected = true;
         OnNoteCollected?.Invoke(this);
 
+    }
+
+    private IEnumerator HapticsWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        hapticOutput.SendHapticResponse(hapticAmplitude, hapticDuration);
     }
 }
