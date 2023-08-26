@@ -665,7 +665,6 @@ MonoBehaviour:
   windowAnimation: {fileID: 0}
   roofAnimation: {fileID: 0}
   audioSourceRoof: {fileID: 0}
-  pauseUIAnimation: {fileID: 0}
 --- !u!135 &729849596095951592
 SphereCollider:
   m_ObjectHideFlags: 0

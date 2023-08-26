@@ -4843,7 +4843,6 @@ GameObject:
   - component: {fileID: 9059778283910492684}
   - component: {fileID: 1772994902}
   - component: {fileID: 3026492125857326398}
-  - component: {fileID: 686311678}
   m_Layer: 0
   m_Name: OctaviCopter_Keyboard0
   m_TagString: Untagged
@@ -4899,7 +4898,7 @@ Animation:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8570663407390828726}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: f3f8ac8162304354eaeea5aca2e5a9c1, type: 2}
   m_Animations:
@@ -4908,25 +4907,6 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!95 &686311678
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8570663407390828726}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d3febb31481d2274d8f4b2818bf49aba, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &9223287227838894679
 GameObject:
   m_ObjectHideFlags: 0
@@ -5385,7 +5365,7 @@ PrefabInstance:
     - target: {fileID: 1964782725075640076, guid: 6dd8be0315d17854e8e1d66cfcab15c5,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1964782725077941369, guid: 6dd8be0315d17854e8e1d66cfcab15c5,
         type: 3}
@@ -5400,12 +5380,12 @@ PrefabInstance:
     - target: {fileID: 1964782725968864695, guid: 6dd8be0315d17854e8e1d66cfcab15c5,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1964782726233479852, guid: 6dd8be0315d17854e8e1d66cfcab15c5,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1964782726589973109, guid: 6dd8be0315d17854e8e1d66cfcab15c5,
         type: 3}
@@ -5525,7 +5505,7 @@ PrefabInstance:
     - target: {fileID: 1964782726670880567, guid: 6dd8be0315d17854e8e1d66cfcab15c5,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dd8be0315d17854e8e1d66cfcab15c5, type: 3}
