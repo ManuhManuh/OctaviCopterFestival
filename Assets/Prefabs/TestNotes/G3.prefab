@@ -17,6 +17,11 @@ PrefabInstance:
       propertyPath: noteName
       value: G3
       objectReference: {fileID: 0}
+    - target: {fileID: -9030394631572952112, guid: c3745aaa4841b474483b4f10a2532a1d,
+        type: 3}
+      propertyPath: hapticDuration
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 267281915261008867, guid: c3745aaa4841b474483b4f10a2532a1d,
         type: 3}
       propertyPath: m_audioClip
