@@ -146,7 +146,7 @@ public class GameManager : MonoBehaviour
     {
         // TODO: Update UI with game over content
         UpdateLifetimePoints(lifetimePoints);
-        PresentFeedback($"Game over!! You won!! Your session total was {sessionPoints}, bringing your lifetime points total to {lifetimePoints}");
+        PresentFeedback($"Fantastic!! You won!! Your session total was {sessionPoints}, bringing your lifetime points total to {lifetimePoints}");
     }
 
     private void PresentFeedback(string message)

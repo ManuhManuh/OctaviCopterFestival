@@ -8,8 +8,9 @@ public class LeftMenuButton : MonoBehaviour
     [SerializeField] InputActionReference returnToMainAction;
     [SerializeField] Animator windowAnimation;
     [SerializeField] Animator roofAnimation;
+    [SerializeField] Animator pauseUIAnimation;
     [SerializeField] AudioSource audioSourceRoof;
-
+    
     private bool open = false;
 
     private void Start()
@@ -29,6 +30,7 @@ public class LeftMenuButton : MonoBehaviour
         {
             windowAnimation.SetTrigger("CloseWindows");
             roofAnimation.SetTrigger("CloseRoof");
+            pauseUIAnimation.SetTrigger("PauseUI_OFF");
             open = false;
             StartCoroutine(DoorSwish(0.65f));
         }
@@ -36,6 +38,7 @@ public class LeftMenuButton : MonoBehaviour
         {
             windowAnimation.SetTrigger("OpenWindows");
             roofAnimation.SetTrigger("OpenRoof");
+            pauseUIAnimation.SetTrigger("PauseUI_ON");
             open = true;
             StartCoroutine(DoorSwish(0.25f));
         }
