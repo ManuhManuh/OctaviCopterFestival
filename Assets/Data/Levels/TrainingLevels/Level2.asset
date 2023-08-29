@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Level2
   m_EditorClassIdentifier: 
   levelID: 2
-  name: C Chord
-  instructions: Listen to the tones and fly the path that matches them
+  name: Level2Name
+  instructions: Level2Instructions
   tracks:
   - {fileID: 11400000, guid: fd772075d4ca81e4bb7d34bb62301a0f, type: 2}
   - {fileID: 11400000, guid: 83aa58d42d17d614fbc3f88778cf72ed, type: 2}

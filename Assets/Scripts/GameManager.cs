@@ -23,12 +23,13 @@ public class GameManager : MonoBehaviour
     private LevelManager currentLevelManager;
     private int currentLevelIndex;
     private Vector3 playerStartPosition;
-    private TMP_Text feedback;
     private bool restartAllowed;
     private int levelAttempts;
     private int sessionPoints;
     private int lifetimePoints;
     private string mode = "beginner";
+    private UIDisplay uiDisplay;
+
     private void Awake()
     {
         currentLevelIndex = 0;
@@ -37,6 +38,10 @@ public class GameManager : MonoBehaviour
         if (PlayerPrefs.HasKey("LifetimePoints"))
         {
             lifetimePoints = PlayerPrefs.GetInt("LifetimePoints");
+        }
+        if (PlayerPrefs.HasKey("LastLanguage"))
+        {
+            lifetimePoints = PlayerPrefs.GetInt("LastLanguage");
         }
 
         backgroundAsset.SetActive(true);
@@ -47,10 +52,9 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerStartPosition = player.transform.position;
 
-        feedback = GameObject.Find("Feedback").GetComponent<TMP_Text>();
-
+        uiDisplay = GameObject.FindObjectOfType<UIDisplay>();
         restartAllowed = true;
-        PresentFeedback("Press X or A to start!");
+        uiDisplay.PresentFeedback("StartPrompt");
         levelAttempts = 1;
 
     }
@@ -61,7 +65,7 @@ public class GameManager : MonoBehaviour
    
         if ((buttonPressValue > 0) && restartAllowed)
         {
-            PresentFeedback("");
+            uiDisplay.PresentFeedback("");
             StartLevel();
             
         }
@@ -101,14 +105,11 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                if(levelAttempts == 1)
-                {
-                    PresentFeedback($"Correct! You have earned {pointsEarned} points for completing the level in 1 try! Your session total is {sessionPoints}. Press X or A to start next level");
-                }
-                else
-                {
-                    PresentFeedback($"Correct! You have earned {pointsEarned} points for completing the level in {levelAttempts} tries! Your session total is {sessionPoints}. Press X or A to start next level");
-                }
+                List<string> pointList = new List<string>();
+                pointList.Add(pointsEarned.ToString());
+                pointList.Add(sessionPoints.ToString());
+
+                uiDisplay.PresentFeedback("PointsPlusTotal", pointList);
                 restartAllowed = true;
                 levelAttempts = 1;
 
@@ -116,7 +117,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            PresentFeedback("Level failed! Press X or A to retry");
+            uiDisplay.PresentFeedback("RetryPrompt");
             restartAllowed = true;
             levelAttempts++;
 
@@ -137,22 +138,14 @@ public class GameManager : MonoBehaviour
         // reset player
         RelocatePlayer(playerStartPosition);
 
-        // pause before allowing a reset
-        // StartCoroutine(MinimumWaitForRestart(timeBeforeRestartAllowed));
     }
 
     
     public void GameOver()
     {
-        // TODO: Update UI with game over content
+     
         UpdateLifetimePoints(lifetimePoints);
-        PresentFeedback($"Fantastic!! You won!! Your session total was {sessionPoints}, bringing your lifetime points total to {lifetimePoints}");
-    }
-
-    private void PresentFeedback(string message)
-    {
-        feedback.text = (message);
-        //Debug.Log(message);
+        uiDisplay.PresentFeedback("GameOver", sessionPoints);
     }
 
     private IEnumerator MinimumWaitForRestart(float restartDelay)
@@ -164,7 +157,6 @@ public class GameManager : MonoBehaviour
 
     private void RelocatePlayer(Vector3 newPosition)
     {
-        // this may need to be a fade in/out vignette if it is too disorienting to just teleport back to the beginning
 
         player.transform.position = newPosition;
 

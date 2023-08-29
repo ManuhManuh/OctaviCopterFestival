@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   levelID: 1
-  name: Basic 5th
-  instructions: Listen to the tones and fly the path that matches them
+  name: Level1Name
+  instructions: Level1Instructions
   tracks:
   - {fileID: 11400000, guid: 4e46d7c666b449a4e81305c1be2153e0, type: 2}
   - {fileID: 11400000, guid: 1067574e270c86c409e677883eb6342d, type: 2}

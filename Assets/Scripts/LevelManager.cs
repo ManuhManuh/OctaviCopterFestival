@@ -43,7 +43,7 @@ public class LevelManager : MonoBehaviour
 
     private TMP_Text levelTitle;
     private TMP_Text levelInstructions;
-    private TMP_Text feedback;
+    private UIDisplay uiDisplay;
 
     private void Start()
     {
@@ -57,7 +57,7 @@ public class LevelManager : MonoBehaviour
 
         levelTitle = GameObject.Find("LevelTitle").GetComponent<TMP_Text>();
         levelInstructions = GameObject.Find("LevelInstructions").GetComponent<TMP_Text>();
-        feedback = GameObject.Find("Feedback").GetComponent<TMP_Text>();
+        uiDisplay = GameObject.FindObjectOfType<UIDisplay>();
 
         if (currentLevel.environmentAsset != null)
         {
@@ -79,7 +79,7 @@ public class LevelManager : MonoBehaviour
             if (buttonPressValue > 0 && cycleEnabled)
             {
                 cycleEnabled = false;
-                PresentFeedback("Pull trigger to select current track");
+                uiDisplay.PresentFeedback("TrackSelect");
                 CycleThroughTracks();
 
             }
@@ -210,8 +210,8 @@ public class LevelManager : MonoBehaviour
         notesCollected = 0;
 
         levelHeight = currentLevel.maxHeight;
-        levelTitle.text = currentLevel.name;
-        levelInstructions.text = currentLevel.instructions;
+        uiDisplay.UpdateLevelTitle(currentLevel.name);
+        uiDisplay.UpdateLevelInstructions(currentLevel.instructions);
 
     }
 
@@ -254,14 +254,14 @@ public class LevelManager : MonoBehaviour
 
     private void ReconnaissanceFlyingEntered()
     {
-        PresentFeedback($"Start flying reconaissance, or hit Y or B to select track to fly");
+        uiDisplay.PresentFeedback("Reconnaissance");
         cycleEnabled = true;
 
     }
     private void CheckNote(Note hitNote)
     {
         notesCollected++;
-        PresentFeedback($"You hit {hitNote.noteName}");
+        uiDisplay.PresentFeedback("NoteHit", hitNote.noteName);
 
         if (levelNotes[hitNote])
         {
@@ -288,7 +288,7 @@ public class LevelManager : MonoBehaviour
         
         yield return new WaitForSeconds(1); 
 
-        PresentFeedback($"Giving {currentLevel.name} hint");
+        // PresentFeedback($"Giving {currentLevel.name} hint");
         List<Note> playNotes = new List<Note>();
 
         foreach (Note note in levelNotes.Keys)
@@ -306,12 +306,6 @@ public class LevelManager : MonoBehaviour
         }
 
         if(currentState == LevelState.LoadingLevel) GotoState(LevelState.ReconaissanceFlying);
-    }
-
-    private void PresentFeedback(string message)
-    {
-        feedback.text = (message);
-        //Debug.Log(message);
     }
 
     private IEnumerator CleanUpAndEndLevel()
@@ -376,7 +370,7 @@ public class LevelManager : MonoBehaviour
     }
     public void FlyingTrackEntered()
     {
-        PresentFeedback($"Start flying track!");
+        uiDisplay.PresentFeedback("FlyPrompt");
 
         // disable strafe
 
