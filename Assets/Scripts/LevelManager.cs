@@ -44,6 +44,8 @@ public class LevelManager : MonoBehaviour
     private TMP_Text levelTitle;
     private TMP_Text levelInstructions;
     private UIDisplay uiDisplay;
+    private string currentFeedbackText;
+    private string lastNoteHit;
 
     private void Start()
     {
@@ -79,7 +81,8 @@ public class LevelManager : MonoBehaviour
             if (buttonPressValue > 0 && cycleEnabled)
             {
                 cycleEnabled = false;
-                uiDisplay.PresentFeedback("TrackSelect");
+                currentFeedbackText = "TrackSelect";
+                SendMessageToUI();
                 CycleThroughTracks();
 
             }
@@ -158,10 +161,7 @@ public class LevelManager : MonoBehaviour
         OnStateEntered(currentState);
     }
 
-    public void TrackSelectionInput()
-    {
 
-    }
     private void LoadingLevelEntered()
     {
         // make sure we're starting with a clean slate
@@ -210,11 +210,38 @@ public class LevelManager : MonoBehaviour
         notesCollected = 0;
 
         levelHeight = currentLevel.maxHeight;
-        uiDisplay.UpdateLevelTitle(currentLevel.name);
-        uiDisplay.UpdateLevelInstructions(currentLevel.instructions);
+        UpdateLevelUIFields();
 
     }
 
+    public void UpdateLevelUIFields()
+    {
+        uiDisplay.UpdateLevelTitle(currentLevel.name);
+        uiDisplay.UpdateLevelInstructions(currentLevel.instructions);
+    }
+
+    public void SendMessageToUI()
+    {
+        switch (currentFeedbackText)
+        {
+            case "TrackSelect":
+            case "RetryPrompt":
+            case "Recon":
+            case "FlyPrompt":
+                {
+                    uiDisplay.PresentFeedback(currentFeedbackText);
+                    break;
+                }
+            case "NoteHit":
+                {
+                    uiDisplay.PresentFeedback(currentFeedbackText, lastNoteHit);
+                    break;
+                }
+
+        }
+
+
+    }
     private void InstantiateTrack(Track track, float trackXPosition)
     {
         float yPosition;
@@ -254,14 +281,17 @@ public class LevelManager : MonoBehaviour
 
     private void ReconnaissanceFlyingEntered()
     {
-        uiDisplay.PresentFeedback("Reconnaissance");
+        currentFeedbackText = "Recon";
+        SendMessageToUI();
         cycleEnabled = true;
 
     }
     private void CheckNote(Note hitNote)
     {
         notesCollected++;
-        uiDisplay.PresentFeedback("NoteHit", hitNote.noteName);
+        lastNoteHit = hitNote.noteName;
+        currentFeedbackText = "NoteHit";
+        SendMessageToUI();
 
         if (levelNotes[hitNote])
         {
@@ -370,7 +400,8 @@ public class LevelManager : MonoBehaviour
     }
     public void FlyingTrackEntered()
     {
-        uiDisplay.PresentFeedback("FlyPrompt");
+        currentFeedbackText = "FlyPrompt";
+        SendMessageToUI();
 
         // disable strafe
 

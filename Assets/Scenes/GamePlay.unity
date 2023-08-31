@@ -324,6 +324,8 @@ MonoBehaviour:
   timeBetweenLevels: 1
   timeBeforeRestartAllowed: 10
   backgroundAsset: {fileID: 405820956}
+  currentLevelManager: {fileID: 0}
+  currentFeedbackText: 
 --- !u!4 &457355963
 Transform:
   m_ObjectHideFlags: 0
@@ -1079,12 +1081,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainPanel: {fileID: 6745482053300885269}
   modeButtonText: {fileID: 757035940}
-  modeButtonLabel: {fileID: 814944097510407476}
   languageButtonText: {fileID: 7690578647135008322}
-  languageButtonLabel: {fileID: 7528135211752562715}
-  instructionsButtonText: {fileID: 2631916528133683373}
-  speedLabel: {fileID: 6394088018303906140}
-  exitButtonText: {fileID: 1165902277029604587}
   instructionPanel: {fileID: 7937025128533215597}
   backButtonText: {fileID: 2268478561036791963}
   modes:
@@ -1093,7 +1090,19 @@ MonoBehaviour:
   languages:
   - English
   - Deutsch
-  - Espanol
+  - "Espa\xF1ol"
+  textFields:
+  - {fileID: 6394088018303906140}
+  - {fileID: 2631916528133683373}
+  - {fileID: 1165902277029604587}
+  - {fileID: 814944097510407476}
+  - {fileID: 7528135211752562715}
+  - {fileID: 7117223360106849827}
+  - {fileID: 3748736049160958618}
+  - {fileID: 4074621881892105879}
+  - {fileID: 7596447638251984985}
+  - {fileID: 1825207215935940172}
+  - {fileID: 2268478561036791963}
 --- !u!1 &729969572482711229
 GameObject:
   m_ObjectHideFlags: 0
@@ -3823,7 +3832,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Move either joystick to fly forward/backward
+  m_text: Move either joystick to fly forward/back
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
