@@ -2,20 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Playables;
 
 public class LeftMenuButton : MonoBehaviour
 {
     [SerializeField] InputActionReference returnToMainAction;
-    [SerializeField] Animator windowAnimation;
-    [SerializeField] Animator roofAnimation;
-    [SerializeField] Animator pauseUIAnimation;
-    [SerializeField] AudioSource audioSourceRoof;
-    
-    private bool open = false;
+    //[SerializeField] PlayableDirector menuOpenDirector;
+    //[SerializeField] PlayableDirector menuCloseDirector;
+
+    //[SerializeField] private Animator menuAnimation;
+    //[SerializeField] private Animator keyboardAnimation;
+    //[SerializeField] private Animator windowAnimation;
+    //[SerializeField] private Animator roofAnimation;
+
+    [SerializeField] private Animator menuAnimation;
+
+    [SerializeField] private AudioSource audioSourceExterior;
+
+    private bool menuOpen = true;
+    //private GameObject mainMenu;
 
     private void Start()
     {
         returnToMainAction.action.performed += MainMenuButtonPress;
+        //mainMenu = GameObject.Find("MainMenu");
     }
 
     private void MainMenuButtonPress(InputAction.CallbackContext obj)
@@ -26,30 +36,63 @@ public class LeftMenuButton : MonoBehaviour
 
         //Debug.Log("Main menu button pushed - add code to open the main menu once there is one");
 
-        if (open)
+        if (menuOpen)
         {
-            windowAnimation.SetTrigger("CloseWindows");
-            roofAnimation.SetTrigger("CloseRoof");
-            pauseUIAnimation.SetTrigger("PauseUI_OFF");
-            open = false;
-            StartCoroutine(DoorSwish(0.65f));
+
+            //menuCloseDirector.Play();
+            //menuOpen = false;
+            StartCoroutine(CloseMenu());
         }
         else
         {
-            windowAnimation.SetTrigger("OpenWindows");
-            roofAnimation.SetTrigger("OpenRoof");
-            pauseUIAnimation.SetTrigger("PauseUI_ON");
-            open = true;
-            StartCoroutine(DoorSwish(0.25f));
+            //menuOpenDirector.Play();
+            //menuOpen = true;
+            StartCoroutine(OpenMenu());
         }
         
         
     }
 
-    private IEnumerator DoorSwish(float delay)
+
+    private IEnumerator OpenMenu()
     {
-        yield return new WaitForSeconds(delay);
-        audioSourceRoof.PlayOneShot(audioSourceRoof.clip);
+        // yield return new WaitForSeconds(0.1f);
+
+        //menuAnimation.SetTrigger("OpenMenu");
+        //keyboardAnimation.SetTrigger("PauseUI_OFF");
+
+        //windowAnimation.SetTrigger("CloseWindows");
+        //roofAnimation.SetTrigger("CloseRoof");
+
+        menuAnimation.SetBool("MenuIsOpen", true);
+
+        yield return new WaitForSeconds(0.65f);
+        audioSourceExterior.PlayOneShot(audioSourceExterior.clip);
+        //mainMenu.SetActive(true);
+
+        menuOpen = true;
+
     }
-    
+
+    private IEnumerator CloseMenu()
+    {
+        //menuAnimation.SetTrigger("CloseMenu");
+        //keyboardAnimation.SetTrigger("PauseUI_ON");
+
+        //windowAnimation.SetTrigger("OpenWindows");
+        //roofAnimation.SetTrigger("OpenRoof");
+
+        menuAnimation.SetBool("MenuIsOpen", false);
+
+        yield return new WaitForSeconds(0.25f);
+        audioSourceExterior.PlayOneShot(audioSourceExterior.clip);
+
+        //yield return new WaitForSeconds(1.0f);
+        //mainMenu.SetActive(false);
+
+        menuOpen = false;
+    }
+
+
+
 }
