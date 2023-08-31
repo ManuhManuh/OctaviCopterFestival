@@ -8,7 +8,12 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public Level CurrentLevel => levels[currentLevelIndex];
-    public string Mode => mode;
+    public string Mode
+    {
+        get { return mode; }
+        set { mode = value; }
+    }
+
     public Vector3 PlayerStartPosition => playerStartPosition;
     public GameObject player;
 
@@ -19,7 +24,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float timeBeforeRestartAllowed;
     [SerializeField] private GameObject backgroundAsset;
     
-
     private LevelManager currentLevelManager;
     private int currentLevelIndex;
     private Vector3 playerStartPosition;
@@ -27,7 +31,7 @@ public class GameManager : MonoBehaviour
     private int levelAttempts;
     private int sessionPoints;
     private int lifetimePoints;
-    private string mode = "beginner";
+    private string mode = "Beginner";
     private UIDisplay uiDisplay;
 
     private void Awake()
