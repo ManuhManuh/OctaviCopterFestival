@@ -21,6 +21,7 @@ public class LevelManager : MonoBehaviour
 
     public float LevelHeight => levelHeight;
     private float levelHeight;
+    public bool HintIsPlaying => hintIsPlaying;
 
     [SerializeField] private InputActionReference cycleTrackActionReference;
     [SerializeField] private InputActionReference startFlyingActionReference;
@@ -46,6 +47,7 @@ public class LevelManager : MonoBehaviour
     private UIDisplay uiDisplay;
     private string currentFeedbackText;
     private string lastNoteHit;
+    private bool hintIsPlaying = false;
 
     private void Start()
     {
@@ -313,9 +315,10 @@ public class LevelManager : MonoBehaviour
     }
 
 
-    private IEnumerator PerformTrackHint()
+    public IEnumerator PerformTrackHint()
     {
-        
+        hintIsPlaying = true;
+
         yield return new WaitForSeconds(1); 
 
         // PresentFeedback($"Giving {currentLevel.name} hint");
@@ -336,6 +339,7 @@ public class LevelManager : MonoBehaviour
         }
 
         if(currentState == LevelState.LoadingLevel) GotoState(LevelState.ReconaissanceFlying);
+        hintIsPlaying = false;
     }
 
     private IEnumerator CleanUpAndEndLevel()

@@ -183,7 +183,6 @@ public class MenuDisplay : MonoBehaviour
                 }
 
         }
-        Debug.Log("Updating speed ranges");
 
     }
 
@@ -191,7 +190,7 @@ public class MenuDisplay : MonoBehaviour
     {
         float newSpeed = speedSlider.value * (currentMaxSpeed - currentMinSpeed) + currentMinSpeed;
         moveProvider.moveSpeed = newSpeed;
-        Debug.Log("Updating speed");
+
     }
 
     private void UpdateSpeedSlider()
@@ -210,7 +209,7 @@ public class MenuDisplay : MonoBehaviour
         {
             newSliderValue = speedPortion / speedRange;
         }
-        Debug.Log($"Updating slider to {newSliderValue}");
+ 
         speedSlider.value = Mathf.Clamp(newSliderValue,0,1);
 
     }

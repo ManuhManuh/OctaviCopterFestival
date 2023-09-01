@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Playables;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class LeftMenuButton : MonoBehaviour
 {
     [SerializeField] private InputActionReference returnToMainAction;
     [SerializeField] private Animator menuAnimation;
     [SerializeField] private AudioSource audioSourceExterior;
+
+    [SerializeField] private XRPokeInteractor leftPokeInteractor;
+    [SerializeField] private XRPokeInteractor rightPokeInteractor;
+    [SerializeField] private XRDirectInteractor leftDirectInteractor;
+    [SerializeField] private XRDirectInteractor rightDirectInteractor;
 
     private bool menuOpen = true;
 
@@ -25,10 +30,22 @@ public class LeftMenuButton : MonoBehaviour
 
         if (menuOpen)
         {
+            leftPokeInteractor.gameObject.SetActive(false);
+            rightPokeInteractor.gameObject.SetActive(false);
+
+            leftDirectInteractor.gameObject.SetActive(true);
+            rightDirectInteractor.gameObject.SetActive(true);
+
             StartCoroutine(CloseMenu());
         }
         else
         {
+            leftPokeInteractor.gameObject.SetActive(true);
+            rightPokeInteractor.gameObject.SetActive(true);
+
+            leftDirectInteractor.gameObject.SetActive(false);
+            rightDirectInteractor.gameObject.SetActive(false);
+
             StartCoroutine(OpenMenu());
         }
         
