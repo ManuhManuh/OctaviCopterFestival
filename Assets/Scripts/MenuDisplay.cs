@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class MenuDisplay : MonoBehaviour
 {
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private TMP_Text modeButtonText;
     [SerializeField] private TMP_Text languageButtonText;
+    [SerializeField] private Slider speedSlider;
 
     [SerializeField] private GameObject instructionPanel;
     [SerializeField] private TMP_Text backButtonText;
@@ -17,8 +19,19 @@ public class MenuDisplay : MonoBehaviour
     [SerializeField] private List<string> languages = new List<string>();
     [SerializeField] private List<TMP_Text> textFields = new List<TMP_Text>();
 
+    [SerializeField] private float minSpeedBeginner;
+    [SerializeField] private float maxSpeedBeginner;
+    [SerializeField] private float minSpeedAdvanced;
+    [SerializeField] private float maxSpeedAdvanced;
+    [SerializeField] private TMP_Text speedSliderLeft;
+    [SerializeField] private TMP_Text speedsliderRight;
+
     private GameManager gameManager;
     private bool localizationInitialized = false;
+    private ActionBasedContinuousMoveProvider moveProvider;
+    private float currentMinSpeed;
+    private float currentMaxSpeed;
+    
 
     private void Start()
     {
@@ -33,6 +46,10 @@ public class MenuDisplay : MonoBehaviour
             gameManager.Mode = "Beginner";
         }
 
+        moveProvider = FindObjectOfType<ActionBasedContinuousMoveProvider>();
+        UpdateSpeedRanges();
+        UpdateSpeedSlider();
+
     }
     public void DisplayInstructions()
     {
@@ -46,6 +63,8 @@ public class MenuDisplay : MonoBehaviour
   
         mainPanel.SetActive(true);
         instructionPanel.SetActive(false);
+        UpdateSpeedRanges();
+        UpdateSpeedSlider();
     }
 
     public void CycleMode()
@@ -58,7 +77,13 @@ public class MenuDisplay : MonoBehaviour
         // update the value in the Game Manager
         gameManager.Mode = modes[newMode];
 
+        // update the min and max speed values
+        UpdateSpeedRanges();
+        UpdateSpeedSlider();
+
     }
+
+    
 
     public void CycleLanguages()
     {
@@ -133,10 +158,60 @@ public class MenuDisplay : MonoBehaviour
         localizationInitialized = true;
 
     }
-    
+
+    private void UpdateSpeedRanges()
+    {
+        // update the min and max speed values
+        string modeKey = Localization.FindKeyFromValue(Localization.currentLocale, gameManager.Mode);
+        switch (modeKey)
+        {
+            case "ModeBeginner":
+                {
+                    speedSliderLeft.text = minSpeedBeginner.ToString();
+                    speedsliderRight.text = maxSpeedBeginner.ToString();
+                    currentMinSpeed = minSpeedBeginner;
+                    currentMaxSpeed = maxSpeedBeginner;
+                    break;
+                }
+            case "ModeAdvanced":
+                {
+                    speedSliderLeft.text = minSpeedAdvanced.ToString();
+                    speedsliderRight.text = maxSpeedAdvanced.ToString();
+                    currentMinSpeed = minSpeedAdvanced;
+                    currentMaxSpeed = maxSpeedAdvanced;
+                    break;
+                }
+
+        }
+        Debug.Log("Updating speed ranges");
+
+    }
 
     public void UpdateSpeed()
     {
+        float newSpeed = speedSlider.value * (currentMaxSpeed - currentMinSpeed) + currentMinSpeed;
+        moveProvider.moveSpeed = newSpeed;
+        Debug.Log("Updating speed");
+    }
+
+    private void UpdateSpeedSlider()
+    {
+        float newSliderValue;
+        float speedRange;
+        float speedPortion;
+
+        speedRange = currentMaxSpeed - currentMinSpeed;
+        speedPortion = moveProvider.moveSpeed - currentMinSpeed;
+        if (speedRange == 0)    // will only happen if max and min speed are the same
+        {
+            newSliderValue = 0;
+        }
+        else
+        {
+            newSliderValue = speedPortion / speedRange;
+        }
+        Debug.Log($"Updating slider to {newSliderValue}");
+        speedSlider.value = Mathf.Clamp(newSliderValue,0,1);
 
     }
 
