@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float timeBetweenLevels;
     [SerializeField] private float timeBeforeRestartAllowed;
     [SerializeField] private GameObject backgroundAsset;
+    [SerializeField] private ParticleSystem fireworks;
     
     public LevelManager currentLevelManager;
     private int currentLevelIndex;
@@ -147,10 +148,12 @@ public class GameManager : MonoBehaviour
     
     public void GameOver()
     {
-     
+
+        fireworks.gameObject.SetActive(true);
         UpdateLifetimePoints(lifetimePoints);
         currentFeedbackText = "GameOver";
         SendMessageToUI();
+
     }
 
     private IEnumerator MinimumWaitForRestart(float restartDelay)
