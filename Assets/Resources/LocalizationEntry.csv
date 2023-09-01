@@ -12,13 +12,14 @@ ModeBeginner;Beginner;(G) Beginner;(S) Beginner;(F) Beginner
 ModeAdvanced;Advanced;(G) Advanced;(S) Advanced;(F) Advanced
 SpeedLable;Speed;(G) Speed;(S) Speed;(F) Speed
 LanguageLabel;Language;(G) Language;(S) Language;(F) Language
-LanguageSelected;English;Deutsch;Español;Francais
+LanguageSelected;English;Deutsch;Espanol;Francais
 InstructionButton;Instructions;(G) Instructions;(S) Instructions;(F) Instructions
 ExitButton;Exit;(G) Exit;(S) Exit;(F) Exit
 InstructionStick;Move either joystick to fly forward/back;(G) Move either joystick to fly forward/back;(S) Move either joystick to fly forward/back;(F) Move either joystick to fly forward/back
 InstructionHead;Move head up/down to fly higher/lower;(G) Move head up/down to fly higher/lower;(S) Move head up/down to fly higher/lower;(F) Move head up/down to fly higher/lower
 InstructionRecon;Recon flying is sightseeing - notes are not collected;(G) Recon flying is sightseeing - notes are not collected;(S) Recon flying is sightseeing - notes are not collected;(F) Recon flying is sightseeing - notes are not collected
 InstructionPoints;Full points on first try, half points on second try;(G) Full points on first try, half points on second try;(S) Full points on first try, half points on second try;(F) Full points on first try, half points on second try
+InstructionButtons;Red/Green buttons replay the hint;(G) Red/Green buttons replay the hint;(S) Red/Green buttons replay the hint;(F) Red/Green buttons replay the hint
 InstructionHamburger;Hamburger button (       ) start/pause/resume game;(G) Hamburger button (       ) start/pause/resume game;(S) Hamburger button (       ) start/pause/resume game;(F) Hamburger button (       ) start/pause/resume game
 BackButton;Back;(G) Back;(S) Back;(F) Back
 Level0Name;Testing;(G) Testing;(S) Testing;(F) Testing
