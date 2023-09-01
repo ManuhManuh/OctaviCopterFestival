@@ -28,6 +28,7 @@ public class LeftMenuButton : MonoBehaviour
 
         if (!this.gameObject.activeInHierarchy) return;
 
+
         if (menuOpen)
         {
             leftPokeInteractor.gameObject.SetActive(false);
@@ -54,11 +55,11 @@ public class LeftMenuButton : MonoBehaviour
 
     private IEnumerator OpenMenu()
     {
+        menuAnimation.enabled = true;
         menuAnimation.SetBool("MenuIsOpen", true);
 
         yield return new WaitForSeconds(0.65f);
         audioSourceExterior.PlayOneShot(audioSourceExterior.clip);
-
         menuOpen = true;
 
     }
@@ -69,6 +70,9 @@ public class LeftMenuButton : MonoBehaviour
 
         yield return new WaitForSeconds(0.25f);
         audioSourceExterior.PlayOneShot(audioSourceExterior.clip);
+
+        yield return new WaitForSeconds(2.0f);  //wait for animation to finish
+        menuAnimation.enabled = false;
 
         menuOpen = false;
     }
