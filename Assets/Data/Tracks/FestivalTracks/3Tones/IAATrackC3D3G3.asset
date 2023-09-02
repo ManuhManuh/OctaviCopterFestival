@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c3a360fbee5dd40a9b657172d15544, type: 3}
   m_Name: IAATrackC3D3G3
   m_EditorClassIdentifier: 
-  trackID: 301
-  trackDescription: C3D3G3
+  trackID: 305
+  trackDescription: IAATrackC3D3G3
   notes:
   - {fileID: 268683940543836428, guid: 3a861c4342fe8ee43abb693546fba3fd, type: 3}
   - {fileID: 5077884817688091162, guid: e0a4e29fc89e73645a40cd600c8d2b0d, type: 3}

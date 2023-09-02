@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c605a6d43594cbb4e934cc00e22d371c, type: 3}
+  m_Name: IAALevel5
+  m_EditorClassIdentifier: 
+  levelID: 5
+  name: Testing Starts
+  instructions: Play it by ear!
+  tracks:
+  - {fileID: 11400000, guid: d93182d3d9b4ddb4ea36f3b8859a4c5b, type: 2}
+  - {fileID: 11400000, guid: 8e829ec69eb8f54488daffda3d3a8d95, type: 2}
+  - {fileID: 11400000, guid: 7d463ecc0e572d4438f08ce3300aa99b, type: 2}
+  winningTrack: {fileID: 11400000, guid: d93182d3d9b4ddb4ea36f3b8859a4c5b, type: 2}
+  pointValue: 40
+  trackSpacing: 10
+  noteSpacing: 75
+  maxHeight: 60
+  trackStartDistance: 15
+  clueTiming: 4
+  environmentAsset: {fileID: 9136014409318921767, guid: b39f01ba84aaf4440aa04f2f80f43e32,
+    type: 3}
+  trackHeight: 0
