@@ -218,6 +218,7 @@ public class MenuDisplay : MonoBehaviour
     {
         Debug.Log("Game will restart at level 1");
     }
+
     public void ExitGame()
     {
         Application.Quit();
