@@ -1063,11 +1063,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3137375980820430083}
     m_Modifications:
-    - target: {fileID: 2081951918185293169, guid: d22b7ce36caceae458f84225238b5e1b,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 8d6cde93bf4099041850077574219210, type: 2}
     - target: {fileID: 2832884632562363136, guid: d22b7ce36caceae458f84225238b5e1b,
         type: 3}
       propertyPath: m_RootOrder
@@ -1128,26 +1123,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: OctaviCopter_Cockpit0
       objectReference: {fileID: 0}
-    - target: {fileID: 3178342031717740986, guid: d22b7ce36caceae458f84225238b5e1b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3833989287528562786, guid: d22b7ce36caceae458f84225238b5e1b,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: b1e77ea6f39464646a647dd1869ea9b9, type: 2}
-    - target: {fileID: 4766673912656993291, guid: d22b7ce36caceae458f84225238b5e1b,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5120010047031521531, guid: d22b7ce36caceae458f84225238b5e1b,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 89137721ed4e747118df23df160c4cf5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d22b7ce36caceae458f84225238b5e1b, type: 3}
 --- !u!4 &3989503284406935376 stripped
