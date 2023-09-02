@@ -22,6 +22,7 @@ public class LevelManager : MonoBehaviour
     public float LevelHeight => levelHeight;
     private float levelHeight;
     public bool HintIsPlaying => hintIsPlaying;
+    public GameObject EnvironmentAsset => environmentAsset;
 
     [SerializeField] private InputActionReference cycleTrackActionReference;
     [SerializeField] private InputActionReference startFlyingActionReference;
@@ -49,11 +50,15 @@ public class LevelManager : MonoBehaviour
     private string lastNoteHit;
     private bool hintIsPlaying = false;
 
-    private void Start()
+    private void Awake()
     {
         // Get reference to game manager and note collector
         gameManager = FindObjectOfType<GameManager>();
         noteCollector = GameObject.Find("NoteCollector");
+    }
+    private void Start()
+    {
+        
         noteCollector.SetActive(false); // disable until a track is selected
 
         // Set the initial state and starting values of flags and indexes
@@ -96,7 +101,20 @@ public class LevelManager : MonoBehaviour
 
             }
         }
-        
+
+        if(currentState == LevelState.FlyingTrack)
+        {
+            float buttonPressValue = cycleTrackActionReference.action.ReadValue<float>();
+            if (buttonPressValue > 0)
+            {
+                // move to start of selected track
+                float newPlayerXPosition = trackXPositions[selectedTrack];
+                float newPlayerYPosition = trackYPositions[selectedTrack];
+                float newPlayerZPostion = gameManager.PlayerStartPosition.z;
+
+                gameManager.player.transform.position = new Vector3(newPlayerXPosition, newPlayerYPosition, newPlayerZPostion);
+            }
+        }
 
     }
 
@@ -342,12 +360,12 @@ public class LevelManager : MonoBehaviour
         hintIsPlaying = false;
     }
 
-    private IEnumerator CleanUpAndEndLevel()
+    public IEnumerator CleanUpAndEndLevel()
     {
         yield return new WaitForSeconds(3); // time for sound from last note collected to decay
         // destroy the notes, thereby also removing the subscriptions to them ;)
         Note[] notes = FindObjectsOfType<Note>();
-        foreach(Note note in notes)
+        foreach (Note note in notes)
         {
             Destroy(note.gameObject);
         }
@@ -358,7 +376,7 @@ public class LevelManager : MonoBehaviour
                 Destroy(track);
             }
         }
-        
+
         yield return new WaitForSeconds(1);
 
         Destroy(environmentAsset);
