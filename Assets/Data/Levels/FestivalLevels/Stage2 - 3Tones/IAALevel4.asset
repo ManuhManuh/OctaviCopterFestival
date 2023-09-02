@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IAALevel4
   m_EditorClassIdentifier: 
   levelID: 4
-  name: IAALevelName
+  name: IAALevel4Name
   instructions: IAALevel4Description
   tracks:
   - {fileID: 11400000, guid: 55e90d2a3bd36b9409e6557ba59a5c10, type: 2}
