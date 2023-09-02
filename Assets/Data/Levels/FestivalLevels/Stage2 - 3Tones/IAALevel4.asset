@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c605a6d43594cbb4e934cc00e22d371c, type: 3}
+  m_Name: IAALevel4
+  m_EditorClassIdentifier: 
+  levelID: 4
+  name: Testing Starts
+  instructions: Keep flying!
+  tracks:
+  - {fileID: 11400000, guid: 55e90d2a3bd36b9409e6557ba59a5c10, type: 2}
+  - {fileID: 11400000, guid: 3b1e6f8a27559d445b28bae8a43583df, type: 2}
+  - {fileID: 11400000, guid: 665fe8fe162dbdf45980c2b86d88da93, type: 2}
+  winningTrack: {fileID: 11400000, guid: 55e90d2a3bd36b9409e6557ba59a5c10, type: 2}
+  pointValue: 30
+  trackSpacing: 10
+  noteSpacing: 75
+  maxHeight: 60
+  trackStartDistance: 15
+  clueTiming: 3
+  environmentAsset: {fileID: 9136014409318921767, guid: b39f01ba84aaf4440aa04f2f80f43e32,
+    type: 3}
+  trackHeight: 0

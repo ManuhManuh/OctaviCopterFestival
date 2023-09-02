@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IAATrackC3F3
   m_EditorClassIdentifier: 
   trackID: 206
-  trackDescription: C3F3
+  trackDescription: IAATrackC3F3
   notes:
   - {fileID: 268683940543836428, guid: 3a861c4342fe8ee43abb693546fba3fd, type: 3}
   - {fileID: 2975544682907214237, guid: c98fc62ae2bb22840a00fd15d5b74b6e, type: 3}
