@@ -18,9 +18,9 @@ ExitButton;Exit;Exit;Salida;(F) Exit
 InstructionStick;Move either joystick to fly forward/back;Joystick  vor/zurück um forwärts/rückwärts zu fliegen;Mueva el  joystick para volar hacia adelante o atrás;(F) Move either joystick to fly forward/back
 InstructionHead;Steer with your head;Lenke mit Deinem Kopf;Mueve la cabeza hacia arriba o abajopara volar más alto o mas bajo;(F) Move head up/down to fly higher/lower
 InstructionRecon;Recon flying is sightseeing - notes are not collected;Der Entdeckungsflug wird nicht gewertet.;Recon flying is sightseeing - notes are not collected;(F) Recon flying is sightseeing - notes are not collected
-InstructionPoints;Full points on first try, half points on second try;1. Versuch: volle Punktzahl - 2. Versuch: halbe Punktzahl;Todos los puntos en la primer prueba, medio puntos en el segundo intento;(F) Full points on first try, half points on second try
+InstructionPoints;Full points on first try, half points on second try;1. Versuch: volle Punktzahl - 2. Versuch: halbe Punktzahl;Todos los puntos en la primer prueba, medio puntos en el segundo intento;(F) Full points on first try,; half points on second try
 InstructionButtons;Green buttons replay the hint;Die grünen Knöpfe wiederholen die zu treffenden Töne;Botones verdesc repiten las notas a tocar;(F) Red/Green buttons replay the hint
-InstructionHamburger;( <sprite name="FlatHamburger"> ) start/pause/resume game;( <sprite name="FlatHamburger"> ) Start/Pause;( <sprite name="FlatHamburger"> ) comenzar/pausar/resumir juego;(F) ( <sprite name="FlatHamburger"> ) start/pause/resume game
+InstructionHamburger;( <sprite name="FlatHamburger" ) start/pause/resume game;( <sprite name="FlatHamburger" ) Start/Pause;( <sprite name="FlatHamburger" ) comenzar/pausar/resumir juego;(F) ( <sprite name="FlatHamburger" ) start/pause/resume game
 BackButton;Back;Zurück;Regresar;(F) Back
 Level0Name;Testing;Test;Probar;(F) Testing
 Level0Instructions;Wing it!;Du schafffst das!;Tu puedes!;(F) Wing it!
