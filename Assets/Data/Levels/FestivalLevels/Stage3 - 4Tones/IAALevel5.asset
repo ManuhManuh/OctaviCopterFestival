@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: IAALevel5
   m_EditorClassIdentifier: 
   levelID: 5
-  name: Testing Starts
-  instructions: Play it by ear!
+  name: IAALevel5Name
+  instructions: IAALevel5Description
   tracks:
   - {fileID: 11400000, guid: d93182d3d9b4ddb4ea36f3b8859a4c5b, type: 2}
   - {fileID: 11400000, guid: 8e829ec69eb8f54488daffda3d3a8d95, type: 2}
