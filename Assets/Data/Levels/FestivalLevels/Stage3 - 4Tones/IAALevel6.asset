@@ -13,18 +13,19 @@ MonoBehaviour:
   m_Name: IAALevel6
   m_EditorClassIdentifier: 
   levelID: 6
-  name: Testing Starts
-  instructions: Own it!
+  name: IAALevel6Name
+  instructions: IAALevel6Description
   tracks:
   - {fileID: 11400000, guid: f16d7ca84b088564f984f947f724d6d7, type: 2}
   - {fileID: 11400000, guid: b1ddd25340442ad44af0676e6f08212a, type: 2}
   - {fileID: 11400000, guid: d93182d3d9b4ddb4ea36f3b8859a4c5b, type: 2}
-  winningTrack: {fileID: 0}
-  pointValue: 0
-  trackSpacing: 0
-  noteSpacing: 0
-  maxHeight: 0
-  trackStartDistance: 0
-  clueTiming: 0
-  environmentAsset: {fileID: 0}
+  winningTrack: {fileID: 11400000, guid: d93182d3d9b4ddb4ea36f3b8859a4c5b, type: 2}
+  pointValue: 40
+  trackSpacing: 10
+  noteSpacing: 75
+  maxHeight: 60
+  trackStartDistance: 15
+  clueTiming: 4
+  environmentAsset: {fileID: 9136014409318921767, guid: b39f01ba84aaf4440aa04f2f80f43e32,
+    type: 3}
   trackHeight: 0

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: IAALevel2
   m_EditorClassIdentifier: 
   levelID: 2
-  name: Testing Starts
-  instructions: Swing it!
+  name: IAALevel2Name
+  instructions: IAALevel2Description
   tracks:
   - {fileID: 11400000, guid: 7fd613e4ed95f09479874fabd7143304, type: 2}
   - {fileID: 11400000, guid: 80e16f3215e1d22488906b0d256b4e10, type: 2}

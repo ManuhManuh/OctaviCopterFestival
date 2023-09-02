@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: IAALevel1
   m_EditorClassIdentifier: 
   levelID: 1
-  name: Testing Starts
-  instructions: Hit it!
+  name: IAALevel1Name
+  instructions: IAALevel1Description
   tracks:
   - {fileID: 11400000, guid: 52a579bd6703db1459cb1e72b01addc1, type: 2}
   - {fileID: 11400000, guid: e543396d81c9338468a77d0266f2ebbd, type: 2}

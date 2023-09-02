@@ -26,7 +26,7 @@ public static class Localization
 
     private static void Load()
     {
-        var source = Resources.Load<TextAsset>("LocalizationEntry");
+        var source = Resources.Load<TextAsset>("Localization");
         var lines = source.text.Split('\n');
         var header = lines[0].Split(';');
 
@@ -55,7 +55,7 @@ public static class Localization
             }
         }
 
-
+        
     }
 
     public static Locale FindLocaleFromButtonText(string valueToFindLocaleFor)
@@ -76,8 +76,15 @@ public static class Localization
     {
         foreach(KeyValuePair<string, string> key in localizationTable[locale])
         {
+            if (valueToFindKeyFor == "Español" && locale == Locale.es)
+            {
+                Debug.Log($"Looking for Español key in {locale} table?");
+                Debug.Log($"Direct by key: {localizationTable[locale]["LanguageSelected"]}");
+            }
+
             if (key.Value == valueToFindKeyFor)
             {
+                
                 //Debug.Log($"Found {valueToFindKeyFor} under {key.Key} in {locale} table");
                 return key.Key;
             }

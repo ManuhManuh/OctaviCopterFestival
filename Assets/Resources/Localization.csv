@@ -1,0 +1,42 @@
+;en;de;es;fr
+StartPrompt;Press X or A to start;Drücke X oder A zum Starten;Presione X o A para comenzar;(F) Press X or A to start
+PointsPlusTotal;Correct! You have earned {0} points - your session total is {1}! Press X or A for next level;Super! Du hast {0} Punkte erzielt - Gesamtwertung Deiner Sitzung: {1}! Weiter mit X oder A!;Correcto! Tu has ganado {0} puntos - tu sesión total es  {0}! Presione X o A para el próximo nivel;(F) Correct! You have earned {0} points - your session total is {1}! Press X or A for next level
+RetryPrompt;Level failed! Press X or A to retry;Schade! Versuch es nochmal: drücke X oder A!;Lo siento! Tu nivel ha fallado! Presiona X or A para reintentar;(F) Level failed! Press X or A to retry
+GameOver;Fantastic!! You won!! Your session total was {0} points;Fantastish!! Gewonnen!! Gesamtwertung deiner Sitzung: {0} Punkte;Fantastico!! Tu Has ganado! Tu sesión total fue de {0} puntos;(F) Fantastic!! You won!! Your session total was {0} points
+TrackSelect;Pull trigger to select current track;Wähle Deinen Track mit dem Trigger;Aprieta el botón para seleccionar la pista actual;(F) Pull trigger to select current track
+Recon;Start flying recon, or hit Y or B to select track to fly;Drücke Y oder B zum Wählen deines Track. Schau' Dich gerne um!;Comienza a volar recon, o pulsa Y o B para seleccionar la pista de vuelo No dudes en echar un vistazo.;(F) Start flying recon, or hit Y or B to select track to fly
+FlyPrompt;Start flying track!;Flieg' los!;Comienza a volar!;(F) Start flying track!
+NoteHit;You hit {0};Du hast {0} Punkte;Te has impactado {0};(F) You hit {0}
+ModeLabel;Mode;Modus;Mode;(F) Mode
+ModeBeginner;Beginner;Anfänger;Principiante;(F) Beginner
+ModeAdvanced;Advanced;Fortgeschritten;Advanzado;(F) Advanced
+SpeedLable;Speed;Geschwindigkeit;Velocidad;(F) Speed
+LanguageLabel;Language;Sprache;Lenguaje;(F) Language
+LanguageSelected;English;Deutsch;Español;Francais
+InstructionButton;Instructions;Anleitung;Instrucciones;(F) Instructions
+ExitButton;Exit;Exit;Salida;(F) Exit
+InstructionStick;Move either joystick to fly forward/back;Joystick  vor/zurück um forwärts/rückwärts zu fliegen;Mueva el  joystick para volar hacia adelante o atrás;(F) Move either joystick to fly forward/back
+InstructionHead;Steer with your head;Lenke mit Deinem Kopf;Mueve la cabeza hacia arriba o abajopara volar más alto o mas bajo;(F) Move head up/down to fly higher/lower
+InstructionRecon;Recon flying is sightseeing - notes are not collected;Der Entdeckungsflug wird nicht gewertet.;Recon flying is sightseeing - notes are not collected;(F) Recon flying is sightseeing - notes are not collected
+InstructionPoints;Full points on first try, half points on second try;1. Versuch: volle Punktzahl - 2. Versuch: halbe Punktzahl;Todos los puntos en la primer prueba, medio puntos en el segundo intento;(F) Full points on first try, half points on second try
+InstructionButtons;Green buttons replay the hint;Die grünen Knöpfe wiederholen die zu treffenden Töne;Botones verdesc repiten las notas a tocar;(F) Red/Green buttons replay the hint
+InstructionHamburger;(       ) start/pause/resume game;(       ) Start/Pause;(       ) comenzar/pausar/resumir juego;(F) (       ) start/pause/resume game
+BackButton;Back;Zurück;Regresar;(F) Back
+Level0Name;Testing;Test;Probar;(F) Testing
+Level0Instructions;Wing it!;Du schafffst das!;Tu puedes!;(F) Wing it!
+Level1Name;Basic 5th;Grund-Quinte;Quinto básico;(F) Basic 5th
+Level1Instructions;Listen to the tones and choose the path that matches;Hör' genau hin und wähle den richtigen Track;Escucha los tonos y elige el camino que corresponda;(F) Listen to the tones and choose the path that matches
+Level2Name;C Chord;C Akkord;Acorde;(F) C Chord
+Level2Instructions;Listen to the tones and choose the path that matches;Hör' genau hin und wähle den richtigen Track;Escucha los tonos y elige el camino que corresponda;(F) Listen to the tones and choose the path that matches
+IAALevel1Name;Level 1;Level 1;Nivel 1;(F) Level 1
+IAALevel1Description;Listen to the tones and choose the path that matches;Hör' genau hin und wähle den richtigen Track;Escucha los tonos y elige el camino que corresponda;(F) Listen to the tones and choose the path that matches
+IAALevel2Name;Level 2;Level 2;Nivel 2;(F) Level 2
+IAALevel2Description;Listen to the tones and choose the path that matches;Hör' genau hin und wähle den richtigen Track;Escucha los tonos y elige el camino que corresponda;(F) Listen to the tones and choose the path that matches
+IAALevel3Name;Level 3;Level 3;Nivel 3;(F) Level 3
+IAALevel3Description;Listen to the tones and choose the path that matches;Hör' genau hin und wähle den richtigen Track;Escucha los tonos y elige el camino que corresponda;(F) Listen to the tones and choose the path that matches
+IAALevel4Name;Level 4;Level 4;Nivel 4;(F) Level 4
+IAALevel4Description;Listen to the tones and choose the path that matches;Hör' genau hin und wähle den richtigen Track;Escucha los tonos y elige el camino que corresponda;(F) Listen to the tones and choose the path that matches
+IAALevel5Name;Level 5;Level 5;Nivel 5;(F) Level 5
+IAALevel5Description;Listen to the tones and choose the path that matches;Hör' genau hin und wähle den richtigen Track;Escucha los tonos y elige el camino que corresponda;(F) Listen to the tones and choose the path that matches
+IAALevel6Name;Level 6;Level 6;Nivel 6;(F) Level 6
+IAALevel6Description;Listen to the tones and choose the path that matches;Hör' genau hin und wähle den richtigen Track;Escucha los tonos y elige el camino que corresponda;(F) Listen to the tones and choose the path that matches
