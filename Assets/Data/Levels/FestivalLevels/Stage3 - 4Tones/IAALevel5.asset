@@ -19,7 +19,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d93182d3d9b4ddb4ea36f3b8859a4c5b, type: 2}
   - {fileID: 11400000, guid: 8e829ec69eb8f54488daffda3d3a8d95, type: 2}
   - {fileID: 11400000, guid: 7d463ecc0e572d4438f08ce3300aa99b, type: 2}
-  winningTrack: {fileID: 11400000, guid: d93182d3d9b4ddb4ea36f3b8859a4c5b, type: 2}
+  winningTrack: {fileID: 11400000, guid: 8e829ec69eb8f54488daffda3d3a8d95, type: 2}
   pointValue: 40
   trackSpacing: 10
   noteSpacing: 75
