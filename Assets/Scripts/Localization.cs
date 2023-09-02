@@ -76,12 +76,6 @@ public static class Localization
     {
         foreach(KeyValuePair<string, string> key in localizationTable[locale])
         {
-            if (valueToFindKeyFor == "Español" && locale == Locale.es)
-            {
-                Debug.Log($"Looking for Español key in {locale} table?");
-                Debug.Log($"Direct by key: {localizationTable[locale]["LanguageSelected"]}");
-            }
-
             if (key.Value == valueToFindKeyFor)
             {
                 
