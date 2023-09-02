@@ -14,7 +14,7 @@ SpeedLable;Speed;Geschwindigkeit;Velocidad;(F) Speed
 LanguageLabel;Language;Sprache;Lenguaje;(F) Language
 LanguageSelected;English;Deutsch;Español;Francais
 InstructionButton;Instructions;Anleitung;Instrucciones;(F) Instructions
-ExitButton;Exit;Exit;Salida;(F) Exit
+RestartButton;Restart;Neustart;Reanudar;(F) Restart
 InstructionStick;Move either joystick to fly forward/back;Joystick  vor/zurück um forwärts/rückwärts zu fliegen;Mueva el  joystick para volar hacia adelante o atrás;(F) Move either joystick to fly forward/back
 InstructionHead;Steer with your head;Lenke mit Deinem Kopf;Mueve la cabeza hacia arriba o abajopara volar más alto o mas bajo;(F) Move head up/down to fly higher/lower
 InstructionRecon;Recon flying is sightseeing - notes are not collected;Der Entdeckungsflug wird nicht gewertet.;Recon está volando sobre los paisajes? Las notas no se han colectado;(F) Recon flying is sightseeing - notes are not collected

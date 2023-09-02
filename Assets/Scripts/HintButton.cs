@@ -22,13 +22,13 @@ public class HintButton : MonoBehaviour
 
         }
 
-        if (gameManager.currentLevelManager != null)    // level has started
+        if (gameManager.CurrentLevelManager != null)    // level has started
         {
-            if (!gameManager.currentLevelManager.HintIsPlaying)
+            if (!gameManager.CurrentLevelManager.HintIsPlaying)
             {
                 buttonPush.Play();
                 clickFX.Play();
-                StartCoroutine(gameManager.currentLevelManager.PerformTrackHint());
+                StartCoroutine(gameManager.CurrentLevelManager.PerformTrackHint());
             }
             
         }
