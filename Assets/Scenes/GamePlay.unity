@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0014452504, g: 0.00096075534, b: 0.00023557333, a: 1}
+  m_IndirectSpecularColor: {r: 0.0014457931, g: 0.00096122903, b: 0.00023574193, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -775,6 +775,21 @@ PrefabInstance:
       propertyPath: m_text
       value: Steer with your head
       objectReference: {fileID: 0}
+    - target: {fileID: 1635138589091948027, guid: 94594c68300b4124fbd5cd83f7f0415a,
+        type: 3}
+      propertyPath: m_Name
+      value: RestartButtonText
+      objectReference: {fileID: 0}
+    - target: {fileID: 1929226857919200382, guid: 94594c68300b4124fbd5cd83f7f0415a,
+        type: 3}
+      propertyPath: m_Name
+      value: RestartButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 2365137258023305560, guid: 94594c68300b4124fbd5cd83f7f0415a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartGame
+      objectReference: {fileID: 0}
     - target: {fileID: 2507651125026322764, guid: 94594c68300b4124fbd5cd83f7f0415a,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -826,6 +841,11 @@ PrefabInstance:
       propertyPath: textFields.Array.data[11]
       value: 
       objectReference: {fileID: 2135209766}
+    - target: {fileID: 3893533618279956217, guid: 94594c68300b4124fbd5cd83f7f0415a,
+        type: 3}
+      propertyPath: m_text
+      value: Restart
+      objectReference: {fileID: 0}
     - target: {fileID: 4571982142797673566, guid: 94594c68300b4124fbd5cd83f7f0415a,
         type: 3}
       propertyPath: m_text
