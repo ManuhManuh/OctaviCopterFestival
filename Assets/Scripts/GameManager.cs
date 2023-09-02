@@ -8,7 +8,12 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public Level CurrentLevel => levels[currentLevelIndex];
-    public string Mode => mode;
+    public string Mode
+    {
+        get { return mode; }
+        set { mode = value; }
+    }
+
     public Vector3 PlayerStartPosition => playerStartPosition;
     public GameObject player;
 
@@ -18,18 +23,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float timeBetweenLevels;
     [SerializeField] private float timeBeforeRestartAllowed;
     [SerializeField] private GameObject backgroundAsset;
+    [SerializeField] private ParticleSystem fireworks;
     
-
-    private LevelManager currentLevelManager;
+    public LevelManager currentLevelManager;
     private int currentLevelIndex;
     private Vector3 playerStartPosition;
     private bool restartAllowed;
     private int levelAttempts;
     private int sessionPoints;
     private int lifetimePoints;
-    private string mode = "beginner";
+    private string mode;
     private UIDisplay uiDisplay;
-
+    public string currentFeedbackText;
+    private List<string> pointList;
     private void Awake()
     {
         currentLevelIndex = 0;
@@ -38,10 +44,6 @@ public class GameManager : MonoBehaviour
         if (PlayerPrefs.HasKey("LifetimePoints"))
         {
             lifetimePoints = PlayerPrefs.GetInt("LifetimePoints");
-        }
-        if (PlayerPrefs.HasKey("LastLanguage"))
-        {
-            lifetimePoints = PlayerPrefs.GetInt("LastLanguage");
         }
 
         backgroundAsset.SetActive(true);
@@ -54,7 +56,8 @@ public class GameManager : MonoBehaviour
 
         uiDisplay = GameObject.FindObjectOfType<UIDisplay>();
         restartAllowed = true;
-        uiDisplay.PresentFeedback("StartPrompt");
+        currentFeedbackText = "StartPrompt";
+        SendMessageToUI();
         levelAttempts = 1;
 
     }
@@ -65,7 +68,8 @@ public class GameManager : MonoBehaviour
    
         if ((buttonPressValue > 0) && restartAllowed)
         {
-            uiDisplay.PresentFeedback("");
+            currentFeedbackText = "";
+            uiDisplay.PresentFeedback(currentFeedbackText);
             StartLevel();
             
         }
@@ -105,11 +109,11 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                List<string> pointList = new List<string>();
+                pointList = new List<string>();
                 pointList.Add(pointsEarned.ToString());
                 pointList.Add(sessionPoints.ToString());
-
-                uiDisplay.PresentFeedback("PointsPlusTotal", pointList);
+                currentFeedbackText = "PointsPlusTotal";
+                SendMessageToUI();
                 restartAllowed = true;
                 levelAttempts = 1;
 
@@ -117,7 +121,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            uiDisplay.PresentFeedback("RetryPrompt");
+            currentFeedbackText = "RetryPrompt";
+            uiDisplay.PresentFeedback(currentFeedbackText);
             restartAllowed = true;
             levelAttempts++;
 
@@ -143,9 +148,12 @@ public class GameManager : MonoBehaviour
     
     public void GameOver()
     {
-     
+
+        fireworks.gameObject.SetActive(true);
         UpdateLifetimePoints(lifetimePoints);
-        uiDisplay.PresentFeedback("GameOver", sessionPoints);
+        currentFeedbackText = "GameOver";
+        SendMessageToUI();
+
     }
 
     private IEnumerator MinimumWaitForRestart(float restartDelay)
@@ -155,6 +163,33 @@ public class GameManager : MonoBehaviour
 
     }
 
+
+    public void SendMessageToUI()
+    {
+        switch (currentFeedbackText)
+        {
+            case "StartPrompt": 
+            case "RetryPrompt":
+                {
+                    uiDisplay.PresentFeedback(currentFeedbackText);
+                    break;
+                }
+            case "PointsPlusTotal":
+                {
+                    uiDisplay.PresentFeedback(currentFeedbackText, pointList);
+                    break;
+                }
+            case "GameOver":
+                {
+                    uiDisplay.PresentFeedback(currentFeedbackText, sessionPoints);
+                    break;
+                }
+
+
+        }
+
+
+    }
     private void RelocatePlayer(Vector3 newPosition)
     {
 

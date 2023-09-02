@@ -15,7 +15,8 @@ public class KeyboardColours : MonoBehaviour
 
     public void OnKeyPlayed(Key key)
     {
-        if(gameManager.Mode == "beginner")
+        string modeKey = Localization.FindKeyFromValue(Localization.currentLocale, gameManager.Mode);
+        if(modeKey == "ModeBeginner")
         {
             key.GetComponent<MeshRenderer>().material = key.hintMaterial;
         }
@@ -23,7 +24,9 @@ public class KeyboardColours : MonoBehaviour
 
     public void OnKeyReleased(Key key)
     {
-        if (gameManager.Mode == "beginner")
+        string modeKey = Localization.FindKeyFromValue(Localization.currentLocale, gameManager.Mode);
+
+        if (modeKey == "ModeBeginner")
         {
             StartCoroutine(ColourSustain(key, colourDelay));
         }

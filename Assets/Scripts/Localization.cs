@@ -5,16 +5,17 @@ using UnityEngine;
 
 public enum Locale
 {
-    english = 0, 
-    deutsch = 1, 
-    espanol = 2
+    en = 0, 
+    de = 1, 
+    es = 2,
+    fr = 3
 }
 
 public static class Localization 
 {
 
     private static Dictionary<Locale, Dictionary<string, string>> localizationTable;
-    public static Locale currentLocale = Locale.english;
+    public static Locale currentLocale = Locale.en;
     public static Dictionary<string, string> currentLocalizationTable => localizationTable[currentLocale];
 
     //Constructor - will happen when class is instantiated
@@ -55,6 +56,34 @@ public static class Localization
         }
 
 
+    }
+
+    public static Locale FindLocaleFromButtonText(string valueToFindLocaleFor)
+    {
+
+        for (int index = 0; index < localizationTable.Count; index++)
+        {
+            string foundKey = FindKeyFromValue((Locale)index, valueToFindLocaleFor);
+            if (foundKey != $"NF_{valueToFindLocaleFor}") return (Locale)index;
+
+        }
+
+        return Locale.en;       // return default language (English)
+
+    }
+
+    public static string FindKeyFromValue(Locale locale, string valueToFindKeyFor)
+    {
+        foreach(KeyValuePair<string, string> key in localizationTable[locale])
+        {
+            if (key.Value == valueToFindKeyFor)
+            {
+                //Debug.Log($"Found {valueToFindKeyFor} under {key.Key} in {locale} table");
+                return key.Key;
+            }
+
+        }
+        return $"NF_{valueToFindKeyFor}";
     }
 
 }
