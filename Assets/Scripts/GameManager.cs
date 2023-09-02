@@ -8,6 +8,8 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public Level CurrentLevel => levels[currentLevelIndex];
+    public LevelManager CurrentLevelManager => currentLevelManager;
+    public GameObject NoteCollector => noteCollector;
     public string Mode
     {
         get { return mode; }
@@ -16,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     public Vector3 PlayerStartPosition => playerStartPosition;
     public GameObject player;
+    public bool restartRequested = false;
 
     [SerializeField] private InputActionReference startLevelActionReference;
     [SerializeField] public List<Level> levels = new List<Level>();
@@ -24,8 +27,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float timeBeforeRestartAllowed;
     [SerializeField] private GameObject backgroundAsset;
     [SerializeField] private ParticleSystem fireworks;
+    [SerializeField] private AudioSource endingSong;
     
-    public LevelManager currentLevelManager;
+    private LevelManager currentLevelManager;
     private int currentLevelIndex;
     private Vector3 playerStartPosition;
     private bool restartAllowed;
@@ -36,9 +40,10 @@ public class GameManager : MonoBehaviour
     private UIDisplay uiDisplay;
     public string currentFeedbackText;
     private List<string> pointList;
+    private GameObject noteCollector;
+
     private void Awake()
     {
-        currentLevelIndex = 0;
         lifetimePoints = 0;
 
         if (PlayerPrefs.HasKey("LifetimePoints"))
@@ -52,8 +57,21 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        noteCollector = GameObject.Find("NoteCollector");
+
         playerStartPosition = player.transform.position;
 
+        InitiateGame();
+
+    }
+
+    public void InitiateGame()
+    {
+
+        currentLevelIndex = 0;
+        sessionPoints = 0;
+        fireworks.gameObject.SetActive(false);
+        endingSong.gameObject.SetActive(false);
         uiDisplay = GameObject.FindObjectOfType<UIDisplay>();
         restartAllowed = true;
         currentFeedbackText = "StartPrompt";
@@ -79,7 +97,7 @@ public class GameManager : MonoBehaviour
     {
         backgroundAsset.SetActive(true);
 
-        if (currentLevelManager != null) Destroy(currentLevelManager);
+        if (currentLevelManager != null) Destroy(currentLevelManager.gameObject);
         int pointsEarned;
 
         if (successful)
@@ -121,10 +139,22 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            currentFeedbackText = "RetryPrompt";
+            if (restartRequested) 
+            {
+                currentLevelIndex = 0;
+                restartRequested = false;
+                currentFeedbackText = "StartPrompt";
+                restartAllowed = true;
+                sessionPoints = 0;
+            }
+            else
+            {
+                levelAttempts++;
+                currentFeedbackText = "RetryPrompt";
+            }
+            
             uiDisplay.PresentFeedback(currentFeedbackText);
             restartAllowed = true;
-            levelAttempts++;
 
         }
 
@@ -135,7 +165,7 @@ public class GameManager : MonoBehaviour
         backgroundAsset.SetActive(false);  // will be replaced by level environment asset
 
         restartAllowed = false;
-        if (currentLevelManager != null) Destroy(currentLevelManager);
+        if (currentLevelManager != null) Destroy(currentLevelManager.gameObject);
 
         // create a new level
         currentLevelManager = Instantiate(levelManagerPrefab);
@@ -150,6 +180,8 @@ public class GameManager : MonoBehaviour
     {
 
         fireworks.gameObject.SetActive(true);
+        endingSong.gameObject.SetActive(true);
+
         UpdateLifetimePoints(lifetimePoints);
         currentFeedbackText = "GameOver";
         SendMessageToUI();

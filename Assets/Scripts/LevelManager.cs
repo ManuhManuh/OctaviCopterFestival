@@ -39,7 +39,6 @@ public class LevelManager : MonoBehaviour
     private List<float> trackXPositions = new List<float>();
     private List<float> trackYPositions = new List<float>();
     private List<GameObject> trackObjects = new List<GameObject>();
-    private GameObject noteCollector;
     private int selectedTrack;
     private bool cycleEnabled;
 
@@ -54,12 +53,10 @@ public class LevelManager : MonoBehaviour
     {
         // Get reference to game manager and note collector
         gameManager = FindObjectOfType<GameManager>();
-        noteCollector = GameObject.Find("NoteCollector");
     }
     private void Start()
     {
-        
-        noteCollector.SetActive(false); // disable until a track is selected
+        gameManager.NoteCollector.SetActive(false); // disable until a track is selected
 
         // Set the initial state and starting values of flags and indexes
         currentLevel = gameManager.CurrentLevel;
@@ -174,7 +171,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void GotoState(LevelState newState)
+    public void GotoState(LevelState newState)
     {
         OnStateLeft(currentState);
         currentState = newState;
@@ -328,6 +325,7 @@ public class LevelManager : MonoBehaviour
 
     private void EvaluatingLevelEntered()
     {
+       
         StartCoroutine(CleanUpAndEndLevel());
 
     }
@@ -376,6 +374,9 @@ public class LevelManager : MonoBehaviour
                 Destroy(track);
             }
         }
+
+        uiDisplay.UpdateLevelTitle("");
+        uiDisplay.UpdateLevelInstructions("");
 
         yield return new WaitForSeconds(1);
 
@@ -428,7 +429,7 @@ public class LevelManager : MonoBehaviour
         // disable strafe
 
         // enable note collector
-        noteCollector.SetActive(true);
+        gameManager.NoteCollector.SetActive(true);
 
     }
 }

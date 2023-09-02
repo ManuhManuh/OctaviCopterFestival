@@ -149,10 +149,10 @@ public class MenuDisplay : MonoBehaviour
 
         gameManager.SendMessageToUI();
 
-        if (gameManager.currentLevelManager != null)    // level has started
+        if (gameManager.CurrentLevelManager != null)    // level has started
         {
-            gameManager.currentLevelManager.UpdateLevelUIFields();
-            gameManager.currentLevelManager.SendMessageToUI();
+            gameManager.CurrentLevelManager.UpdateLevelUIFields();
+            gameManager.CurrentLevelManager.SendMessageToUI();
         }
 
         localizationInitialized = true;
@@ -216,7 +216,16 @@ public class MenuDisplay : MonoBehaviour
 
     public void RestartGame()
     {
-        Debug.Log("Game will restart at level 1");
+        if(gameManager.CurrentLevelManager == null)
+        {
+            gameManager.InitiateGame();
+        }
+        else
+        {
+            gameManager.restartRequested = true;
+            gameManager.CurrentLevelManager.GotoState(LevelManager.LevelState.EvaluatingLevel);
+        }
+        
     }
 
     public void ExitGame()
