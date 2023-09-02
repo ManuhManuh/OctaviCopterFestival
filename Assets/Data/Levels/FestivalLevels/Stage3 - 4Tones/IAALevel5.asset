@@ -25,7 +25,7 @@ MonoBehaviour:
   noteSpacing: 75
   maxHeight: 60
   trackStartDistance: 15
-  clueTiming: 4
+  clueTiming: 2
   environmentAsset: {fileID: 9136014409318921767, guid: b39f01ba84aaf4440aa04f2f80f43e32,
     type: 3}
   trackHeight: 0
