@@ -22,6 +22,7 @@ public class LevelManager : MonoBehaviour
     public float LevelHeight => levelHeight;
     private float levelHeight;
     public bool HintIsPlaying => hintIsPlaying;
+    public LevelState CurrentState => currentState;
 
     [SerializeField] private InputActionReference cycleTrackActionReference;
     [SerializeField] private InputActionReference startFlyingActionReference;
