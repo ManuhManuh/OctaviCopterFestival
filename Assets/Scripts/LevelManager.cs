@@ -22,7 +22,7 @@ public class LevelManager : MonoBehaviour
     public float LevelHeight => levelHeight;
     private float levelHeight;
     public bool HintIsPlaying => hintIsPlaying;
-    public LevelState CurrentState => currentState;
+    public GameObject EnvironmentAsset => environmentAsset;
 
     [SerializeField] private InputActionReference cycleTrackActionReference;
     [SerializeField] private InputActionReference startFlyingActionReference;
@@ -39,7 +39,6 @@ public class LevelManager : MonoBehaviour
     private List<float> trackXPositions = new List<float>();
     private List<float> trackYPositions = new List<float>();
     private List<GameObject> trackObjects = new List<GameObject>();
-    private GameObject noteCollector;
     private int selectedTrack;
     private bool cycleEnabled;
 
@@ -50,12 +49,14 @@ public class LevelManager : MonoBehaviour
     private string lastNoteHit;
     private bool hintIsPlaying = false;
 
-    private void Start()
+    private void Awake()
     {
         // Get reference to game manager and note collector
         gameManager = FindObjectOfType<GameManager>();
-        noteCollector = GameObject.Find("NoteCollector");
-        noteCollector.SetActive(false); // disable until a track is selected
+    }
+    private void Start()
+    {
+        gameManager.NoteCollector.SetActive(false); // disable until a track is selected
 
         // Set the initial state and starting values of flags and indexes
         currentLevel = gameManager.CurrentLevel;
@@ -97,7 +98,20 @@ public class LevelManager : MonoBehaviour
 
             }
         }
-        
+
+        if(currentState == LevelState.FlyingTrack)
+        {
+            float buttonPressValue = cycleTrackActionReference.action.ReadValue<float>();
+            if (buttonPressValue > 0)
+            {
+                // move to start of selected track
+                float newPlayerXPosition = trackXPositions[selectedTrack];
+                float newPlayerYPosition = trackYPositions[selectedTrack];
+                float newPlayerZPostion = gameManager.PlayerStartPosition.z;
+
+                gameManager.player.transform.position = new Vector3(newPlayerXPosition, newPlayerYPosition, newPlayerZPostion);
+            }
+        }
 
     }
 
@@ -157,7 +171,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void GotoState(LevelState newState)
+    public void GotoState(LevelState newState)
     {
         OnStateLeft(currentState);
         currentState = newState;
@@ -311,6 +325,7 @@ public class LevelManager : MonoBehaviour
 
     private void EvaluatingLevelEntered()
     {
+       
         StartCoroutine(CleanUpAndEndLevel());
 
     }
@@ -343,12 +358,12 @@ public class LevelManager : MonoBehaviour
         hintIsPlaying = false;
     }
 
-    private IEnumerator CleanUpAndEndLevel()
+    public IEnumerator CleanUpAndEndLevel()
     {
         yield return new WaitForSeconds(3); // time for sound from last note collected to decay
         // destroy the notes, thereby also removing the subscriptions to them ;)
         Note[] notes = FindObjectsOfType<Note>();
-        foreach(Note note in notes)
+        foreach (Note note in notes)
         {
             Destroy(note.gameObject);
         }
@@ -359,7 +374,10 @@ public class LevelManager : MonoBehaviour
                 Destroy(track);
             }
         }
-        
+
+        uiDisplay.UpdateLevelTitle("");
+        uiDisplay.UpdateLevelInstructions("");
+
         yield return new WaitForSeconds(1);
 
         Destroy(environmentAsset);
@@ -411,7 +429,7 @@ public class LevelManager : MonoBehaviour
         // disable strafe
 
         // enable note collector
-        noteCollector.SetActive(true);
+        gameManager.NoteCollector.SetActive(true);
 
     }
 }

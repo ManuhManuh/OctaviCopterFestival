@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: IAALevel3
   m_EditorClassIdentifier: 
   levelID: 3
-  name: Testing Starts
-  instructions: Go for it!
+  name: IAALevel3Name
+  instructions: IAALevel3Description
   tracks:
   - {fileID: 11400000, guid: 78aba8415e14cb643ba28ab7890e65f3, type: 2}
   - {fileID: 11400000, guid: 108afa847f8a01f4692d077bc9ce978a, type: 2}
@@ -25,7 +25,7 @@ MonoBehaviour:
   noteSpacing: 75
   maxHeight: 60
   trackStartDistance: 15
-  clueTiming: 3
+  clueTiming: 2
   environmentAsset: {fileID: 9136014409318921767, guid: b39f01ba84aaf4440aa04f2f80f43e32,
     type: 3}
   trackHeight: 0

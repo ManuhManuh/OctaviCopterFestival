@@ -26,7 +26,7 @@ public static class Localization
 
     private static void Load()
     {
-        var source = Resources.Load<TextAsset>("LocalizationEntry");
+        var source = Resources.Load<TextAsset>("Localization");
         var lines = source.text.Split('\n');
         var header = lines[0].Split(';');
 
@@ -55,7 +55,7 @@ public static class Localization
             }
         }
 
-
+        
     }
 
     public static Locale FindLocaleFromButtonText(string valueToFindLocaleFor)
@@ -78,6 +78,7 @@ public static class Localization
         {
             if (key.Value == valueToFindKeyFor)
             {
+                
                 //Debug.Log($"Found {valueToFindKeyFor} under {key.Key} in {locale} table");
                 return key.Key;
             }
