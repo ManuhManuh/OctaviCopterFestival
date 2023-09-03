@@ -5,60 +5,60 @@ using UnityEngine.InputSystem;
 
 public class PeekaBoo : MonoBehaviour
 {
-    [SerializeField] private List<MeshRenderer> objectsToPeekThrough = new List<MeshRenderer>();
     [SerializeField] private float peekDuration = 1.0f;
     [SerializeField] private Material peekaBooMaterial;
-    [SerializeField] private InputActionReference gripReference;
+    [SerializeField] private InputActionReference leftGripReference;
+    [SerializeField] private InputActionReference rightGripReference;
 
     private GameManager gameManager;
-    private bool changeable = true;
-    
+    private Material originalMaterial;
+    private MeshRenderer meshRenderer;
+    private bool gripping = false;
+    private float gripValue;
+
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        originalMaterial = meshRenderer.material;
     }
 
     private void Update()
     {
-        float buttonPressValue = gripReference.action.ReadValue<float>();
-
-        // if ((buttonPressValue > 0) && gameManager.currentLevelManager.CurrentState == LevelManager.LevelState.FlyingTrack)
-        if ((buttonPressValue > 0) && changeable)
+        if(gameManager.CurrentLevelManager != null)
         {
-            changeable = false;
-            PeekThrough();
-        }
-    }
+            float leftGripValue = leftGripReference.action.ReadValue<float>();
+            float rightGripValue = rightGripReference.action.ReadValue<float>();
 
-    public void PeekThrough()
-    {
-        StartCoroutine(MaterialPeek(peekDuration));
-    }
+            if (leftGripValue > 0.1)
+            {
+                gripValue = leftGripValue;
+            }
+            else if (rightGripValue > 0.1)
+            {
+                gripValue = rightGripValue;
+            }
+            else
+            {
+                gripValue = 0;
+            }
 
-    private IEnumerator MaterialPeek(float duration)
-    {
-        // change materials to PeekaBoo material
-        List<Material> oldMaterials = new List<Material>();
-
-        foreach(MeshRenderer obj in objectsToPeekThrough)
-        {
-            oldMaterials.Add(obj.material);
-            obj.material = peekaBooMaterial;
+            if ((gripValue > 0.1))
+            {
+                gripping = true;
+                meshRenderer.material = peekaBooMaterial;
+                Color newColor = peekaBooMaterial.color;
+                newColor.a = Mathf.Clamp(1 - gripValue, 0.25f, 1.0f);
+                peekaBooMaterial.color = newColor;
+            }
+            else if(gripping == true)
+            {
+                gripping = false;
+                meshRenderer.material = originalMaterial;
+            }
         }
         
-        yield return new WaitForSeconds(duration);
-
-        // change material back to original material
-
-        int materialIndex = 0;
-
-        foreach (MeshRenderer obj in objectsToPeekThrough)
-        {
-            Debug.Log($"Changing material back to {oldMaterials[materialIndex].name}");
-            obj.material = oldMaterials[materialIndex];
-            materialIndex++;
-        }
-
-        changeable = true;
     }
+
+    
 }
