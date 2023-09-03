@@ -16,8 +16,8 @@ GameObject:
   - component: {fileID: 1152863304773478446}
   - component: {fileID: 1152863304773478453}
   - component: {fileID: 1152863304773478442}
-  - component: {fileID: 1152863304773478443}
   - component: {fileID: 1957813271}
+  - component: {fileID: 9215164725226709597}
   m_Layer: 0
   m_Name: OctaviCockpit_KeyboardKey_D.001
   m_TagString: Untagged
@@ -253,7 +253,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1152863304773478443
+--- !u!114 &1957813271
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -262,7 +262,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1152863304773478447}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: a8d6fe63570441646b8bf78a263daed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hintMaterial: {fileID: 2100000, guid: 79ff59f08137e48568af094001f763aa, type: 2}
+  originalMaterial: {fileID: 2100000, guid: 674565753313a4e5eb07a3ce0351a8c6, type: 2}
+--- !u!114 &9215164725226709597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152863304773478447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -315,7 +329,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8642950405117911197}
+      - m_Target: {fileID: 1772994902}
         m_TargetAssemblyTypeName: KeyboardColours, Assembly-CSharp
         m_MethodName: OnKeyPlayed
         m_Mode: 2
@@ -330,7 +344,7 @@ MonoBehaviour:
   m_HoverExited:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8642950405117911197}
+      - m_Target: {fileID: 1772994902}
         m_TargetAssemblyTypeName: KeyboardColours, Assembly-CSharp
         m_MethodName: OnKeyReleased
         m_Mode: 2
@@ -390,66 +404,6 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  m_AttachTransform: {fileID: 0}
-  m_SecondaryAttachTransform: {fileID: 0}
-  m_UseDynamicAttach: 0
-  m_MatchAttachPosition: 1
-  m_MatchAttachRotation: 1
-  m_SnapToColliderVolume: 1
-  m_ReinitializeDynamicAttachEverySingleGrab: 1
-  m_AttachEaseInTime: 0.15
-  m_MovementType: 2
-  m_VelocityDamping: 1
-  m_VelocityScale: 1
-  m_AngularVelocityDamping: 1
-  m_AngularVelocityScale: 1
-  m_TrackPosition: 1
-  m_SmoothPosition: 0
-  m_SmoothPositionAmount: 5
-  m_TightenPosition: 0.5
-  m_TrackRotation: 1
-  m_SmoothRotation: 0
-  m_SmoothRotationAmount: 5
-  m_TightenRotation: 0.5
-  m_ThrowOnDetach: 1
-  m_ThrowSmoothingDuration: 0.25
-  m_ThrowSmoothingCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_ThrowVelocityScale: 1.5
-  m_ThrowAngularVelocityScale: 1
-  m_ForceGravityOnDetach: 0
-  m_RetainTransformParent: 1
-  m_AttachPointCompatibilityMode: 0
-  m_StartingSingleGrabTransformers: []
-  m_StartingMultipleGrabTransformers: []
-  m_AddDefaultGrabTransformers: 1
---- !u!114 &1957813271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1152863304773478447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8d6fe63570441646b8bf78a263daed4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hintMaterial: {fileID: 2100000, guid: 79ff59f08137e48568af094001f763aa, type: 2}
-  originalMaterial: {fileID: 2100000, guid: 674565753313a4e5eb07a3ce0351a8c6, type: 2}
 --- !u!1 &2369292633948301912
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,8 +420,8 @@ GameObject:
   - component: {fileID: 2369292633948301915}
   - component: {fileID: 2369292633948301990}
   - component: {fileID: 2369292633948301991}
-  - component: {fileID: 2369292633948301988}
   - component: {fileID: 263077634}
+  - component: {fileID: 1318341933110778682}
   m_Layer: 0
   m_Name: OctaviCockpit_KeyboardKey_A.001
   m_TagString: Untagged
@@ -701,7 +655,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2369292633948301988
+--- !u!114 &263077634
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -710,7 +664,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 2369292633948301912}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: a8d6fe63570441646b8bf78a263daed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hintMaterial: {fileID: 2100000, guid: c5df250ef2aca4420bf718e0daa7e592, type: 2}
+  originalMaterial: {fileID: 2100000, guid: 674565753313a4e5eb07a3ce0351a8c6, type: 2}
+--- !u!114 &1318341933110778682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2369292633948301912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -763,7 +731,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8642950405117911197}
+      - m_Target: {fileID: 1772994902}
         m_TargetAssemblyTypeName: KeyboardColours, Assembly-CSharp
         m_MethodName: OnKeyPlayed
         m_Mode: 2
@@ -778,7 +746,7 @@ MonoBehaviour:
   m_HoverExited:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8642950405117911197}
+      - m_Target: {fileID: 1772994902}
         m_TargetAssemblyTypeName: KeyboardColours, Assembly-CSharp
         m_MethodName: OnKeyReleased
         m_Mode: 2
@@ -838,66 +806,6 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  m_AttachTransform: {fileID: 0}
-  m_SecondaryAttachTransform: {fileID: 0}
-  m_UseDynamicAttach: 0
-  m_MatchAttachPosition: 1
-  m_MatchAttachRotation: 1
-  m_SnapToColliderVolume: 1
-  m_ReinitializeDynamicAttachEverySingleGrab: 1
-  m_AttachEaseInTime: 0.15
-  m_MovementType: 2
-  m_VelocityDamping: 1
-  m_VelocityScale: 1
-  m_AngularVelocityDamping: 1
-  m_AngularVelocityScale: 1
-  m_TrackPosition: 1
-  m_SmoothPosition: 0
-  m_SmoothPositionAmount: 5
-  m_TightenPosition: 0.5
-  m_TrackRotation: 1
-  m_SmoothRotation: 0
-  m_SmoothRotationAmount: 5
-  m_TightenRotation: 0.5
-  m_ThrowOnDetach: 1
-  m_ThrowSmoothingDuration: 0.25
-  m_ThrowSmoothingCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_ThrowVelocityScale: 1.5
-  m_ThrowAngularVelocityScale: 1
-  m_ForceGravityOnDetach: 0
-  m_RetainTransformParent: 1
-  m_AttachPointCompatibilityMode: 0
-  m_StartingSingleGrabTransformers: []
-  m_StartingMultipleGrabTransformers: []
-  m_AddDefaultGrabTransformers: 1
---- !u!114 &263077634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2369292633948301912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8d6fe63570441646b8bf78a263daed4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hintMaterial: {fileID: 2100000, guid: c5df250ef2aca4420bf718e0daa7e592, type: 2}
-  originalMaterial: {fileID: 2100000, guid: 674565753313a4e5eb07a3ce0351a8c6, type: 2}
 --- !u!1 &2546109231392215409
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,8 +822,8 @@ GameObject:
   - component: {fileID: 2546109231392215408}
   - component: {fileID: 2546109231392215423}
   - component: {fileID: 2546109231392215420}
-  - component: {fileID: 2546109231392215421}
   - component: {fileID: 109153959}
+  - component: {fileID: 224176269281627407}
   m_Layer: 0
   m_Name: OctaviCockpit_KeyboardKey_H.001
   m_TagString: Untagged
@@ -1149,7 +1057,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2546109231392215421
+--- !u!114 &109153959
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1158,7 +1066,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 2546109231392215409}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: a8d6fe63570441646b8bf78a263daed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hintMaterial: {fileID: 2100000, guid: ece517410544f4239a4d9e1437bc7ec3, type: 2}
+  originalMaterial: {fileID: 2100000, guid: 674565753313a4e5eb07a3ce0351a8c6, type: 2}
+--- !u!114 &224176269281627407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2546109231392215409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -1211,7 +1133,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8642950405117911197}
+      - m_Target: {fileID: 1772994902}
         m_TargetAssemblyTypeName: KeyboardColours, Assembly-CSharp
         m_MethodName: OnKeyPlayed
         m_Mode: 2
@@ -1226,7 +1148,7 @@ MonoBehaviour:
   m_HoverExited:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8642950405117911197}
+      - m_Target: {fileID: 1772994902}
         m_TargetAssemblyTypeName: KeyboardColours, Assembly-CSharp
         m_MethodName: OnKeyReleased
         m_Mode: 2
@@ -1286,66 +1208,6 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  m_AttachTransform: {fileID: 0}
-  m_SecondaryAttachTransform: {fileID: 0}
-  m_UseDynamicAttach: 0
-  m_MatchAttachPosition: 1
-  m_MatchAttachRotation: 1
-  m_SnapToColliderVolume: 1
-  m_ReinitializeDynamicAttachEverySingleGrab: 1
-  m_AttachEaseInTime: 0.15
-  m_MovementType: 2
-  m_VelocityDamping: 1
-  m_VelocityScale: 1
-  m_AngularVelocityDamping: 1
-  m_AngularVelocityScale: 1
-  m_TrackPosition: 1
-  m_SmoothPosition: 0
-  m_SmoothPositionAmount: 5
-  m_TightenPosition: 0.5
-  m_TrackRotation: 1
-  m_SmoothRotation: 0
-  m_SmoothRotationAmount: 5
-  m_TightenRotation: 0.5
-  m_ThrowOnDetach: 1
-  m_ThrowSmoothingDuration: 0.25
-  m_ThrowSmoothingCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_ThrowVelocityScale: 1.5
-  m_ThrowAngularVelocityScale: 1
-  m_ForceGravityOnDetach: 0
-  m_RetainTransformParent: 1
-  m_AttachPointCompatibilityMode: 0
-  m_StartingSingleGrabTransformers: []
-  m_StartingMultipleGrabTransformers: []
-  m_AddDefaultGrabTransformers: 1
---- !u!114 &109153959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2546109231392215409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8d6fe63570441646b8bf78a263daed4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hintMaterial: {fileID: 2100000, guid: ece517410544f4239a4d9e1437bc7ec3, type: 2}
-  originalMaterial: {fileID: 2100000, guid: 674565753313a4e5eb07a3ce0351a8c6, type: 2}
 --- !u!1 &2832769404463972098
 GameObject:
   m_ObjectHideFlags: 0
@@ -1362,7 +1224,7 @@ GameObject:
   - component: {fileID: 2832769404463972109}
   - component: {fileID: 2832769404463972105}
   - component: {fileID: 2832769404463972110}
-  - component: {fileID: 2832769404463972104}
+  - component: {fileID: 7422697276922248386}
   m_Layer: 0
   m_Name: OctaviCockpit_Keyboard_blackKey_D#Eb.001
   m_TagString: Untagged
@@ -1596,7 +1458,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2832769404463972104
+--- !u!114 &7422697276922248386
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1605,7 +1467,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2832769404463972098}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -1709,52 +1571,6 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  m_AttachTransform: {fileID: 0}
-  m_SecondaryAttachTransform: {fileID: 0}
-  m_UseDynamicAttach: 0
-  m_MatchAttachPosition: 1
-  m_MatchAttachRotation: 1
-  m_SnapToColliderVolume: 1
-  m_ReinitializeDynamicAttachEverySingleGrab: 1
-  m_AttachEaseInTime: 0.15
-  m_MovementType: 2
-  m_VelocityDamping: 1
-  m_VelocityScale: 1
-  m_AngularVelocityDamping: 1
-  m_AngularVelocityScale: 1
-  m_TrackPosition: 1
-  m_SmoothPosition: 0
-  m_SmoothPositionAmount: 5
-  m_TightenPosition: 0.5
-  m_TrackRotation: 1
-  m_SmoothRotation: 0
-  m_SmoothRotationAmount: 5
-  m_TightenRotation: 0.5
-  m_ThrowOnDetach: 1
-  m_ThrowSmoothingDuration: 0.25
-  m_ThrowSmoothingCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_ThrowVelocityScale: 1.5
-  m_ThrowAngularVelocityScale: 1
-  m_ForceGravityOnDetach: 0
-  m_RetainTransformParent: 1
-  m_AttachPointCompatibilityMode: 0
-  m_StartingSingleGrabTransformers: []
-  m_StartingMultipleGrabTransformers: []
-  m_AddDefaultGrabTransformers: 1
 --- !u!1 &4092661189020154968
 GameObject:
   m_ObjectHideFlags: 0
@@ -1771,7 +1587,7 @@ GameObject:
   - component: {fileID: 4092661189020155044}
   - component: {fileID: 4092661189020155045}
   - component: {fileID: 4092661189020154970}
-  - component: {fileID: 4092661189020154971}
+  - component: {fileID: 8198136218462658224}
   m_Layer: 0
   m_Name: OctaviCockpit_Keyboard_blackKey3_A#B.001
   m_TagString: Untagged
@@ -2005,7 +1821,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4092661189020154971
+--- !u!114 &8198136218462658224
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2014,7 +1830,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4092661189020154968}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -2118,52 +1934,6 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  m_AttachTransform: {fileID: 0}
-  m_SecondaryAttachTransform: {fileID: 0}
-  m_UseDynamicAttach: 0
-  m_MatchAttachPosition: 1
-  m_MatchAttachRotation: 1
-  m_SnapToColliderVolume: 1
-  m_ReinitializeDynamicAttachEverySingleGrab: 1
-  m_AttachEaseInTime: 0.15
-  m_MovementType: 2
-  m_VelocityDamping: 1
-  m_VelocityScale: 1
-  m_AngularVelocityDamping: 1
-  m_AngularVelocityScale: 1
-  m_TrackPosition: 1
-  m_SmoothPosition: 0
-  m_SmoothPositionAmount: 5
-  m_TightenPosition: 0.5
-  m_TrackRotation: 1
-  m_SmoothRotation: 0
-  m_SmoothRotationAmount: 5
-  m_TightenRotation: 0.5
-  m_ThrowOnDetach: 1
-  m_ThrowSmoothingDuration: 0.25
-  m_ThrowSmoothingCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_ThrowVelocityScale: 1.5
-  m_ThrowAngularVelocityScale: 1
-  m_ForceGravityOnDetach: 0
-  m_RetainTransformParent: 1
-  m_AttachPointCompatibilityMode: 0
-  m_StartingSingleGrabTransformers: []
-  m_StartingMultipleGrabTransformers: []
-  m_AddDefaultGrabTransformers: 1
 --- !u!1 &4872712461268846240
 GameObject:
   m_ObjectHideFlags: 0
@@ -2180,7 +1950,7 @@ GameObject:
   - component: {fileID: 4872712461268846243}
   - component: {fileID: 4872712461268846254}
   - component: {fileID: 4872712461268846255}
-  - component: {fileID: 4872712461268846252}
+  - component: {fileID: 6779885071203022206}
   m_Layer: 0
   m_Name: OctaviCockpit_Keyboard_blackKey_C#Db.001
   m_TagString: Untagged
@@ -2414,7 +2184,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4872712461268846252
+--- !u!114 &6779885071203022206
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2423,7 +2193,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4872712461268846240}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -2527,52 +2297,6 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  m_AttachTransform: {fileID: 0}
-  m_SecondaryAttachTransform: {fileID: 0}
-  m_UseDynamicAttach: 0
-  m_MatchAttachPosition: 1
-  m_MatchAttachRotation: 1
-  m_SnapToColliderVolume: 1
-  m_ReinitializeDynamicAttachEverySingleGrab: 1
-  m_AttachEaseInTime: 0.15
-  m_MovementType: 2
-  m_VelocityDamping: 1
-  m_VelocityScale: 1
-  m_AngularVelocityDamping: 1
-  m_AngularVelocityScale: 1
-  m_TrackPosition: 1
-  m_SmoothPosition: 0
-  m_SmoothPositionAmount: 5
-  m_TightenPosition: 0.5
-  m_TrackRotation: 1
-  m_SmoothRotation: 0
-  m_SmoothRotationAmount: 5
-  m_TightenRotation: 0.5
-  m_ThrowOnDetach: 1
-  m_ThrowSmoothingDuration: 0.25
-  m_ThrowSmoothingCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_ThrowVelocityScale: 1.5
-  m_ThrowAngularVelocityScale: 1
-  m_ForceGravityOnDetach: 0
-  m_RetainTransformParent: 1
-  m_AttachPointCompatibilityMode: 0
-  m_StartingSingleGrabTransformers: []
-  m_StartingMultipleGrabTransformers: []
-  m_AddDefaultGrabTransformers: 1
 --- !u!1 &5087982575656383146
 GameObject:
   m_ObjectHideFlags: 0
@@ -2589,7 +2313,7 @@ GameObject:
   - component: {fileID: 5087982575656383157}
   - component: {fileID: 5087982575656383152}
   - component: {fileID: 5087982575656383153}
-  - component: {fileID: 5087982575656383158}
+  - component: {fileID: 5415235076695795651}
   m_Layer: 0
   m_Name: OctaviCockpit_Keyboard_blackKey3_F#Gb.001
   m_TagString: Untagged
@@ -2823,7 +2547,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5087982575656383158
+--- !u!114 &5415235076695795651
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2832,7 +2556,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5087982575656383146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -2936,52 +2660,6 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  m_AttachTransform: {fileID: 0}
-  m_SecondaryAttachTransform: {fileID: 0}
-  m_UseDynamicAttach: 0
-  m_MatchAttachPosition: 1
-  m_MatchAttachRotation: 1
-  m_SnapToColliderVolume: 1
-  m_ReinitializeDynamicAttachEverySingleGrab: 1
-  m_AttachEaseInTime: 0.15
-  m_MovementType: 2
-  m_VelocityDamping: 1
-  m_VelocityScale: 1
-  m_AngularVelocityDamping: 1
-  m_AngularVelocityScale: 1
-  m_TrackPosition: 1
-  m_SmoothPosition: 0
-  m_SmoothPositionAmount: 5
-  m_TightenPosition: 0.5
-  m_TrackRotation: 1
-  m_SmoothRotation: 0
-  m_SmoothRotationAmount: 5
-  m_TightenRotation: 0.5
-  m_ThrowOnDetach: 1
-  m_ThrowSmoothingDuration: 0.25
-  m_ThrowSmoothingCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_ThrowVelocityScale: 1.5
-  m_ThrowAngularVelocityScale: 1
-  m_ForceGravityOnDetach: 0
-  m_RetainTransformParent: 1
-  m_AttachPointCompatibilityMode: 0
-  m_StartingSingleGrabTransformers: []
-  m_StartingMultipleGrabTransformers: []
-  m_AddDefaultGrabTransformers: 1
 --- !u!1 &5099700924125233749
 GameObject:
   m_ObjectHideFlags: 0
@@ -2998,8 +2676,8 @@ GameObject:
   - component: {fileID: 5099700924125233748}
   - component: {fileID: 5099700924125233747}
   - component: {fileID: 5099700924125233744}
-  - component: {fileID: 5099700924125233745}
   - component: {fileID: 1227022886}
+  - component: {fileID: 3933377935792944636}
   m_Layer: 0
   m_Name: OctaviCockpit_KeyboardKey_E.001
   m_TagString: Untagged
@@ -3233,7 +2911,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5099700924125233745
+--- !u!114 &1227022886
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3242,7 +2920,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 5099700924125233749}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: a8d6fe63570441646b8bf78a263daed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hintMaterial: {fileID: 2100000, guid: f063dcaf9511142a9967082d9bd3e250, type: 2}
+  originalMaterial: {fileID: 2100000, guid: 674565753313a4e5eb07a3ce0351a8c6, type: 2}
+--- !u!114 &3933377935792944636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5099700924125233749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -3295,7 +2987,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8642950405117911197}
+      - m_Target: {fileID: 1772994902}
         m_TargetAssemblyTypeName: KeyboardColours, Assembly-CSharp
         m_MethodName: OnKeyPlayed
         m_Mode: 2
@@ -3310,7 +3002,7 @@ MonoBehaviour:
   m_HoverExited:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8642950405117911197}
+      - m_Target: {fileID: 1772994902}
         m_TargetAssemblyTypeName: KeyboardColours, Assembly-CSharp
         m_MethodName: OnKeyReleased
         m_Mode: 2
@@ -3370,66 +3062,6 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  m_AttachTransform: {fileID: 0}
-  m_SecondaryAttachTransform: {fileID: 0}
-  m_UseDynamicAttach: 0
-  m_MatchAttachPosition: 1
-  m_MatchAttachRotation: 1
-  m_SnapToColliderVolume: 1
-  m_ReinitializeDynamicAttachEverySingleGrab: 1
-  m_AttachEaseInTime: 0.15
-  m_MovementType: 2
-  m_VelocityDamping: 1
-  m_VelocityScale: 1
-  m_AngularVelocityDamping: 1
-  m_AngularVelocityScale: 1
-  m_TrackPosition: 1
-  m_SmoothPosition: 0
-  m_SmoothPositionAmount: 5
-  m_TightenPosition: 0.5
-  m_TrackRotation: 1
-  m_SmoothRotation: 0
-  m_SmoothRotationAmount: 5
-  m_TightenRotation: 0.5
-  m_ThrowOnDetach: 1
-  m_ThrowSmoothingDuration: 0.25
-  m_ThrowSmoothingCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_ThrowVelocityScale: 1.5
-  m_ThrowAngularVelocityScale: 1
-  m_ForceGravityOnDetach: 0
-  m_RetainTransformParent: 1
-  m_AttachPointCompatibilityMode: 0
-  m_StartingSingleGrabTransformers: []
-  m_StartingMultipleGrabTransformers: []
-  m_AddDefaultGrabTransformers: 1
---- !u!114 &1227022886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5099700924125233749}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8d6fe63570441646b8bf78a263daed4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hintMaterial: {fileID: 2100000, guid: f063dcaf9511142a9967082d9bd3e250, type: 2}
-  originalMaterial: {fileID: 2100000, guid: 674565753313a4e5eb07a3ce0351a8c6, type: 2}
 --- !u!1 &5250236006401276991
 GameObject:
   m_ObjectHideFlags: 0
@@ -3446,8 +3078,8 @@ GameObject:
   - component: {fileID: 5250236006401276987}
   - component: {fileID: 5250236006401276984}
   - component: {fileID: 5250236006401276985}
-  - component: {fileID: 5250236006401276990}
   - component: {fileID: 825847432}
+  - component: {fileID: 8069425156044838660}
   m_Layer: 0
   m_Name: OctaviCockpit_KeyboardKey_F.001
   m_TagString: Untagged
@@ -3681,7 +3313,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5250236006401276990
+--- !u!114 &825847432
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3690,7 +3322,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 5250236006401276991}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: a8d6fe63570441646b8bf78a263daed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hintMaterial: {fileID: 2100000, guid: 807d50348fa74463e84b4c89c46c27cf, type: 2}
+  originalMaterial: {fileID: 2100000, guid: 674565753313a4e5eb07a3ce0351a8c6, type: 2}
+--- !u!114 &8069425156044838660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5250236006401276991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -3743,7 +3389,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8642950405117911197}
+      - m_Target: {fileID: 1772994902}
         m_TargetAssemblyTypeName: KeyboardColours, Assembly-CSharp
         m_MethodName: OnKeyPlayed
         m_Mode: 2
@@ -3758,7 +3404,7 @@ MonoBehaviour:
   m_HoverExited:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8642950405117911197}
+      - m_Target: {fileID: 1772994902}
         m_TargetAssemblyTypeName: KeyboardColours, Assembly-CSharp
         m_MethodName: OnKeyReleased
         m_Mode: 2
@@ -3818,66 +3464,6 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  m_AttachTransform: {fileID: 0}
-  m_SecondaryAttachTransform: {fileID: 0}
-  m_UseDynamicAttach: 0
-  m_MatchAttachPosition: 1
-  m_MatchAttachRotation: 1
-  m_SnapToColliderVolume: 1
-  m_ReinitializeDynamicAttachEverySingleGrab: 1
-  m_AttachEaseInTime: 0.15
-  m_MovementType: 2
-  m_VelocityDamping: 1
-  m_VelocityScale: 1
-  m_AngularVelocityDamping: 1
-  m_AngularVelocityScale: 1
-  m_TrackPosition: 1
-  m_SmoothPosition: 0
-  m_SmoothPositionAmount: 5
-  m_TightenPosition: 0.5
-  m_TrackRotation: 1
-  m_SmoothRotation: 0
-  m_SmoothRotationAmount: 5
-  m_TightenRotation: 0.5
-  m_ThrowOnDetach: 1
-  m_ThrowSmoothingDuration: 0.25
-  m_ThrowSmoothingCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_ThrowVelocityScale: 1.5
-  m_ThrowAngularVelocityScale: 1
-  m_ForceGravityOnDetach: 0
-  m_RetainTransformParent: 1
-  m_AttachPointCompatibilityMode: 0
-  m_StartingSingleGrabTransformers: []
-  m_StartingMultipleGrabTransformers: []
-  m_AddDefaultGrabTransformers: 1
---- !u!114 &825847432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5250236006401276991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8d6fe63570441646b8bf78a263daed4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hintMaterial: {fileID: 2100000, guid: 807d50348fa74463e84b4c89c46c27cf, type: 2}
-  originalMaterial: {fileID: 2100000, guid: 674565753313a4e5eb07a3ce0351a8c6, type: 2}
 --- !u!1 &6474932610236511603
 GameObject:
   m_ObjectHideFlags: 0
@@ -3894,8 +3480,8 @@ GameObject:
   - component: {fileID: 6474932610236511602}
   - component: {fileID: 6474932610236511609}
   - component: {fileID: 6474932610236511614}
-  - component: {fileID: 6474932610236511615}
   - component: {fileID: 765876020}
+  - component: {fileID: 2772294467123919673}
   m_Layer: 0
   m_Name: OctaviCockpit_KeyboardKey_C.001
   m_TagString: Untagged
@@ -4131,7 +3717,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6474932610236511615
+--- !u!114 &765876020
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4140,7 +3726,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 6474932610236511603}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: a8d6fe63570441646b8bf78a263daed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hintMaterial: {fileID: 2100000, guid: 3dd0586635d244e74947111e9d5ca675, type: 2}
+  originalMaterial: {fileID: 2100000, guid: 674565753313a4e5eb07a3ce0351a8c6, type: 2}
+--- !u!114 &2772294467123919673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6474932610236511603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -4193,7 +3793,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8642950405117911197}
+      - m_Target: {fileID: 1772994902}
         m_TargetAssemblyTypeName: KeyboardColours, Assembly-CSharp
         m_MethodName: OnKeyPlayed
         m_Mode: 2
@@ -4208,7 +3808,7 @@ MonoBehaviour:
   m_HoverExited:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8642950405117911197}
+      - m_Target: {fileID: 1772994902}
         m_TargetAssemblyTypeName: KeyboardColours, Assembly-CSharp
         m_MethodName: OnKeyReleased
         m_Mode: 2
@@ -4268,66 +3868,6 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  m_AttachTransform: {fileID: 0}
-  m_SecondaryAttachTransform: {fileID: 0}
-  m_UseDynamicAttach: 0
-  m_MatchAttachPosition: 1
-  m_MatchAttachRotation: 1
-  m_SnapToColliderVolume: 1
-  m_ReinitializeDynamicAttachEverySingleGrab: 1
-  m_AttachEaseInTime: 0.15
-  m_MovementType: 2
-  m_VelocityDamping: 1
-  m_VelocityScale: 1
-  m_AngularVelocityDamping: 1
-  m_AngularVelocityScale: 1
-  m_TrackPosition: 1
-  m_SmoothPosition: 0
-  m_SmoothPositionAmount: 5
-  m_TightenPosition: 0.5
-  m_TrackRotation: 1
-  m_SmoothRotation: 0
-  m_SmoothRotationAmount: 5
-  m_TightenRotation: 0.5
-  m_ThrowOnDetach: 1
-  m_ThrowSmoothingDuration: 0.25
-  m_ThrowSmoothingCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_ThrowVelocityScale: 1.5
-  m_ThrowAngularVelocityScale: 1
-  m_ForceGravityOnDetach: 0
-  m_RetainTransformParent: 1
-  m_AttachPointCompatibilityMode: 0
-  m_StartingSingleGrabTransformers: []
-  m_StartingMultipleGrabTransformers: []
-  m_AddDefaultGrabTransformers: 1
---- !u!114 &765876020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6474932610236511603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8d6fe63570441646b8bf78a263daed4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hintMaterial: {fileID: 2100000, guid: 3dd0586635d244e74947111e9d5ca675, type: 2}
-  originalMaterial: {fileID: 2100000, guid: 674565753313a4e5eb07a3ce0351a8c6, type: 2}
 --- !u!1 &7892059080462213617
 GameObject:
   m_ObjectHideFlags: 0
@@ -4344,7 +3884,7 @@ GameObject:
   - component: {fileID: 7892059080462213629}
   - component: {fileID: 7892059080462213618}
   - component: {fileID: 7892059080462213619}
-  - component: {fileID: 7892059080462213616}
+  - component: {fileID: 251887505566244187}
   m_Layer: 0
   m_Name: OctaviCockpit_Keyboard_blackKey3_G#Ab.001
   m_TagString: Untagged
@@ -4578,7 +4118,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7892059080462213616
+--- !u!114 &251887505566244187
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4587,7 +4127,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7892059080462213617}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -4691,52 +4231,6 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  m_AttachTransform: {fileID: 0}
-  m_SecondaryAttachTransform: {fileID: 0}
-  m_UseDynamicAttach: 0
-  m_MatchAttachPosition: 1
-  m_MatchAttachRotation: 1
-  m_SnapToColliderVolume: 1
-  m_ReinitializeDynamicAttachEverySingleGrab: 1
-  m_AttachEaseInTime: 0.15
-  m_MovementType: 2
-  m_VelocityDamping: 1
-  m_VelocityScale: 1
-  m_AngularVelocityDamping: 1
-  m_AngularVelocityScale: 1
-  m_TrackPosition: 1
-  m_SmoothPosition: 0
-  m_SmoothPositionAmount: 5
-  m_TightenPosition: 0.5
-  m_TrackRotation: 1
-  m_SmoothRotation: 0
-  m_SmoothRotationAmount: 5
-  m_TightenRotation: 0.5
-  m_ThrowOnDetach: 1
-  m_ThrowSmoothingDuration: 0.25
-  m_ThrowSmoothingCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_ThrowVelocityScale: 1.5
-  m_ThrowAngularVelocityScale: 1
-  m_ForceGravityOnDetach: 0
-  m_RetainTransformParent: 1
-  m_AttachPointCompatibilityMode: 0
-  m_StartingSingleGrabTransformers: []
-  m_StartingMultipleGrabTransformers: []
-  m_AddDefaultGrabTransformers: 1
 --- !u!1 &8203088029247546203
 GameObject:
   m_ObjectHideFlags: 0
@@ -4905,8 +4399,8 @@ GameObject:
   - component: {fileID: 9223287227838894678}
   - component: {fileID: 9223287227838894685}
   - component: {fileID: 9223287227838894674}
-  - component: {fileID: 9223287227838894675}
   - component: {fileID: 131304737}
+  - component: {fileID: 8711518169575046827}
   m_Layer: 0
   m_Name: OctaviCockpit_KeyboardKey_G.001
   m_TagString: Untagged
@@ -5140,7 +4634,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &9223287227838894675
+--- !u!114 &131304737
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5149,7 +4643,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 9223287227838894679}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
+  m_Script: {fileID: 11500000, guid: a8d6fe63570441646b8bf78a263daed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hintMaterial: {fileID: 2100000, guid: 0e2e8b0e5daf2443d877c301d1e78bcc, type: 2}
+  originalMaterial: {fileID: 2100000, guid: 674565753313a4e5eb07a3ce0351a8c6, type: 2}
+--- !u!114 &8711518169575046827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9223287227838894679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
@@ -5202,7 +4710,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8642950405117911197}
+      - m_Target: {fileID: 1772994902}
         m_TargetAssemblyTypeName: KeyboardColours, Assembly-CSharp
         m_MethodName: OnKeyPlayed
         m_Mode: 2
@@ -5217,7 +4725,7 @@ MonoBehaviour:
   m_HoverExited:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8642950405117911197}
+      - m_Target: {fileID: 1772994902}
         m_TargetAssemblyTypeName: KeyboardColours, Assembly-CSharp
         m_MethodName: OnKeyReleased
         m_Mode: 2
@@ -5277,63 +4785,3 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
-  m_AttachTransform: {fileID: 0}
-  m_SecondaryAttachTransform: {fileID: 0}
-  m_UseDynamicAttach: 0
-  m_MatchAttachPosition: 1
-  m_MatchAttachRotation: 1
-  m_SnapToColliderVolume: 1
-  m_ReinitializeDynamicAttachEverySingleGrab: 1
-  m_AttachEaseInTime: 0.15
-  m_MovementType: 2
-  m_VelocityDamping: 1
-  m_VelocityScale: 1
-  m_AngularVelocityDamping: 1
-  m_AngularVelocityScale: 1
-  m_TrackPosition: 1
-  m_SmoothPosition: 0
-  m_SmoothPositionAmount: 5
-  m_TightenPosition: 0.5
-  m_TrackRotation: 1
-  m_SmoothRotation: 0
-  m_SmoothRotationAmount: 5
-  m_TightenRotation: 0.5
-  m_ThrowOnDetach: 1
-  m_ThrowSmoothingDuration: 0.25
-  m_ThrowSmoothingCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  m_ThrowVelocityScale: 1.5
-  m_ThrowAngularVelocityScale: 1
-  m_ForceGravityOnDetach: 0
-  m_RetainTransformParent: 1
-  m_AttachPointCompatibilityMode: 0
-  m_StartingSingleGrabTransformers: []
-  m_StartingMultipleGrabTransformers: []
-  m_AddDefaultGrabTransformers: 1
---- !u!114 &131304737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9223287227838894679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8d6fe63570441646b8bf78a263daed4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hintMaterial: {fileID: 2100000, guid: 0e2e8b0e5daf2443d877c301d1e78bcc, type: 2}
-  originalMaterial: {fileID: 2100000, guid: 674565753313a4e5eb07a3ce0351a8c6, type: 2}
