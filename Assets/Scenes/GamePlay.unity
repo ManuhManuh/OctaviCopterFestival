@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0014457931, g: 0.00096122903, b: 0.00023574193, a: 1}
+  m_IndirectSpecularColor: {r: 0.0014452504, g: 0.00096075534, b: 0.00023557333, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -457,10 +457,7 @@ MonoBehaviour:
     type: 3}
   levels:
   - {fileID: 11400000, guid: 7845538ee1f9dfa449c43af25726129e, type: 2}
-  - {fileID: 11400000, guid: c9403a0320226d749bd07189466e20b1, type: 2}
-  - {fileID: 11400000, guid: 20a14b3acf5bb774fa2ff95542e2a53c, type: 2}
   - {fileID: 11400000, guid: 09be928d1c5f8074a9121b2d365bb869, type: 2}
-  - {fileID: 11400000, guid: 15172ce8d8391164da3477a5676d434f, type: 2}
   - {fileID: 11400000, guid: 8255742ca9fa72643a5e1ea8579fd621, type: 2}
   levelManagerPrefab: {fileID: 9098552129751637603, guid: a6b784b0db1ac8544a3ffc2e8302d579,
     type: 3}
