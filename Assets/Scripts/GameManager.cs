@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public Vector3 PlayerStartPosition => playerStartPosition;
     public GameObject player;
     public bool restartRequested = false;
+    public bool runningTutorial = false;
 
     [SerializeField] private InputActionReference startLevelActionReference;
     [SerializeField] public List<Level> levels = new List<Level>();
@@ -82,15 +83,19 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        float buttonPressValue = startLevelActionReference.action.ReadValue<float>();
-   
-        if ((buttonPressValue > 0) && restartAllowed)
+        if (!runningTutorial)
         {
-            currentFeedbackText = "";
-            uiDisplay.PresentFeedback(currentFeedbackText);
-            StartLevel();
-            
+            float buttonPressValue = startLevelActionReference.action.ReadValue<float>();
+
+            if ((buttonPressValue > 0) && restartAllowed)
+            {
+                currentFeedbackText = "";
+                uiDisplay.PresentFeedback(currentFeedbackText);
+                StartLevel();
+
+            }
         }
+        
     }
 
     public void OnLevelCompleted(bool successful, int maxPoints)

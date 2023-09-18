@@ -11,9 +11,12 @@ public class MenuDisplay : MonoBehaviour
     [SerializeField] private TMP_Text modeButtonText;
     [SerializeField] private TMP_Text languageButtonText;
     [SerializeField] private Slider speedSlider;
+    [SerializeField] private Button TutorialButton;
 
     [SerializeField] private GameObject instructionPanel;
     [SerializeField] private TMP_Text backButtonText;
+
+    [SerializeField] private GameObject tutorialPrefab;
 
     [SerializeField] private List<string> modes = new List<string>();
     [SerializeField] private List<string> languages = new List<string>();
@@ -49,6 +52,7 @@ public class MenuDisplay : MonoBehaviour
         moveProvider = FindObjectOfType<ActionBasedContinuousMoveProvider>();
         UpdateSpeedRanges();
         UpdateSpeedSlider();
+        
 
     }
     public void DisplayInstructions()
@@ -83,7 +87,6 @@ public class MenuDisplay : MonoBehaviour
 
     }
 
-    
 
     public void CycleLanguages()
     {
@@ -159,6 +162,18 @@ public class MenuDisplay : MonoBehaviour
 
     }
 
+    private void OnEnable()
+    {
+        // prevent the tutorial from being run in the middle of a level (must restart to run tutorial)
+        if(gameManager == null)
+        {
+            TutorialButton.enabled = true;
+        }
+        else
+        {
+            TutorialButton.enabled = gameManager.CurrentLevelManager == null;
+        }
+    }
     private void UpdateSpeedRanges()
     {
         // update the min and max speed values
@@ -226,6 +241,12 @@ public class MenuDisplay : MonoBehaviour
             gameManager.CurrentLevelManager.GotoState(LevelManager.LevelState.EvaluatingLevel);
         }
         
+    }
+
+    public void RunTutorial()
+    {
+        gameManager.runningTutorial = true;
+        Instantiate(tutorialPrefab);
     }
 
     public void ExitGame()
