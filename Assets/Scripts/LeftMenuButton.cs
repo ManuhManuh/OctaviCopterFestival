@@ -52,6 +52,10 @@ public class LeftMenuButton : MonoBehaviour
         
     }
 
+    public void CloseWithoutButtonPress()
+    {
+        StartCoroutine(CloseMenu());
+    }
 
     private IEnumerator OpenMenu()
     {

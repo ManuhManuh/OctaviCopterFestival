@@ -1341,10 +1341,21 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3184895211693892052, guid: 94594c68300b4124fbd5cd83f7f0415a,
+        type: 3}
+      propertyPath: tutorialPrefab
+      value: 
+      objectReference: {fileID: 7419633889644547261, guid: 0f0751fc05393774893f7c92d15ec76c,
+        type: 3}
     - target: {fileID: 5459697838709398258, guid: 94594c68300b4124fbd5cd83f7f0415a,
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6894871337715721022, guid: 94594c68300b4124fbd5cd83f7f0415a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RunTutorial
       objectReference: {fileID: 0}
     - target: {fileID: 8915515325670297668, guid: 94594c68300b4124fbd5cd83f7f0415a,
         type: 3}

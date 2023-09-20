@@ -34,11 +34,12 @@ public class MenuDisplay : MonoBehaviour
     private ActionBasedContinuousMoveProvider moveProvider;
     private float currentMinSpeed;
     private float currentMaxSpeed;
-    
+    private LeftMenuButton leftMenuButton;
 
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        leftMenuButton = FindObjectOfType<LeftMenuButton>();
 
         if(PlayerPrefs.GetInt("LastLanguageUsed") != (int)Locale.en)
         {
@@ -246,7 +247,8 @@ public class MenuDisplay : MonoBehaviour
     public void RunTutorial()
     {
         gameManager.runningTutorial = true;
-        Instantiate(tutorialPrefab);
+        Instantiate(tutorialPrefab, Vector3.zero, Quaternion.identity);
+        leftMenuButton.CloseWithoutButtonPress();
     }
 
     public void ExitGame()

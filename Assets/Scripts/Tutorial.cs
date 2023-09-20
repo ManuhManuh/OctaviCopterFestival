@@ -18,21 +18,46 @@ public class Tutorial : MonoBehaviour
 
     [SerializeField] public InputActionReference primaryButtonPress;
     [SerializeField] public InputActionReference secondaryButtonPress;
+    
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] private AudioClip[] englishClips;
+    [SerializeField] private AudioClip[] germanClips;
+    [SerializeField] private AudioClip[] spanishClips;
+
+    [SerializeField] GameObject scalePrefab;
+    [SerializeField] GameObject examplePrefab;
 
     private GameManager gameManager;
     private TutorialState currentState;
+    private GameObject cMajorScale;
+    private GameObject simpleExample;
 
     private bool firstNoteCollected = false;
     private bool secondNoteCollected = false;
     private bool keyboardPlayed = false;
     private bool hintPlayed = false;
     private bool cycleAttempted = false;
+    private AudioClip[] currentClipArray;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        switch (Localization.currentLocale)
+        {
+            case Locale.en:
+                currentClipArray = englishClips;
+                break;
+            case Locale.de:
+                currentClipArray = germanClips;
+                break;
+            case Locale.es:
+                currentClipArray = spanishClips;
+                break;
+        }
 
+        currentState = TutorialState.None;
+        GotoTutorialState(TutorialState.Introduction);
     }
 
     // Update is called once per frame
@@ -148,12 +173,45 @@ public class Tutorial : MonoBehaviour
 
     private void IntroductionEntered()
     {
-        // play introduction timeline
-            // clip 1a
-            // display C Major scale
-            // clip 1b
-            // display C3, D3
-        // when timeline finished, change state to Flying
+        StartCoroutine(IntroductionSection());
+
+    }
+
+    private IEnumerator IntroductionSection()
+    {
+        // clip 1a
+        audioSource.PlayOneShot(currentClipArray[0]);
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
+
+        // show C Major Scale
+        cMajorScale = Instantiate(scalePrefab, Vector3.zero, Quaternion.identity);
+        Animator animator = cMajorScale.GetComponent<Animator>();
+        yield return new WaitForEndOfFrame();
+
+        float NTime = 0;
+        AnimatorStateInfo animatorStateInfo;
+
+        while (NTime < 1.0f)
+        {
+            animatorStateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            NTime = animatorStateInfo.normalizedTime;
+            yield return null;
+        }
+
+        // clip 1b
+        audioSource.PlayOneShot(currentClipArray[1]);
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
+
+        // Replace C Major scale with simple example
+        Destroy(cMajorScale.gameObject);
+        simpleExample = Instantiate(examplePrefab, Vector3.zero, Quaternion.identity);
+        GotoTutorialState(TutorialState.Flying);
 
     }
 

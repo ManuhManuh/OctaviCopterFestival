@@ -95,6 +95,14 @@ public class GameManager : MonoBehaviour
 
             }
         }
+        else
+        {
+            if (currentFeedbackText != "")
+            {
+                currentFeedbackText = "";
+                uiDisplay.PresentFeedback(currentFeedbackText);
+            }
+        }
         
     }
 
