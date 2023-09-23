@@ -13,7 +13,6 @@ public class LevelManager : MonoBehaviour
     {
         None,
         LoadingLevel,
-        ReconaissanceFlying,
         FlyingTrack,
         EvaluatingLevel
       
@@ -22,6 +21,7 @@ public class LevelManager : MonoBehaviour
     public float LevelHeight => levelHeight;
     private float levelHeight;
     public bool HintIsPlaying => hintIsPlaying;
+    public bool CheckingLevel => CheckingLevel;
     public GameObject EnvironmentAsset => environmentAsset;
 
     [SerializeField] private InputActionReference cycleTrackActionReference;
@@ -39,8 +39,9 @@ public class LevelManager : MonoBehaviour
     private List<float> trackXPositions = new List<float>();
     private List<float> trackYPositions = new List<float>();
     private List<GameObject> trackObjects = new List<GameObject>();
-    private int selectedTrack;
+    private Vector3 resetPosition;
     private bool cycleEnabled;
+    private bool checkingLevel;
 
     private TMP_Text levelTitle;
     private TMP_Text levelInstructions;
@@ -56,8 +57,6 @@ public class LevelManager : MonoBehaviour
     }
     private void Start()
     {
-        gameManager.NoteCollector.SetActive(false); // disable until a track is selected
-
         // Set the initial state and starting values of flags and indexes
         currentLevel = gameManager.CurrentLevel;
 
@@ -78,39 +77,24 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        if(currentState == LevelState.ReconaissanceFlying)
+        if(currentState == LevelState.FlyingTrack)
         {
-
-            float buttonPressValue = cycleTrackActionReference.action.ReadValue<float>();
-            if (buttonPressValue > 0 && cycleEnabled)
+     
+            float secondaryPressValue = cycleTrackActionReference.action.ReadValue<float>();
+            if (secondaryPressValue > 0 && cycleEnabled)
             {
                 cycleEnabled = false;
                 currentFeedbackText = "TrackSelect";
                 SendMessageToUI();
                 CycleThroughTracks();
-
             }
 
-            float triggerPressValue = startFlyingActionReference.action.ReadValue<float>();
-            if (triggerPressValue > 0)
+            float primaryPressValue = startFlyingActionReference.action.ReadValue<float>();
+            if (primaryPressValue > 0)
             {
-                GotoState(LevelState.FlyingTrack);
-
+                gameManager.player.transform.position = resetPosition;
             }
-        }
 
-        if(currentState == LevelState.FlyingTrack)
-        {
-            float buttonPressValue = cycleTrackActionReference.action.ReadValue<float>();
-            if (buttonPressValue > 0)
-            {
-                // move to start of selected track
-                float newPlayerXPosition = trackXPositions[selectedTrack];
-                float newPlayerYPosition = trackYPositions[selectedTrack];
-                float newPlayerZPostion = gameManager.PlayerStartPosition.z;
-
-                gameManager.player.transform.position = new Vector3(newPlayerXPosition, newPlayerYPosition, newPlayerZPostion);
-            }
         }
 
     }
@@ -128,12 +112,6 @@ public class LevelManager : MonoBehaviour
                     LoadingLevelEntered();
                     break;
                 }
-            case LevelState.ReconaissanceFlying:
-                {
-                    ReconnaissanceFlyingEntered();
-                    break;
-                }
-
             case LevelState.FlyingTrack:
                 {
                     FlyingTrackEntered();
@@ -214,8 +192,12 @@ public class LevelManager : MonoBehaviour
 
         } 
 
-        // Give player note clue
-        StartCoroutine(PerformTrackHint());
+        // Give player note clue, if this is not the tutorial level
+        if (!gameManager.runningTutorial)
+        {
+            StartCoroutine(PerformTrackHint());
+        }
+        
 
     }
 
@@ -296,13 +278,6 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    private void ReconnaissanceFlyingEntered()
-    {
-        currentFeedbackText = "Recon";
-        SendMessageToUI();
-        cycleEnabled = true;
-
-    }
     private void CheckNote(Note hitNote)
     {
         notesCollected++;
@@ -354,14 +329,16 @@ public class LevelManager : MonoBehaviour
             yield return new WaitForSeconds(currentLevel.clueTiming);
         }
 
-        if(currentState == LevelState.LoadingLevel) GotoState(LevelState.ReconaissanceFlying);
+        if(currentState == LevelState.LoadingLevel) GotoState(LevelState.FlyingTrack);
         hintIsPlaying = false;
     }
 
     public IEnumerator CleanUpAndEndLevel()
     {
+        checkingLevel = true;
+
         yield return new WaitForSeconds(3); // time for sound from last note collected to decay
-        // destroy the notes, thereby also removing the subscriptions to them ;)
+                                            // destroy the notes, thereby also removing the subscriptions to them ;)
         Note[] notes = FindObjectsOfType<Note>();
         foreach (Note note in notes)
         {
@@ -402,14 +379,16 @@ public class LevelManager : MonoBehaviour
                 positionIndex = i;
             }
         }
-        selectedTrack = (positionIndex + 1) % trackXPositions.Count; // wrap around at the end
+
+        int selectedTrack = (positionIndex + 1) % trackXPositions.Count; // wrap around at the end
 
         // move to next available track
         float newPlayerXPosition = trackXPositions[selectedTrack];
         float newPlayerYPosition = trackYPositions[selectedTrack];
         float newPlayerZPostion = gameManager.PlayerStartPosition.z;
 
-        gameManager.player.transform.position = new Vector3(newPlayerXPosition, newPlayerYPosition, newPlayerZPostion);
+        resetPosition = new Vector3(newPlayerXPosition, newPlayerYPosition, newPlayerZPostion);
+        gameManager.player.transform.position = resetPosition;
 
         // delay the next cycle
         StartCoroutine(TrackCycleDelay(0.5f));
@@ -423,13 +402,9 @@ public class LevelManager : MonoBehaviour
     }
     public void FlyingTrackEntered()
     {
+        cycleEnabled = true;
         currentFeedbackText = "FlyPrompt";
         SendMessageToUI();
-
-        // disable strafe
-
-        // enable note collector
-        gameManager.NoteCollector.SetActive(true);
 
     }
 }

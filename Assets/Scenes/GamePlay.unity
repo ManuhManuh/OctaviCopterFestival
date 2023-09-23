@@ -564,6 +564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc2842598a13bc419dee5c82bda5e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentLevel: {fileID: 0}
   player: {fileID: 2118515032950969002}
   restartRequested: 0
   runningTutorial: 0
@@ -580,6 +581,8 @@ MonoBehaviour:
     type: 3}
   timeBetweenLevels: 1
   timeBeforeRestartAllowed: 10
+  tutorialPrefab: {fileID: 7419633889644547261, guid: 0f0751fc05393774893f7c92d15ec76c,
+    type: 3}
   backgroundAsset: {fileID: 405820956}
   fireworks: {fileID: 1473118096}
   endingSong: {fileID: 297750292}

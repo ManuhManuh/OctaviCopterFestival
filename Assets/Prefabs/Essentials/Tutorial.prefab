@@ -69,8 +69,11 @@ MonoBehaviour:
   spanishClips: []
   scalePrefab: {fileID: 3403632369758014265, guid: 1db6a1e20c3e3ef4a9bc2017ba4cd028,
     type: 3}
-  examplePrefab: {fileID: 5781641293210830752, guid: 9210e1238536e1c458358c912b438080,
+  firstExampleNotePrefab: {fileID: 268683940543836428, guid: 3a861c4342fe8ee43abb693546fba3fd,
     type: 3}
+  secondExampleNotePrefab: {fileID: 6767525875305163089, guid: 195505791803fda4ca4e5a7ba9263cdc,
+    type: 3}
+  tutorialLevel: {fileID: 11400000, guid: 412ba5f51f05c9348b4f09bdac627413, type: 2}
 --- !u!82 &3571222972533778875
 AudioSource:
   m_ObjectHideFlags: 0

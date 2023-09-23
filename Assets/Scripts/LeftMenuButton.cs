@@ -54,6 +54,12 @@ public class LeftMenuButton : MonoBehaviour
 
     public void CloseWithoutButtonPress()
     {
+        leftPokeInteractor.gameObject.SetActive(false);
+        rightPokeInteractor.gameObject.SetActive(false);
+
+        leftDirectInteractor.gameObject.SetActive(true);
+        rightDirectInteractor.gameObject.SetActive(true);
+
         StartCoroutine(CloseMenu());
     }
 

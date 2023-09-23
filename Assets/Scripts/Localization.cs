@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System;
 using UnityEngine;
+using System.Linq;
 
 public enum Locale
 {
@@ -15,8 +16,11 @@ public static class Localization
 {
 
     private static Dictionary<Locale, Dictionary<string, string>> localizationTable;
+    private static Dictionary<Locale, AudioClip[]> localizedTutorialVOTable;
+
     public static Locale currentLocale = Locale.en;
     public static Dictionary<string, string> currentLocalizationTable => localizationTable[currentLocale];
+    public static AudioClip[] currentVOTable => localizedTutorialVOTable[currentLocale];
 
     //Constructor - will happen when class is instantiated
     static Localization()
@@ -26,6 +30,7 @@ public static class Localization
 
     private static void Load()
     {
+        // load the text asset
         var source = Resources.Load<TextAsset>("Localization");
         var lines = source.text.Split('\n');
         var header = lines[0].Split(';');
@@ -33,8 +38,7 @@ public static class Localization
         var localeOrder = new List<Locale>(header.Length - 1);
 
         localizationTable = new Dictionary<Locale, Dictionary<string, string>>();
-
-
+        
         // Generate list of locales that are in the text asset and a dictionary for each
         for (int i = 1; i < header.Length; i++)
         {
@@ -55,7 +59,18 @@ public static class Localization
             }
         }
 
-        
+        // load the audioclip assets
+        localizedTutorialVOTable = new Dictionary<Locale, AudioClip[]>();
+
+        for (int i = 0; i < localizationTable.Count; i++)
+        {
+            var locale = (Locale)i;
+            var folderName = ($"TutorialTracks_{locale}");
+
+            AudioClip[] clipSet = Resources.LoadAll(folderName, typeof(AudioClip)).Cast<AudioClip>().ToArray();
+            localizedTutorialVOTable[locale] = clipSet;
+
+        }
     }
 
     public static Locale FindLocaleFromButtonText(string valueToFindLocaleFor)

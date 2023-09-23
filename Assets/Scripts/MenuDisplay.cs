@@ -16,8 +16,6 @@ public class MenuDisplay : MonoBehaviour
     [SerializeField] private GameObject instructionPanel;
     [SerializeField] private TMP_Text backButtonText;
 
-    [SerializeField] private GameObject tutorialPrefab;
-
     [SerializeField] private List<string> modes = new List<string>();
     [SerializeField] private List<string> languages = new List<string>();
     [SerializeField] private List<TMP_Text> textFields = new List<TMP_Text>();
@@ -246,8 +244,7 @@ public class MenuDisplay : MonoBehaviour
 
     public void RunTutorial()
     {
-        gameManager.runningTutorial = true;
-        Instantiate(tutorialPrefab, Vector3.zero, Quaternion.identity);
+        gameManager.RunTutorial();
         leftMenuButton.CloseWithoutButtonPress();
     }
 

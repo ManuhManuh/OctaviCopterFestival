@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 
 public class Tutorial : MonoBehaviour
 {
@@ -9,52 +10,48 @@ public class Tutorial : MonoBehaviour
     {
         None,
         Introduction,
-        Flying,
+        FlyingFirstNote,
+        FlyingSecondNote,
+        WaitingForReset,
         Tracks,
-        Keyboard,
+        WaitingForKeyboardPlay,
+        WaitingForHintPlay,
+        Experimenting,
         TrackSelection,
-        TestDrive
+        TestDrive,
+        TryAgainFeedback,
+        SuccessFeedback,
+        WaitingForLevelRestart
     }
 
     [SerializeField] public InputActionReference primaryButtonPress;
     [SerializeField] public InputActionReference secondaryButtonPress;
-    
+
     [SerializeField] AudioSource audioSource;
-    [SerializeField] private AudioClip[] englishClips;
-    [SerializeField] private AudioClip[] germanClips;
-    [SerializeField] private AudioClip[] spanishClips;
 
     [SerializeField] GameObject scalePrefab;
-    [SerializeField] GameObject examplePrefab;
+    [SerializeField] Note firstExampleNotePrefab;
+    [SerializeField] Note secondExampleNotePrefab;
+    [SerializeField] Level tutorialLevel;
 
     private GameManager gameManager;
     private TutorialState currentState;
-    private GameObject cMajorScale;
-    private GameObject simpleExample;
+    private GameObject locomotionControls;
+    private Key[] keys;
 
-    private bool firstNoteCollected = false;
-    private bool secondNoteCollected = false;
-    private bool keyboardPlayed = false;
-    private bool hintPlayed = false;
-    private bool cycleAttempted = false;
+    private bool hintStarted = false;
+    private bool firstAttemptAtLevel = true;
     private AudioClip[] currentClipArray;
+    private Note firstExampleNote;
+    private Note secondExampleNote;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
-        switch (Localization.currentLocale)
-        {
-            case Locale.en:
-                currentClipArray = englishClips;
-                break;
-            case Locale.de:
-                currentClipArray = germanClips;
-                break;
-            case Locale.es:
-                currentClipArray = spanishClips;
-                break;
-        }
+        keys = FindObjectsOfType<Key>();
+        locomotionControls = GameObject.Find("Locomotion");
+        currentClipArray = Localization.currentVOTable;
 
         currentState = TutorialState.None;
         GotoTutorialState(TutorialState.Introduction);
@@ -63,51 +60,91 @@ public class Tutorial : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // pieces triggered by controller input
         switch (currentState)
         {
-            case TutorialState.Flying:
+            case TutorialState.WaitingForReset:
             {
-                if (firstNoteCollected && secondNoteCollected)
-                    {
-                        float buttonPressValue = secondaryButtonPress.action.ReadValue<float>();
-                        if (buttonPressValue > 0)
-                        {
-                            GotoTutorialState(TutorialState.Tracks);
-                        }
-                        
-                    }
+                float buttonPressValue = secondaryButtonPress.action.ReadValue<float>();
+                if (buttonPressValue > 0)
+                {
+                    gameManager.player.transform.position = gameManager.PlayerStartPosition;
+                    DisableFlying();
+                    GotoTutorialState(TutorialState.Tracks);
+                }
+
                 break;
             }
 
-
-            case TutorialState.Keyboard:
+            case TutorialState.WaitingForKeyboardPlay:
                 {
-                    if (keyboardPlayed && hintPlayed)
+                    foreach (Key key in keys)
                     {
-                        float buttonPressValue = primaryButtonPress.action.ReadValue<float>();
-                        if (buttonPressValue > 0)
+                        if (key.BeenPlayed)
                         {
-                            GotoTutorialState(TutorialState.TrackSelection);
+                            GotoTutorialState(TutorialState.WaitingForHintPlay);
                         }
+                    }
+                        
+                    break;
+                }
 
+            case TutorialState.WaitingForHintPlay:
+                {
+                    if (!hintStarted && gameManager.CurrentLevelManager.HintIsPlaying)
+                    {
+                        hintStarted = true;
+                        StartCoroutine(MonitorHint());
+                    }
+                    break;
+                }
+
+            case TutorialState.Experimenting:
+                {
+                    float buttonPressValue = primaryButtonPress.action.ReadValue<float>();
+                    if (buttonPressValue > 0)
+                    {
+                        GotoTutorialState(TutorialState.TrackSelection);
                     }
                     break;
                 }
 
             case TutorialState.TrackSelection:
                 {
-                    if (!cycleAttempted)
-                    {
-                        float buttonPressValue = secondaryButtonPress.action.ReadValue<float>();
-                        if (buttonPressValue > 0)
-                        {
-                            cycleAttempted = true;
-                            // play trackselection timeline
-                                // play clip 10
-                                // when clip is done, change state to TestDrive
-                                
-                        }
 
+                    float buttonPressValue = secondaryButtonPress.action.ReadValue<float>();
+                    if (buttonPressValue > 0)
+                    {
+                        EnableFlying();
+                        GotoTutorialState(TutorialState.TestDrive);
+                        
+                    }
+
+                    break;
+                }
+            case TutorialState.TestDrive:
+                {
+                    if (gameManager.TutorialCompleted)
+                    {
+                        if (gameManager.TutorialSuccessful)
+                        {
+                            GotoTutorialState(TutorialState.SuccessFeedback);
+                        }
+                        else
+                        {
+                            GotoTutorialState(TutorialState.TryAgainFeedback);
+                        }
+                        
+                    }
+                    break;
+                }
+            case TutorialState.WaitingForLevelRestart:
+                {
+                    float buttonPressValue = primaryButtonPress.action.ReadValue<float>();
+                    if (buttonPressValue > 0)
+                    {
+                        gameManager.StartLevel(tutorialLevel);
+                        GotoTutorialState(TutorialState.TestDrive);
                     }
                     break;
                 }
@@ -117,7 +154,6 @@ public class Tutorial : MonoBehaviour
 
     public void GotoTutorialState(TutorialState newState)
     {
-        OnStateExited(currentState);
         currentState = newState;
         OnStateEntered(currentState);
     }
@@ -135,9 +171,14 @@ public class Tutorial : MonoBehaviour
                     IntroductionEntered();
                     break;
                 }
-            case TutorialState.Flying:
+            case TutorialState.FlyingFirstNote:
                 {
-                    FlyingEntered();
+                    FlyingFirstNoteEntered();
+                    break;
+                }
+            case TutorialState.FlyingSecondNote:
+                {
+                    FlyingSecondNoteEntered();
                     break;
                 }
             case TutorialState.Tracks:
@@ -145,29 +186,45 @@ public class Tutorial : MonoBehaviour
                     TracksEntered();
                     break;
                 }
-            case TutorialState.Keyboard:
+            case TutorialState.WaitingForKeyboardPlay:
                 {
-                    FlyingEntered();
+                    KeyboardEntered();
                     break;
                 }
-
-
-        }
-    }
-
-    private void OnStateExited(TutorialState state)
-    {
-        switch (state)
-        {
-            case TutorialState.None:
+            case TutorialState.WaitingForHintPlay:
+                {
+                    HintEntered();
+                    break;
+                }
+            case TutorialState.Experimenting:
+                {
+                    ExperimentingEntered();
+                    break;
+                }
+            case TutorialState.TrackSelection:
+                {
+                    TrackSelectionEntered();
+                    break;
+                }
+            case TutorialState.TestDrive:
+                {
+                    TestDriveEntered();
+                    break;
+                }
+            case TutorialState.SuccessFeedback:
+                {
+                    SuccessFeedbackEntered();
+                    break;
+                }
+            case TutorialState.TryAgainFeedback:
+                {
+                    TryAgainFeedbackEntered();
+                    break;
+                }
+            case TutorialState.WaitingForLevelRestart:
                 {
                     break;
                 }
-            case TutorialState.Introduction:
-                {
-                    break;
-                }
-
         }
     }
 
@@ -179,6 +236,7 @@ public class Tutorial : MonoBehaviour
 
     private IEnumerator IntroductionSection()
     {
+        DisableFlying();
         // clip 1a
         audioSource.PlayOneShot(currentClipArray[0]);
         while (audioSource.isPlaying)
@@ -187,7 +245,7 @@ public class Tutorial : MonoBehaviour
         }
 
         // show C Major Scale
-        cMajorScale = Instantiate(scalePrefab, Vector3.zero, Quaternion.identity);
+        GameObject cMajorScale = Instantiate(scalePrefab, Vector3.zero, Quaternion.identity);
         Animator animator = cMajorScale.GetComponent<Animator>();
         yield return new WaitForEndOfFrame();
 
@@ -208,76 +266,183 @@ public class Tutorial : MonoBehaviour
             yield return null;
         }
 
-        // Replace C Major scale with simple example
+        // remove the C Major scale and go to Flying state
         Destroy(cMajorScale.gameObject);
-        simpleExample = Instantiate(examplePrefab, Vector3.zero, Quaternion.identity);
-        GotoTutorialState(TutorialState.Flying);
-
+        GotoTutorialState(TutorialState.FlyingFirstNote);
     }
 
-    private void FlyingEntered()
+    private void FlyingFirstNoteEntered()
     {
+        // Show the simple example and subscribe to their hit events
+        firstExampleNote = Instantiate(firstExampleNotePrefab, Vector3.zero, Quaternion.identity);
+        Vector3 firstNotePosition = new Vector3(0, firstExampleNote.height, 15.0f);
+        firstExampleNote.transform.position = firstNotePosition;
+        firstExampleNote.OnNoteCollected += OnFirstNoteHit;
+
+        secondExampleNote = Instantiate(secondExampleNotePrefab, Vector3.zero, Quaternion.identity);
+        Vector3 secondNotePosition = new Vector3(0, secondExampleNote.height, 40.0f);
+        secondExampleNote.transform.position = secondNotePosition;
+        secondExampleNote.OnNoteCollected += OnSecondNoteHit;
+
         // clip 2
-        // subscribe OnFirstNoteHit to C3 hit
+        audioSource.PlayOneShot(currentClipArray[2]);
+
+        EnableFlying();
+
     }
 
-    private void OnFirstNoteHit()
+    private void OnFirstNoteHit(Note hitNote)
     {
-        firstNoteCollected = true;
+        GotoTutorialState(TutorialState.FlyingSecondNote);
+        
+    }
+
+    private void FlyingSecondNoteEntered()
+    {
         // play Clip 3
-        // subscribe OnSecondNoteHit to E3 hit
+        audioSource.PlayOneShot(currentClipArray[3]);
     }
 
-    private void OnSecondNoteHit()
+    private void OnSecondNoteHit(Note hitNote)
     {
-        secondNoteCollected = true;
         // play clip 4
+        audioSource.PlayOneShot(currentClipArray[4]);
+        GotoTutorialState(TutorialState.WaitingForReset);
     }
 
     private void TracksEntered()
     {
-        // play Tracks timeline
-            // play clip 5a
-            // display 3 2-note tracks, one track at a time
-            // play clip 5b
-            // play hint tones
-            // play clip 5c
-        // when timeline finished, change state to Keyboard
+        // destroy the simple example
+        Destroy(firstExampleNote.gameObject);
+        Destroy(secondExampleNote.gameObject);
+
+        StartCoroutine(TrackSection());
+            
+    }
+
+    private IEnumerator TrackSection()
+    {
+        // play clip 5a
+        audioSource.PlayOneShot(currentClipArray[5]);
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
+
+        gameManager.StartLevel(tutorialLevel);  // hint notes are not played on instantiation for tutorial level
+
+        yield return new WaitForSeconds(2.0f);
+
+        // play clip 5b
+        audioSource.PlayOneShot(currentClipArray[6]);
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
+
+        // play hint tones
+        StartCoroutine(gameManager.CurrentLevelManager.PerformTrackHint());
+        while (gameManager.CurrentLevelManager.HintIsPlaying)
+        {
+            yield return null;
+        }
+
+        // play clip 5c
+        audioSource.PlayOneShot(currentClipArray[7]);
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
+
+        GotoTutorialState(TutorialState.WaitingForKeyboardPlay);
+
     }
 
     private void KeyboardEntered()
     {
         // play clip 6
+        audioSource.PlayOneShot(currentClipArray[8]);
 
     }
 
-    private void OnKeyboardPlayed(Key key)
+    private void HintEntered()
     {
-        keyboardPlayed = true;
         // play clip 7
-        // make green buttons glow?
+        audioSource.PlayOneShot(currentClipArray[9]);
+    }
+
+    private IEnumerator MonitorHint()
+    {
+
+        // wait for hint to finish
+        while (gameManager.CurrentLevelManager.HintIsPlaying)
+        {
+            yield return null;
+
+        }
+
+        GotoTutorialState(TutorialState.Experimenting);
 
     }
 
-    private void OnHintPlayed()
+    private void ExperimentingEntered()
     {
-        hintPlayed = true;
         // play clip 8
+        audioSource.PlayOneShot(currentClipArray[10]);
+
     }
 
     private void TrackSelectionEntered()
     {
         // play Clip 9
+        audioSource.PlayOneShot(currentClipArray[11]);
     }
 
     private void TestDriveEntered()
     {
-        // all the things normally done when starting a level
-            // check 
-            // play 11a if incorrect
-        // once over
-            //gameManager.runningTutorial = false;
-            // play clip 11b
+        // play clip 10
+        if (firstAttemptAtLevel)
+        {
+            firstAttemptAtLevel = false;
+            audioSource.PlayOneShot(currentClipArray[12]);
+        }
+  
     }
+
+    private void SuccessFeedbackEntered()
+    {
+        audioSource.PlayOneShot(currentClipArray[14]);
+        // Game Manager should now be waiting for X or A to start game
+        Debug.Log("Game Manager should now be waiting for X or A to start game");
+    }
+
+    private void TryAgainFeedbackEntered()
+    {
+        StartCoroutine(TryAgainFeedbackSection());
+    }
+
+    private IEnumerator TryAgainFeedbackSection()
+    {
+        audioSource.PlayOneShot(currentClipArray[13]);
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
+
+        GotoTutorialState(TutorialState.WaitingForLevelRestart);
+    }
+
+    private void EnableFlying()
+    {
+        locomotionControls.SetActive(true);
+
+    }
+
+    private void DisableFlying()
+    {
+        locomotionControls.SetActive(false);
+
+    }
+
 
 }
