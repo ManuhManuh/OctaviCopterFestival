@@ -38,9 +38,9 @@ public class Tutorial : MonoBehaviour
     [SerializeField] float narrationPauseInterval = 0.5f;
 
     private GameManager gameManager;
-    private TutorialState currentState;
+    public TutorialState currentState;
     private GameObject locomotionControls;
-    private Key[] keys;
+    private GameObject[] keys;
     
     private bool hintStarted = false;
     private bool clipsPlaying = true;
@@ -56,7 +56,7 @@ public class Tutorial : MonoBehaviour
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
-        keys = FindObjectsOfType<Key>();
+        keys = GameObject.FindGameObjectsWithTag("Key");
         locomotionControls = GameObject.Find("Locomotion");
         currentClipArray = Localization.currentVOTable;
         uiDisplay = GameObject.FindObjectOfType<UIDisplay>();
@@ -87,10 +87,9 @@ public class Tutorial : MonoBehaviour
             case TutorialState.WaitingForKeyboardPlay:
                 {
                     bool keyPlayed = false;
-                    foreach (Key key in keys)
+                    foreach (GameObject key in keys)
                     {
-                        Debug.Log($"Checking key {key.name}");
-                        if (key.BeenPlayed)
+                        if (key.GetComponent<Key>().BeenPlayed)
                         {
                             keyPlayed = true;
                         }
@@ -457,7 +456,7 @@ public class Tutorial : MonoBehaviour
         {
             yield return null;
         }
-
+        
         GotoTutorialState(TutorialState.WaitingForLevelRestart);
     }
 

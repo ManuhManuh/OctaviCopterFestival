@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
     private GameObject noteCollector;
     private bool tutorialCompleted = false;
     private bool tutorialSuccessful = false;
+    private GameObject tutorial;
 
     private void Awake()
     {
@@ -82,8 +83,11 @@ public class GameManager : MonoBehaviour
         endingSong.gameObject.SetActive(false);
         uiDisplay = GameObject.FindObjectOfType<UIDisplay>();
         restartAllowed = true;
-        currentFeedbackText = "StartPrompt";
-        SendMessageToUI();
+        if (!runningTutorial)
+        {
+            currentFeedbackText = "StartPrompt";
+            SendMessageToUI();
+        }
         levelAttempts = 1;
         runningTutorial = false;
 
@@ -116,8 +120,25 @@ public class GameManager : MonoBehaviour
 
     public void RunTutorial()
     {
-        runningTutorial = true;
-        Instantiate(tutorialPrefab, Vector3.zero, Quaternion.identity);
+        if (runningTutorial)
+        {
+            // if tutorial is already running, destroy it
+            if (currentLevelManager != null)
+            {
+                Destroy(currentLevelManager.gameObject);
+                Destroy(tutorial.gameObject);
+                tutorialCompleted = false;
+                tutorialSuccessful = false;
+            }
+                
+        }
+        else
+        {
+            runningTutorial = true;
+        }
+
+        tutorial = Instantiate(tutorialPrefab, Vector3.zero, Quaternion.identity);
+
     }
 
     public void OnLevelCompleted(bool successful, int maxPoints)
@@ -133,7 +154,6 @@ public class GameManager : MonoBehaviour
             {
                 tutorialSuccessful = true;
                 tutorialCompleted = true;
-                Debug.Log ("Game manager initiating game");
                 InitiateGame();
 
             }
@@ -229,7 +249,6 @@ public class GameManager : MonoBehaviour
         tutorialCompleted = false;
         backgroundAsset.SetActive(false);  // will be replaced by level environment asset
 
-        restartAllowed = false;
         if (currentLevelManager != null) Destroy(currentLevelManager.gameObject);
 
         // create a new level

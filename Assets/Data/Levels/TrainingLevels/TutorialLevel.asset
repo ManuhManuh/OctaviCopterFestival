@@ -22,7 +22,7 @@ MonoBehaviour:
   winningTrack: {fileID: 11400000, guid: 20e03cb4ca81f8a418149d30a1b617fb, type: 2}
   pointValue: 0
   trackSpacing: 10
-  noteSpacing: 15
+  noteSpacing: 75
   maxHeight: 60
   trackStartDistance: 15
   clueTiming: 2
