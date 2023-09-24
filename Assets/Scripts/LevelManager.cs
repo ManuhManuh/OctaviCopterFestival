@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using UnityEngine.InputSystem;
 
 public class LevelManager : MonoBehaviour
@@ -41,14 +38,12 @@ public class LevelManager : MonoBehaviour
     private List<GameObject> trackObjects = new List<GameObject>();
     private Vector3 resetPosition;
     private bool cycleEnabled;
-    private bool checkingLevel;
 
-    private TMP_Text levelTitle;
-    private TMP_Text levelInstructions;
     private UIDisplay uiDisplay;
     private string currentFeedbackText;
     private string lastNoteHit;
     private bool hintIsPlaying = false;
+    private bool checkingLevel = false;
 
     private void Awake()
     {
@@ -59,9 +54,6 @@ public class LevelManager : MonoBehaviour
     {
         // Set the initial state and starting values of flags and indexes
         currentLevel = gameManager.CurrentLevel;
-
-        levelTitle = GameObject.Find("LevelTitle").GetComponent<TMP_Text>();
-        levelInstructions = GameObject.Find("LevelInstructions").GetComponent<TMP_Text>();
         uiDisplay = GameObject.FindObjectOfType<UIDisplay>();
 
         if (currentLevel.environmentAsset != null)
@@ -84,8 +76,6 @@ public class LevelManager : MonoBehaviour
             if (secondaryPressValue > 0 && cycleEnabled)
             {
                 cycleEnabled = false;
-                currentFeedbackText = "TrackSelect";
-                SendMessageToUI();
                 CycleThroughTracks();
             }
 
@@ -187,8 +177,14 @@ public class LevelManager : MonoBehaviour
 
         }
 
-        // Give player note clue, if this is not the tutorial level
-        if (!gameManager.runningTutorial)
+        // Give player note clue, maybe...
+        if (gameManager.runningTutorial)
+        {
+            // It is the tutorial and the hint timing is handled by the Tutorial script; go right to flying track
+            if (currentState == LevelState.LoadingLevel) GotoState(LevelState.FlyingTrack);
+            
+        }
+        else
         {
             StartCoroutine(PerformTrackHint());
         }
@@ -263,7 +259,7 @@ public class LevelManager : MonoBehaviour
         cycleEnabled = true;
         if (!gameManager.runningTutorial)
         {
-            currentFeedbackText = "FlyPrompt";
+            currentFeedbackText = "TrackSelect";
             SendMessageToUI();
         }
 

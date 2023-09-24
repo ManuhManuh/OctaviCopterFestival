@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 1699857624}
   m_Layer: 0
   m_Name: OctaviCockpit_KeyboardKey_D.001
-  m_TagString: Untagged
+  m_TagString: Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -229,8 +229,6 @@ PlayableDirector:
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
-  - key: {fileID: 645987926878115322, guid: 8e20359ade1b5974e9e1393b155770c4, type: 2}
-    value: {fileID: 0}
   - key: {fileID: -7759567968401651421, guid: e2156d2f4f98b9948a7f4fa93a9cc9f6, type: 2}
     value: {fileID: 1152863304773478442}
   m_ExposedReferences:
@@ -268,6 +266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hintMaterial: {fileID: 2100000, guid: 79ff59f08137e48568af094001f763aa, type: 2}
   originalMaterial: {fileID: 2100000, guid: 674565753313a4e5eb07a3ce0351a8c6, type: 2}
+  beenPlayed: 0
 --- !u!114 &9215164725226709597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,7 +455,7 @@ GameObject:
   - component: {fileID: 1550854054}
   m_Layer: 0
   m_Name: OctaviCockpit_KeyboardKey_A.001
-  m_TagString: Untagged
+  m_TagString: Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -701,6 +700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hintMaterial: {fileID: 2100000, guid: c5df250ef2aca4420bf718e0daa7e592, type: 2}
   originalMaterial: {fileID: 2100000, guid: 674565753313a4e5eb07a3ce0351a8c6, type: 2}
+  beenPlayed: 0
 --- !u!114 &1318341933110778682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -889,7 +889,7 @@ GameObject:
   - component: {fileID: 259672641}
   m_Layer: 0
   m_Name: OctaviCockpit_KeyboardKey_H.001
-  m_TagString: Untagged
+  m_TagString: Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1134,6 +1134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hintMaterial: {fileID: 2100000, guid: ece517410544f4239a4d9e1437bc7ec3, type: 2}
   originalMaterial: {fileID: 2100000, guid: 674565753313a4e5eb07a3ce0351a8c6, type: 2}
+  beenPlayed: 0
 --- !u!114 &224176269281627407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2850,7 +2851,7 @@ GameObject:
   - component: {fileID: 974840943}
   m_Layer: 0
   m_Name: OctaviCockpit_KeyboardKey_E.001
-  m_TagString: Untagged
+  m_TagString: Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3095,6 +3096,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hintMaterial: {fileID: 2100000, guid: f063dcaf9511142a9967082d9bd3e250, type: 2}
   originalMaterial: {fileID: 2100000, guid: 674565753313a4e5eb07a3ce0351a8c6, type: 2}
+  beenPlayed: 0
 --- !u!114 &3933377935792944636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3283,7 +3285,7 @@ GameObject:
   - component: {fileID: 1286534997}
   m_Layer: 0
   m_Name: OctaviCockpit_KeyboardKey_F.001
-  m_TagString: Untagged
+  m_TagString: Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3528,6 +3530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hintMaterial: {fileID: 2100000, guid: 807d50348fa74463e84b4c89c46c27cf, type: 2}
   originalMaterial: {fileID: 2100000, guid: 674565753313a4e5eb07a3ce0351a8c6, type: 2}
+  beenPlayed: 0
 --- !u!114 &8069425156044838660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3716,7 +3719,7 @@ GameObject:
   - component: {fileID: 137783614}
   m_Layer: 0
   m_Name: OctaviCockpit_KeyboardKey_C.001
-  m_TagString: Untagged
+  m_TagString: Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3963,6 +3966,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hintMaterial: {fileID: 2100000, guid: 3dd0586635d244e74947111e9d5ca675, type: 2}
   originalMaterial: {fileID: 2100000, guid: 674565753313a4e5eb07a3ce0351a8c6, type: 2}
+  beenPlayed: 0
 --- !u!114 &2772294467123919673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4704,7 +4708,7 @@ GameObject:
   - component: {fileID: 2047215386}
   m_Layer: 0
   m_Name: OctaviCockpit_KeyboardKey_G.001
-  m_TagString: Untagged
+  m_TagString: Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4949,6 +4953,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hintMaterial: {fileID: 2100000, guid: 0e2e8b0e5daf2443d877c301d1e78bcc, type: 2}
   originalMaterial: {fileID: 2100000, guid: 674565753313a4e5eb07a3ce0351a8c6, type: 2}
+  beenPlayed: 0
 --- !u!114 &8711518169575046827
 MonoBehaviour:
   m_ObjectHideFlags: 0
