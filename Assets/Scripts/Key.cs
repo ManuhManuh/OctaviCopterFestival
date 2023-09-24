@@ -8,11 +8,17 @@ public class Key : MonoBehaviour
     public Material originalMaterial;
     public bool BeenPlayed => beenPlayed;
 
-    private bool beenPlayed = false;
+    private GameManager gameManager;
+    [SerializeField] private bool beenPlayed = false;
 
+    private void Start()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+    }
     public void Played()
     {
-        beenPlayed = true;
+        if(gameManager.runningTutorial) beenPlayed = true;
+
     }
 
 }

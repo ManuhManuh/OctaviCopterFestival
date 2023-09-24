@@ -44,6 +44,7 @@ public class Tutorial : MonoBehaviour
     
     private bool hintStarted = false;
     private bool clipsPlaying = true;
+    private bool firstLevelAttempt = true;
 
     private AudioClip[] currentClipArray;
     private UIDisplay uiDisplay;
@@ -85,14 +86,17 @@ public class Tutorial : MonoBehaviour
 
             case TutorialState.WaitingForKeyboardPlay:
                 {
+                    bool keyPlayed = false;
                     foreach (Key key in keys)
                     {
+                        Debug.Log($"Checking key {key.name}");
                         if (key.BeenPlayed)
                         {
-                            GotoTutorialState(TutorialState.WaitingForHintPlay);
+                            keyPlayed = true;
                         }
                     }
-                        
+                    
+                    if(keyPlayed) GotoTutorialState(TutorialState.WaitingForHintPlay);
                     break;
                 }
 
@@ -307,6 +311,8 @@ public class Tutorial : MonoBehaviour
 
         EnableFlying();
 
+        yield return new WaitForSeconds(narrationPauseInterval);
+
     }
     private void OnFirstNoteHit(Note hitNote)
     {
@@ -375,7 +381,12 @@ public class Tutorial : MonoBehaviour
 
         string[] clips3 = { "10" };
         StartCoroutine(PlayAndDisplay(clips3));
+        while (clipsPlaying)
+        {
+            yield return null;
+        }
 
+        GotoTutorialState(TutorialState.WaitingForKeyboardPlay);
     }
 
     private void KeyboardEntered()
@@ -419,13 +430,21 @@ public class Tutorial : MonoBehaviour
 
     private void TestDriveEntered()
     {
-        string[] clips = { "20" };
-        StartCoroutine(PlayAndDisplay(clips));
-
+        if (firstLevelAttempt)
+        {
+            string[] clips = { "20" };
+            StartCoroutine(PlayAndDisplay(clips));
+        }
+        else
+        {
+            uiDisplay.PresentFeedback("TrackSelect");
+        }
+        
     }
 
     private void TryAgainFeedbackEntered()
     {
+        firstLevelAttempt = false;
         StartCoroutine(TryAgainFeedbackSection());
 
     }
@@ -452,6 +471,8 @@ public class Tutorial : MonoBehaviour
     private IEnumerator PlayAndDisplay(string[] clips)
     {
         clipsPlaying = true;
+
+        yield return new WaitForSeconds(narrationPauseInterval);
 
         foreach(string clip in clips)
         {

@@ -226,6 +226,7 @@ public class GameManager : MonoBehaviour
 
     public void StartLevel(Level levelToStart)
     {
+        tutorialCompleted = false;
         backgroundAsset.SetActive(false);  // will be replaced by level environment asset
 
         restartAllowed = false;

@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1152863304773478442}
   - component: {fileID: 1957813271}
   - component: {fileID: 9215164725226709597}
+  - component: {fileID: 1699857624}
   m_Layer: 0
   m_Name: OctaviCockpit_KeyboardKey_D.001
   m_TagString: Untagged
@@ -416,6 +417,24 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1699857624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152863304773478447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8848d7f1a5a9b64bb62843df21f081f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peekDuration: 1
+  peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
+  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
 --- !u!1 &2369292633948301912
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,6 +453,7 @@ GameObject:
   - component: {fileID: 2369292633948301991}
   - component: {fileID: 263077634}
   - component: {fileID: 1318341933110778682}
+  - component: {fileID: 1550854054}
   m_Layer: 0
   m_Name: OctaviCockpit_KeyboardKey_A.001
   m_TagString: Untagged
@@ -830,6 +850,24 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1550854054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2369292633948301912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8848d7f1a5a9b64bb62843df21f081f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peekDuration: 1
+  peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
+  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
 --- !u!1 &2546109231392215409
 GameObject:
   m_ObjectHideFlags: 0
@@ -848,6 +886,7 @@ GameObject:
   - component: {fileID: 2546109231392215420}
   - component: {fileID: 109153959}
   - component: {fileID: 224176269281627407}
+  - component: {fileID: 259672641}
   m_Layer: 0
   m_Name: OctaviCockpit_KeyboardKey_H.001
   m_TagString: Untagged
@@ -1244,6 +1283,24 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &259672641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2546109231392215409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8848d7f1a5a9b64bb62843df21f081f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peekDuration: 1
+  peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
+  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
 --- !u!1 &2832769404463972098
 GameObject:
   m_ObjectHideFlags: 0
@@ -1261,6 +1318,7 @@ GameObject:
   - component: {fileID: 2832769404463972105}
   - component: {fileID: 2832769404463972110}
   - component: {fileID: 7422697276922248386}
+  - component: {fileID: 704155535}
   m_Layer: 0
   m_Name: OctaviCockpit_Keyboard_blackKey_D#Eb.001
   m_TagString: Untagged
@@ -1607,6 +1665,24 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &704155535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2832769404463972098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8848d7f1a5a9b64bb62843df21f081f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peekDuration: 1
+  peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
+  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
 --- !u!1 &4092661189020154968
 GameObject:
   m_ObjectHideFlags: 0
@@ -1624,6 +1700,7 @@ GameObject:
   - component: {fileID: 4092661189020155045}
   - component: {fileID: 4092661189020154970}
   - component: {fileID: 8198136218462658224}
+  - component: {fileID: 165724210}
   m_Layer: 0
   m_Name: OctaviCockpit_Keyboard_blackKey3_A#B.001
   m_TagString: Untagged
@@ -1970,6 +2047,24 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &165724210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4092661189020154968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8848d7f1a5a9b64bb62843df21f081f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peekDuration: 1
+  peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
+  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
 --- !u!1 &4872712461268846240
 GameObject:
   m_ObjectHideFlags: 0
@@ -1987,6 +2082,7 @@ GameObject:
   - component: {fileID: 4872712461268846254}
   - component: {fileID: 4872712461268846255}
   - component: {fileID: 6779885071203022206}
+  - component: {fileID: 1406932475}
   m_Layer: 0
   m_Name: OctaviCockpit_Keyboard_blackKey_C#Db.001
   m_TagString: Untagged
@@ -2333,6 +2429,24 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1406932475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4872712461268846240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8848d7f1a5a9b64bb62843df21f081f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peekDuration: 1
+  peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
+  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
 --- !u!1 &5087982575656383146
 GameObject:
   m_ObjectHideFlags: 0
@@ -2350,6 +2464,7 @@ GameObject:
   - component: {fileID: 5087982575656383152}
   - component: {fileID: 5087982575656383153}
   - component: {fileID: 5415235076695795651}
+  - component: {fileID: 1951104876}
   m_Layer: 0
   m_Name: OctaviCockpit_Keyboard_blackKey3_F#Gb.001
   m_TagString: Untagged
@@ -2696,6 +2811,24 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1951104876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5087982575656383146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8848d7f1a5a9b64bb62843df21f081f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peekDuration: 1
+  peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
+  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
 --- !u!1 &5099700924125233749
 GameObject:
   m_ObjectHideFlags: 0
@@ -2714,6 +2847,7 @@ GameObject:
   - component: {fileID: 5099700924125233744}
   - component: {fileID: 1227022886}
   - component: {fileID: 3933377935792944636}
+  - component: {fileID: 974840943}
   m_Layer: 0
   m_Name: OctaviCockpit_KeyboardKey_E.001
   m_TagString: Untagged
@@ -3110,6 +3244,24 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &974840943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5099700924125233749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8848d7f1a5a9b64bb62843df21f081f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peekDuration: 1
+  peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
+  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
 --- !u!1 &5250236006401276991
 GameObject:
   m_ObjectHideFlags: 0
@@ -3128,6 +3280,7 @@ GameObject:
   - component: {fileID: 5250236006401276985}
   - component: {fileID: 825847432}
   - component: {fileID: 8069425156044838660}
+  - component: {fileID: 1286534997}
   m_Layer: 0
   m_Name: OctaviCockpit_KeyboardKey_F.001
   m_TagString: Untagged
@@ -3524,6 +3677,24 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1286534997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5250236006401276991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8848d7f1a5a9b64bb62843df21f081f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peekDuration: 1
+  peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
+  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
 --- !u!1 &6474932610236511603
 GameObject:
   m_ObjectHideFlags: 0
@@ -3542,6 +3713,7 @@ GameObject:
   - component: {fileID: 6474932610236511614}
   - component: {fileID: 765876020}
   - component: {fileID: 2772294467123919673}
+  - component: {fileID: 137783614}
   m_Layer: 0
   m_Name: OctaviCockpit_KeyboardKey_C.001
   m_TagString: Untagged
@@ -3940,6 +4112,24 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &137783614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6474932610236511603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8848d7f1a5a9b64bb62843df21f081f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peekDuration: 1
+  peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
+  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
 --- !u!1 &7892059080462213617
 GameObject:
   m_ObjectHideFlags: 0
@@ -3957,6 +4147,7 @@ GameObject:
   - component: {fileID: 7892059080462213618}
   - component: {fileID: 7892059080462213619}
   - component: {fileID: 251887505566244187}
+  - component: {fileID: 1384571020}
   m_Layer: 0
   m_Name: OctaviCockpit_Keyboard_blackKey3_G#Ab.001
   m_TagString: Untagged
@@ -4303,6 +4494,24 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1384571020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7892059080462213617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8848d7f1a5a9b64bb62843df21f081f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peekDuration: 1
+  peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
+  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
 --- !u!1 &8203088029247546203
 GameObject:
   m_ObjectHideFlags: 0
@@ -4315,6 +4524,7 @@ GameObject:
   - component: {fileID: 7744309363308984538}
   - component: {fileID: 1776333601528499942}
   - component: {fileID: 8642950405117911197}
+  - component: {fileID: 1226718480}
   m_Layer: 0
   m_Name: OctaviCockpit_Keyboard.003
   m_TagString: Untagged
@@ -4398,6 +4608,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colourDelay: 1
+--- !u!114 &1226718480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8203088029247546203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8848d7f1a5a9b64bb62843df21f081f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peekDuration: 1
+  peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
+  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
 --- !u!1 &8570663407390828726
 GameObject:
   m_ObjectHideFlags: 0
@@ -4473,6 +4701,7 @@ GameObject:
   - component: {fileID: 9223287227838894674}
   - component: {fileID: 131304737}
   - component: {fileID: 8711518169575046827}
+  - component: {fileID: 2047215386}
   m_Layer: 0
   m_Name: OctaviCockpit_KeyboardKey_G.001
   m_TagString: Untagged
@@ -4869,3 +5098,21 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2047215386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9223287227838894679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8848d7f1a5a9b64bb62843df21f081f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peekDuration: 1
+  peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
+  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}

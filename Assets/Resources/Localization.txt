@@ -3,8 +3,7 @@ StartPrompt	Press X or A to start	Drücke X oder A zum Starten	Presione X o A pa
 PointsPlusTotal	Correct! You have earned {0} points - your session total is {1}! Press X or A for next level	Super! Du hast {0} Punkte erzielt - Gesamtwertung Deiner Sitzung: {1}! Weiter mit X oder A!	Correcto! Tu has ganado {0} puntos - tu sesión total es  {0}! Presione X o A para el próximo nivel	(F) Correct! You have earned {0} points - your session total is {1}! Press X or A for next level
 RetryPrompt	Level failed! Press X or A to retry	Schade! Versuch es nochmal: drücke X oder A!	Lo siento! Tu nivel ha fallado! Presiona X or A para reintentar	(F) Level failed! Press X or A to retry
 GameOver	Fantastic!! You won!! Your session total was {0} points	Fantastish!! Gewonnen!! Gesamtwertung deiner Sitzung: {0} Punkte	Fantastico!! Tu Has ganado! Tu sesión total fue de {0} puntos	(F) Fantastic!! You won!! Your session total was {0} points
-TrackSelect	Pull trigger to select current track	Wähle Deinen Track mit dem Trigger	Aprieta el botón para seleccionar la pista actual	(F) Pull trigger to select current track
-Recon	Start flying recon, or hit Y or B to select track to fly	Drücke Y oder B zum Wählen deines Track. Schau' Dich gerne um!	Comienza a volar recon, o pulsa Y o B para seleccionar la pista de vuelo No dudes en echar un vistazo.	(F) Start flying recon, or hit Y or B to select track to fly
+TrackSelect	Press Y or B to select track, then start flying	Drücke Y oder B zum Wählen deines Track.	 Pulsa Y o B para seleccionar la pista de vuelo No dudes en echar un vistazo.	(F) Pull trigger to select current track
 FlyPrompt	Start flying track!	Flieg' los!	Vamo' arriba!	(F) Start flying track!
 NoteHit	You hit {0}	Du hast {0} Punkte	Te has impactado {0}	(F) You hit {0}
 ModeLabel	Mode	Modus	Mode	(F) Mode
@@ -41,7 +40,7 @@ IAALevel5Description	Listen to the tones and choose the path that matches	Hör' 
 IAALevel6Name	Level 6	Level 6	Nivel 6	(F) Level 6
 IAALevel6Description	Listen to the tones and choose the path that matches	Hör' genau hin und wähle den richtigen Track	Escucha los tonos y elige el camino que corresponda	(F) Listen to the tones and choose the path that matches
 TutorialName	Tutorial Level	Tutorial Level	Nivel Tutorial	(F) Tutorial Level
-TutorialDescription	Practice level to learn how to play	For Sonja to fill in!	Nivel de práctica para apreneder a jugar	(F) Practice level to learn how to play
+TutorialInstructions	Follow directions to learn how to play	(G)TutorialInstructions	(S) TutorialInstructions	(F) TutorialInstructions
 TutorialClip00	Welcome to the OctaviCopter!  You are about to embark on a journey where virtual reality meets musical exploration!	German version of clip 01	Spanish version of clip 01	French version of clip 01
 TutorialClip01	We will begin with an introduction to how the OctaviCopter works, and what you will be expected to do with it.	German version of clip 02	Spanish version of clip 02	French version of clip 02
 TutorialClip02	What you see in front of you are coloured spheres that represent the notes of the C Major scale.	German version of clip 03	Spanish version of clip 03	French version of clip 03
