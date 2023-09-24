@@ -22,7 +22,6 @@ public static class Localization
     public static Dictionary<string, string> currentLocalizationTable => localizationTable[currentLocale];
     public static AudioClip[] currentVOTable => localizedTutorialVOTable[currentLocale];
 
-    //Constructor - will happen when class is instantiated
     static Localization()
     {
         Load();
@@ -30,10 +29,9 @@ public static class Localization
 
     private static void Load()
     {
-        // load the text asset
-        var source = Resources.Load<TextAsset>("Localization");
+        var source = Resources.Load<TextAsset>("Localization");     // tab delimted text file
         var lines = source.text.Split('\n');
-        var header = lines[0].Split(';');
+        var header = lines[0].Split((char)9);
 
         var localeOrder = new List<Locale>(header.Length - 1);
 
@@ -49,7 +47,7 @@ public static class Localization
 
         for(int index = 1;index < lines.Length - 1; index++)
         {
-            var entry = lines[index].Split(';');
+            var entry = lines[index].Split((char)9);
             var key = entry[0];
 
             for (int i = 0; i < localeOrder.Count; i++)

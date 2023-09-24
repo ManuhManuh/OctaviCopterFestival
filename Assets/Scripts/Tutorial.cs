@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,14 +35,19 @@ public class Tutorial : MonoBehaviour
     [SerializeField] Note secondExampleNotePrefab;
     [SerializeField] Level tutorialLevel;
 
+    [SerializeField] float narrationPauseInterval = 0.5f;
+
     private GameManager gameManager;
     private TutorialState currentState;
     private GameObject locomotionControls;
     private Key[] keys;
-
+    
     private bool hintStarted = false;
-    private bool firstAttemptAtLevel = true;
+    private bool clipsPlaying = true;
+
     private AudioClip[] currentClipArray;
+    private UIDisplay uiDisplay;
+
     private Note firstExampleNote;
     private Note secondExampleNote;
 
@@ -52,6 +58,7 @@ public class Tutorial : MonoBehaviour
         keys = FindObjectsOfType<Key>();
         locomotionControls = GameObject.Find("Locomotion");
         currentClipArray = Localization.currentVOTable;
+        uiDisplay = GameObject.FindObjectOfType<UIDisplay>();
 
         currentState = TutorialState.None;
         GotoTutorialState(TutorialState.Introduction);
@@ -237,9 +244,10 @@ public class Tutorial : MonoBehaviour
     private IEnumerator IntroductionSection()
     {
         DisableFlying();
-        // clip 1a
-        audioSource.PlayOneShot(currentClipArray[0]);
-        while (audioSource.isPlaying)
+
+        string[] clips1 = { "00", "01" };
+        StartCoroutine(PlayAndDisplay(clips1));
+        while (clipsPlaying)
         {
             yield return null;
         }
@@ -258,20 +266,26 @@ public class Tutorial : MonoBehaviour
             NTime = animatorStateInfo.normalizedTime;
             yield return null;
         }
+        //
 
-        // clip 1b
-        audioSource.PlayOneShot(currentClipArray[1]);
-        while (audioSource.isPlaying)
+        string[] clips2 = { "02", "03"};
+        StartCoroutine(PlayAndDisplay(clips2));
+        while (clipsPlaying)
         {
             yield return null;
         }
 
-        // remove the C Major scale and go to Flying state
+        // remove the C Major scale and go to FlyingFirstNote state
         Destroy(cMajorScale.gameObject);
         GotoTutorialState(TutorialState.FlyingFirstNote);
     }
 
     private void FlyingFirstNoteEntered()
+    {
+        StartCoroutine(FlyingFirstNoteSection());
+    }
+
+    private IEnumerator FlyingFirstNoteSection()
     {
         // Show the simple example and subscribe to their hit events
         firstExampleNote = Instantiate(firstExampleNotePrefab, Vector3.zero, Quaternion.identity);
@@ -284,13 +298,16 @@ public class Tutorial : MonoBehaviour
         secondExampleNote.transform.position = secondNotePosition;
         secondExampleNote.OnNoteCollected += OnSecondNoteHit;
 
-        // clip 2
-        audioSource.PlayOneShot(currentClipArray[2]);
+        string[] clips = { "04", "05" };
+        StartCoroutine(PlayAndDisplay(clips));
+        while (clipsPlaying)
+        {
+            yield return null;
+        }
 
         EnableFlying();
 
     }
-
     private void OnFirstNoteHit(Note hitNote)
     {
         GotoTutorialState(TutorialState.FlyingSecondNote);
@@ -299,14 +316,25 @@ public class Tutorial : MonoBehaviour
 
     private void FlyingSecondNoteEntered()
     {
-        // play Clip 3
-        audioSource.PlayOneShot(currentClipArray[3]);
+        string[] clips = { "06" };
+        StartCoroutine(PlayAndDisplay(clips));
+
     }
 
     private void OnSecondNoteHit(Note hitNote)
     {
-        // play clip 4
-        audioSource.PlayOneShot(currentClipArray[4]);
+        StartCoroutine(FlyingSecondNoteSection());
+    }
+
+    private IEnumerator FlyingSecondNoteSection()
+    {
+        string[] clips = { "07" };
+        StartCoroutine(PlayAndDisplay(clips));
+        while (clipsPlaying)
+        {
+            yield return null;
+        }
+
         GotoTutorialState(TutorialState.WaitingForReset);
     }
 
@@ -322,20 +350,18 @@ public class Tutorial : MonoBehaviour
 
     private IEnumerator TrackSection()
     {
-        // play clip 5a
-        audioSource.PlayOneShot(currentClipArray[5]);
-        while (audioSource.isPlaying)
+        string[] clips1 = { "08" };
+        StartCoroutine(PlayAndDisplay(clips1));
+        while (clipsPlaying)
         {
             yield return null;
         }
 
         gameManager.StartLevel(tutorialLevel);  // hint notes are not played on instantiation for tutorial level
 
-        yield return new WaitForSeconds(2.0f);
-
-        // play clip 5b
-        audioSource.PlayOneShot(currentClipArray[6]);
-        while (audioSource.isPlaying)
+        string[] clips2 = { "09" };
+        StartCoroutine(PlayAndDisplay(clips2));
+        while (clipsPlaying)
         {
             yield return null;
         }
@@ -347,33 +373,26 @@ public class Tutorial : MonoBehaviour
             yield return null;
         }
 
-        // play clip 5c
-        audioSource.PlayOneShot(currentClipArray[7]);
-        while (audioSource.isPlaying)
-        {
-            yield return null;
-        }
-
-        GotoTutorialState(TutorialState.WaitingForKeyboardPlay);
+        string[] clips3 = { "10" };
+        StartCoroutine(PlayAndDisplay(clips3));
 
     }
 
     private void KeyboardEntered()
     {
-        // play clip 6
-        audioSource.PlayOneShot(currentClipArray[8]);
+        string[] clips = { "11", "12" };
+        StartCoroutine(PlayAndDisplay(clips));
 
     }
 
     private void HintEntered()
     {
-        // play clip 7
-        audioSource.PlayOneShot(currentClipArray[9]);
+        string[] clips = { "13", "14", "15" };
+        StartCoroutine(PlayAndDisplay(clips));
     }
 
     private IEnumerator MonitorHint()
     {
-
         // wait for hint to finish
         while (gameManager.CurrentLevelManager.HintIsPlaying)
         {
@@ -387,49 +406,74 @@ public class Tutorial : MonoBehaviour
 
     private void ExperimentingEntered()
     {
-        // play clip 8
-        audioSource.PlayOneShot(currentClipArray[10]);
+        string[] clips = { "16", "17" };
+        StartCoroutine(PlayAndDisplay(clips));
 
     }
 
     private void TrackSelectionEntered()
     {
-        // play Clip 9
-        audioSource.PlayOneShot(currentClipArray[11]);
+        string[] clips = { "18", "19" };
+        StartCoroutine(PlayAndDisplay(clips));
     }
 
     private void TestDriveEntered()
     {
-        // play clip 10
-        if (firstAttemptAtLevel)
-        {
-            firstAttemptAtLevel = false;
-            audioSource.PlayOneShot(currentClipArray[12]);
-        }
-  
-    }
+        string[] clips = { "20" };
+        StartCoroutine(PlayAndDisplay(clips));
 
-    private void SuccessFeedbackEntered()
-    {
-        audioSource.PlayOneShot(currentClipArray[14]);
-        // Game Manager should now be waiting for X or A to start game
-        Debug.Log("Game Manager should now be waiting for X or A to start game");
     }
 
     private void TryAgainFeedbackEntered()
     {
         StartCoroutine(TryAgainFeedbackSection());
+
     }
 
     private IEnumerator TryAgainFeedbackSection()
     {
-        audioSource.PlayOneShot(currentClipArray[13]);
-        while (audioSource.isPlaying)
+        string[] clips = { "21" };
+        StartCoroutine(PlayAndDisplay(clips));
+        while (clipsPlaying)
         {
             yield return null;
         }
 
         GotoTutorialState(TutorialState.WaitingForLevelRestart);
+    }
+
+    private void SuccessFeedbackEntered()
+    {
+        string[] clips = { "22","23", "24", "25"};
+        StartCoroutine(PlayAndDisplay(clips));
+
+    }
+
+    private IEnumerator PlayAndDisplay(string[] clips)
+    {
+        clipsPlaying = true;
+
+        foreach(string clip in clips)
+        {
+            int clipNumber = Int32.Parse(clip);
+
+            // update UI with text
+            uiDisplay.PresentFeedback("TutorialClip"+clip);
+            yield return new WaitForEndOfFrame();
+
+            // play audio clip
+            audioSource.PlayOneShot(currentClipArray[clipNumber]);
+            while (audioSource.isPlaying)
+            {
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(narrationPauseInterval);
+
+        }
+
+        clipsPlaying = false;
+
     }
 
     private void EnableFlying()
