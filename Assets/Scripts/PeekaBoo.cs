@@ -7,8 +7,8 @@ public class PeekaBoo : MonoBehaviour
 {
     [SerializeField] private float peekDuration = 1.0f;
     [SerializeField] private Material peekaBooMaterial;
-    [SerializeField] private InputActionReference leftGripReference;
-    [SerializeField] private InputActionReference rightGripReference;
+    [SerializeField] private InputActionReference leftTriggerReference;
+    [SerializeField] private InputActionReference rightTriggerReference;
 
     private GameManager gameManager;
     private Material originalMaterial;
@@ -25,18 +25,18 @@ public class PeekaBoo : MonoBehaviour
 
     private void Update()
     {
-        if(gameManager.CurrentLevelManager != null)
+        if(gameManager.CurrentLevelManager != null || gameManager.runningTutorial)
         {
-            float leftGripValue = leftGripReference.action.ReadValue<float>();
-            float rightGripValue = rightGripReference.action.ReadValue<float>();
+            float leftTriggerValue = leftTriggerReference.action.ReadValue<float>();
+            float rightTriggerValue = rightTriggerReference.action.ReadValue<float>();
 
-            if (leftGripValue > 0.1)
+            if (leftTriggerValue > 0.1)
             {
-                gripValue = leftGripValue;
+                gripValue = leftTriggerValue;
             }
-            else if (rightGripValue > 0.1)
+            else if (rightTriggerValue > 0.1)
             {
-                gripValue = rightGripValue;
+                gripValue = rightTriggerValue;
             }
             else
             {

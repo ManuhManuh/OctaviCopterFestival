@@ -22,7 +22,7 @@ public class LevelManager : MonoBehaviour
     public GameObject EnvironmentAsset => environmentAsset;
 
     [SerializeField] private InputActionReference cycleTrackActionReference;
-    [SerializeField] private InputActionReference startFlyingActionReference;
+    [SerializeField] private InputActionReference resetPositionActionReference;
 
     private GameManager gameManager;
     private LevelState currentState;
@@ -79,10 +79,11 @@ public class LevelManager : MonoBehaviour
                 CycleThroughTracks();
             }
 
-            float primaryPressValue = startFlyingActionReference.action.ReadValue<float>();
+            float primaryPressValue = resetPositionActionReference.action.ReadValue<float>();
             if (primaryPressValue > 0)
             {
                 gameManager.player.transform.position = resetPosition;
+                notesCollected = 0;
             }
 
         }

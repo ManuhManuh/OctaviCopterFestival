@@ -2076,7 +2076,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "StartFlying",
+                    "name": "ResetPosition",
                     "type": "Button",
                     "id": "e531e549-df7b-4fca-8f78-e4cd0c9effbd",
                     "expectedControlType": "Button",
@@ -2111,11 +2111,22 @@
                 {
                     "name": "",
                     "id": "8a7086a4-a90c-4088-b0a1-ba30e3a575ad",
-                    "path": "<OculusTouchController>/triggerPressed",
+                    "path": "<OculusTouchController>{RightHand}/primaryButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "StartFlying",
+                    "action": "ResetPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "34ac5168-12b4-42bc-9847-2c22685e835a",
+                    "path": "<OculusTouchController>{LeftHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ResetPosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

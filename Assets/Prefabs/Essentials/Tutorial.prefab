@@ -55,8 +55,11 @@ MonoBehaviour:
     type: 3}
   secondExampleNotePrefab: {fileID: 6767525875305163089, guid: 195505791803fda4ca4e5a7ba9263cdc,
     type: 3}
+  thirdExampleNotePrefab: {fileID: 268683940543836428, guid: 3a861c4342fe8ee43abb693546fba3fd,
+    type: 3}
   tutorialLevel: {fileID: 11400000, guid: 412ba5f51f05c9348b4f09bdac627413, type: 2}
   narrationPauseInterval: 0.75
+  currentState: 0
 --- !u!82 &3571222972533778875
 AudioSource:
   m_ObjectHideFlags: 0

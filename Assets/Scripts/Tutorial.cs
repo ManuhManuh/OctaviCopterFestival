@@ -13,6 +13,7 @@ public class Tutorial : MonoBehaviour
         Introduction,
         FlyingFirstNote,
         FlyingSecondNote,
+        FlyingThirdNote,
         WaitingForReset,
         Tracks,
         WaitingForKeyboardPlay,
@@ -33,6 +34,7 @@ public class Tutorial : MonoBehaviour
     [SerializeField] GameObject scalePrefab;
     [SerializeField] Note firstExampleNotePrefab;
     [SerializeField] Note secondExampleNotePrefab;
+    [SerializeField] Note thirdExampleNotePrefab;
     [SerializeField] Level tutorialLevel;
 
     [SerializeField] float narrationPauseInterval = 0.5f;
@@ -51,6 +53,7 @@ public class Tutorial : MonoBehaviour
 
     private Note firstExampleNote;
     private Note secondExampleNote;
+    private Note thirdExampleNote;
 
     // Start is called before the first frame update
     void Start()
@@ -65,16 +68,16 @@ public class Tutorial : MonoBehaviour
         GotoTutorialState(TutorialState.Introduction);
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        // pieces triggered by controller input
+        // state changes triggered by controller input
         switch (currentState)
         {
             case TutorialState.WaitingForReset:
             {
                 float buttonPressValue = secondaryButtonPress.action.ReadValue<float>();
-                if (buttonPressValue > 0)
+                if (buttonPressValue > 0 && !clipsPlaying)
                 {
                     gameManager.player.transform.position = gameManager.PlayerStartPosition;
                     DisableFlying();
@@ -191,6 +194,16 @@ public class Tutorial : MonoBehaviour
                     FlyingSecondNoteEntered();
                     break;
                 }
+            case TutorialState.FlyingThirdNote:
+                {
+                    FlyingThirdNoteEntered();
+                    break;
+                }
+            case TutorialState.WaitingForReset:
+                {
+                    WaitingForResetEntered();
+                    break;
+                }
             case TutorialState.Tracks:
                 {
                     TracksEntered();
@@ -260,17 +273,18 @@ public class Tutorial : MonoBehaviour
         Animator animator = cMajorScale.GetComponent<Animator>();
         yield return new WaitForEndOfFrame();
 
-        float NTime = 0;
+        float nTime = 0;
         AnimatorStateInfo animatorStateInfo;
 
-        while (NTime < 1.0f)
+        // wait for animation to complete
+        while (nTime < 1.0f)
         {
             animatorStateInfo = animator.GetCurrentAnimatorStateInfo(0);
-            NTime = animatorStateInfo.normalizedTime;
+            nTime = animatorStateInfo.normalizedTime;
             yield return null;
         }
-        //
 
+        
         string[] clips2 = { "02", "03"};
         StartCoroutine(PlayAndDisplay(clips2));
         while (clipsPlaying)
@@ -321,26 +335,82 @@ public class Tutorial : MonoBehaviour
 
     private void FlyingSecondNoteEntered()
     {
-        string[] clips = { "06" };
-        StartCoroutine(PlayAndDisplay(clips));
-
-    }
-
-    private void OnSecondNoteHit(Note hitNote)
-    {
         StartCoroutine(FlyingSecondNoteSection());
+
     }
 
     private IEnumerator FlyingSecondNoteSection()
     {
-        string[] clips = { "07" };
+        // allow player to move beyond note, but not far enough to fly through the next note
+        yield return new WaitForSeconds(0.5f);
+        DisableFlying();
+
+        string[] clips = { "06" };
         StartCoroutine(PlayAndDisplay(clips));
         while (clipsPlaying)
         {
             yield return null;
         }
 
+        EnableFlying();
+
+    }
+
+    private void OnSecondNoteHit(Note hitNote)
+    {
+        GotoTutorialState(TutorialState.FlyingThirdNote);
+    }
+
+    private void FlyingThirdNoteEntered()
+    {
+        StartCoroutine(FlyingThirdNoteSection());
+        
+
+    }
+
+    private IEnumerator FlyingThirdNoteSection()
+    {
+        // allow player to move beyond note, but not far enough to fly through the next note
+        yield return new WaitForSeconds(0.5f);
+        DisableFlying();
+
+        thirdExampleNote = Instantiate(thirdExampleNotePrefab, Vector3.zero, Quaternion.identity);
+        Vector3 thirdNotePosition = new Vector3(0, thirdExampleNote.height, 120.0f);
+        thirdExampleNote.transform.position = thirdNotePosition;
+        thirdExampleNote.OnNoteCollected += OnThirdNoteHit;
+
+        string[] clips = { "07", "08", "09", "10" };
+        StartCoroutine(PlayAndDisplay(clips));
+        while (clipsPlaying)
+        {
+            yield return null;
+        }
+
+        EnableFlying();
+
+    }
+
+    private void OnThirdNoteHit(Note noteHit)
+    {
+
         GotoTutorialState(TutorialState.WaitingForReset);
+
+    }
+
+    private void WaitingForResetEntered()
+    {
+        StartCoroutine(WaitingForResetSection());
+    }
+
+    private IEnumerator WaitingForResetSection()
+    {
+        string[] clips = { "11" };
+        StartCoroutine(PlayAndDisplay(clips));
+        while (clipsPlaying)
+        {
+            yield return null;
+        }
+
     }
 
     private void TracksEntered()
@@ -348,6 +418,7 @@ public class Tutorial : MonoBehaviour
         // destroy the simple example
         Destroy(firstExampleNote.gameObject);
         Destroy(secondExampleNote.gameObject);
+        Destroy(thirdExampleNote.gameObject);
 
         StartCoroutine(TrackSection());
             
@@ -355,7 +426,7 @@ public class Tutorial : MonoBehaviour
 
     private IEnumerator TrackSection()
     {
-        string[] clips1 = { "08" };
+        string[] clips1 = { "12" };
         StartCoroutine(PlayAndDisplay(clips1));
         while (clipsPlaying)
         {
@@ -364,7 +435,7 @@ public class Tutorial : MonoBehaviour
 
         gameManager.StartLevel(tutorialLevel);  // hint notes are not played on instantiation for tutorial level
 
-        string[] clips2 = { "09" };
+        string[] clips2 = { "13" };
         StartCoroutine(PlayAndDisplay(clips2));
         while (clipsPlaying)
         {
@@ -378,7 +449,7 @@ public class Tutorial : MonoBehaviour
             yield return null;
         }
 
-        string[] clips3 = { "10" };
+        string[] clips3 = { "14" };
         StartCoroutine(PlayAndDisplay(clips3));
         while (clipsPlaying)
         {
@@ -390,14 +461,14 @@ public class Tutorial : MonoBehaviour
 
     private void KeyboardEntered()
     {
-        string[] clips = { "11", "12" };
+        string[] clips = { "15", "16" };
         StartCoroutine(PlayAndDisplay(clips));
 
     }
 
     private void HintEntered()
     {
-        string[] clips = { "13", "14", "15" };
+        string[] clips = { "17", "18", "19" };
         StartCoroutine(PlayAndDisplay(clips));
     }
 
@@ -416,14 +487,14 @@ public class Tutorial : MonoBehaviour
 
     private void ExperimentingEntered()
     {
-        string[] clips = { "16", "17" };
+        string[] clips = { "20", "21" };
         StartCoroutine(PlayAndDisplay(clips));
 
     }
 
     private void TrackSelectionEntered()
     {
-        string[] clips = { "18", "19" };
+        string[] clips = { "22", "23" };
         StartCoroutine(PlayAndDisplay(clips));
     }
 
@@ -431,7 +502,7 @@ public class Tutorial : MonoBehaviour
     {
         if (firstLevelAttempt)
         {
-            string[] clips = { "20" };
+            string[] clips = { "24" };
             StartCoroutine(PlayAndDisplay(clips));
         }
         else
@@ -450,7 +521,7 @@ public class Tutorial : MonoBehaviour
 
     private IEnumerator TryAgainFeedbackSection()
     {
-        string[] clips = { "21" };
+        string[] clips = { "25" };
         StartCoroutine(PlayAndDisplay(clips));
         while (clipsPlaying)
         {
@@ -462,13 +533,14 @@ public class Tutorial : MonoBehaviour
 
     private void SuccessFeedbackEntered()
     {
-        string[] clips = { "22","23", "24", "25"};
+        string[] clips = { "26","27", "28", "29"};
         StartCoroutine(PlayAndDisplay(clips));
 
     }
 
     private IEnumerator PlayAndDisplay(string[] clips)
     {
+        
         clipsPlaying = true;
 
         yield return new WaitForSeconds(narrationPauseInterval);
@@ -476,7 +548,6 @@ public class Tutorial : MonoBehaviour
         foreach(string clip in clips)
         {
             int clipNumber = Int32.Parse(clip);
-
             // update UI with text
             uiDisplay.PresentFeedback("TutorialClip"+clip);
             yield return new WaitForEndOfFrame();
