@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - TargetSphere
+  - Key
   layers:
   - Default
   - TransparentFX

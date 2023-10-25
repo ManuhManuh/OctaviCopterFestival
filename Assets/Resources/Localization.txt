@@ -1,0 +1,73 @@
+	en	de	es	fr
+StartPrompt	Press X or A to start	Drücke X oder A zum Starten	Presione X o A para comenzar	(F) Press X or A to start
+PointsPlusTotal	Correct! You have earned {0} points - your session total is {1}! Press X or A for next level	Super! Du hast {0} Punkte erzielt - Gesamtwertung Deiner Sitzung: {1}! Weiter mit X oder A!	Correcto! Tu has ganado {0} puntos - tu sesión total es  {0}! Presione X o A para el próximo nivel	(F) Correct! You have earned {0} points - your session total is {1}! Press X or A for next level
+RetryPrompt	Level failed! Press X or A to retry	Schade! Versuch es nochmal: drücke X oder A!	Lo siento! Tu nivel ha fallado! Presiona X or A para reintentar	(F) Level failed! Press X or A to retry
+GameOver	Fantastic!! You won!! Your session total was {0} points	Fantastish!! Gewonnen!! Gesamtwertung deiner Sitzung: {0} Punkte	Fantastico!! Tu Has ganado! Tu sesión total fue de {0} puntos	(F) Fantastic!! You won!! Your session total was {0} points
+TrackSelect	Press Y or B to select track, then start flying	Drücke Y oder B zum Wählen deines Track.	 Pulsa Y o B para seleccionar la pista de vuelo No dudes en echar un vistazo.	(F) Pull trigger to select current track
+FlyPrompt	Start flying track!	Flieg' los!	Vamo' arriba!	(F) Start flying track!
+NoteHit	You hit {0}	Du hast {0} Punkte	Te has impactado {0}	(F) You hit {0}
+ModeLabel	Mode	Modus	Mode	(F) Mode
+ModeBeginner	Beginner	Anfänger	Principiante	(F) Beginner
+ModeAdvanced	Advanced	Fortgeschritten	Advanzado	(F) Advanced
+SpeedLable	Speed	Geschwindigkeit	Velocidad	(F) Speed
+LanguageLabel	Language	Sprache	Lenguaje	(F) Language
+LanguageSelected	English	Deutsch	Español	Francais
+InstructionButton	Instructions	Anleitung	Instrucciones	(F) Instructions
+RestartButton	Restart	Neustart	Reanudar	(F) Restart
+InstructionStick	Move either joystick to fly forward/back	Joystick  vor/zurück um forwärts/rückwärts zu fliegen	Mueva el  joystick para volar hacia adelante o atrás	(F) Move either joystick to fly forward/back
+InstructionHead	Steer with your head	Lenke mit Deinem Kopf	Mueve la cabeza hacia arriba o abajopara volar más alto o mas bajo	(F) Move head up/down to fly higher/lower
+InstructionControls	Pull either trigger for Stealth Mode; press X or A to reset level	{Needs German translation - line changed}	{Needs Spanish translation - line changed}	(F) Pull either trigger for Stealth Mode; press X or A to reset level
+InstructionPoints	Full points on first try, half points on second try	1. Versuch: volle Punktzahl - 2. Versuch: halbe Punktzahl	Todos los puntos en la primer prueba, medio puntos en el segundo intento	(F) Full points on first try, half points on second try
+InstructionButtons	Green buttons replay the hint	Die grünen Knöpfe wiederholen die zu treffenden Töne	Botones verdesc repiten las notas a tocar	(F) Red/Green buttons replay the hint
+InstructionHamburger	(  <sprite name="FlatHamburger" ) start/pause/resume game	(  <sprite name="FlatHamburger" ) Start/Pause	(  <sprite name="FlatHamburger" ) comenzar/pausar/resumir juego	(F) (  <sprite name="FlatHamburger" ) start/pause/resume game
+BackButton	Back	Zurück	Regresar	(F) Back
+Level0Name	Testing	Test	Probar	(F) Testing
+Level0Instructions	Wing it!	Du schafffst das!	Tu puedes!	(F) Wing it!
+Level1Name	Basic 5th	Grund-Quinte	Quinto básico	(F) Basic 5th
+Level1Instructions	Listen to the tones and choose the path that matches	Hör' genau hin und wähle den richtigen Track	Escucha los tonos y elige el camino que corresponda	(F) Listen to the tones and choose the path that matches
+Level2Name	C Chord	C Akkord	Acorde	(F) C Chord
+Level2Instructions	Listen to the tones and choose the path that matches	Hör' genau hin und wähle den richtigen Track	Escucha los tonos y elige el camino que corresponda	(F) Listen to the tones and choose the path that matches
+IAALevel1Name	Level 1	Level 1	Nivel 1	(F) Level 1
+IAALevel1Description	Listen to the tones and choose the path that matches	Hör' genau hin und wähle den richtigen Track	Escucha los tonos y elige el camino que corresponda	(F) Listen to the tones and choose the path that matches
+IAALevel2Name	Level 2	Level 2	Nivel 2	(F) Level 2
+IAALevel2Description	Listen to the tones and choose the path that matches	Hör' genau hin und wähle den richtigen Track	Escucha los tonos y elige el camino que corresponda	(F) Listen to the tones and choose the path that matches
+IAALevel3Name	Level 3	Level 3	Nivel 3	(F) Level 3
+IAALevel3Description	Listen to the tones and choose the path that matches	Hör' genau hin und wähle den richtigen Track	Escucha los tonos y elige el camino que corresponda	(F) Listen to the tones and choose the path that matches
+IAALevel4Name	Level 4	Level 4	Nivel 4	(F) Level 4
+IAALevel4Description	Listen to the tones and choose the path that matches	Hör' genau hin und wähle den richtigen Track	Escucha los tonos y elige el camino que corresponda	(F) Listen to the tones and choose the path that matches
+IAALevel5Name	Level 5	Level 5	Nivel 5	(F) Level 5
+IAALevel5Description	Listen to the tones and choose the path that matches	Hör' genau hin und wähle den richtigen Track	Escucha los tonos y elige el camino que corresponda	(F) Listen to the tones and choose the path that matches
+IAALevel6Name	Level 6	Level 6	Nivel 6	(F) Level 6
+IAALevel6Description	Listen to the tones and choose the path that matches	Hör' genau hin und wähle den richtigen Track	Escucha los tonos y elige el camino que corresponda	(F) Listen to the tones and choose the path that matches
+TutorialName	Tutorial Level	Tutorial Level	Nivel Tutorial	(F) Tutorial Level
+TutorialInstructions	Follow directions to learn how to play	(G)TutorialInstructions	(S) TutorialInstructions	(F) TutorialInstructions
+TutorialClip00	Welcome inside the OctaviCopter!  You are about to embark on a journey where virtual reality meets musical exploration!	Willkommen im OctaviCopter! Dein Hörtrainer in Virtual Reality!	Spanish version of clip 00	French version of clip 00
+TutorialClip01	Get ready for your VR pitch training!  In this tutorial, you will learn how the OctaviCopter works so you will be able to tackle the tasks ahead.	Erfahre zunächst, wie der OctaviCopter funktioniert, damit du die folgenden Aufgaben erfolgreich meistern kannst! Mache Dich bereit!	Spanish version of clip 01	French version of clip 01
+TutorialClip02	What you see in front of you are coloured spheres that represent the notes of the C Major scale.	Vor dir siehst du bunte Kugeln. Jede von ihnen repräsentiert eine Note der Tonleiter C-Dur.	Spanish version of clip 02	French version of clip 02
+TutorialClip03	The pitch is indicated by both the colour of the sphere and the height at which it is placed.	Jeder Ton ist jeweils seiner Farbe und seiner Höhe zugeordnet.	Spanish version of clip 03	French version of clip 03
+TutorialClip04	You will use the OctaviCopter to collect notes by flying through them.  To fly, push either one of the joysticks forward.  You steer with your head by facing your target.	Fliege mit dem OctaviCopter durch die Noten hindurch, um die Töne zu treffen und zu sammeln. Um vorwärts zu fliegen, bewege den Joystick mit deinem Daumen nach vorne. Du versierst Dein Ziel an, indem Du mit deinem Kopf steuerst.	Spanish version of clip 04	French version of clip 04
+TutorialClip05	Try flying through the red one now.	Schaffst du es, durch die rote Note? Probiere es mal!	Spanish version of clip 05	French version of clip 05
+TutorialClip06	Good! Now, fly through the yellow one.	Mega! Nun, fliege durch die gelbe Note hindurch!	Spanish version of clip 06	French version of clip 06
+TutorialClip07	Excellent!  Notice how the Rainbow Scale-O-Meter in front of the keyboard has a yellow border now.  This will change to show you what pitch you are flying at.	Genial! Ist dir aufgefallen, dass sich der Rainbow Scale-o-Meter verändert hat? Der Rand um das Notenblatt vor dir ist nun gelb – genauso wie die gelbe Note, durch die Du gerade geflogen bist. Der Rainbow Scale-o-Meter zeigt dir die Höhe an, auf der Du Dich gerade befindest.	Spanish version of clip 07	French version of clip 07
+TutorialClip08	Not all intervals go from low to high; sometimes you will be flying from a higher note to a lower note.	Vorsicht! Nicht alle Intervalle verlaufen von unten nach oben. Manchmal musst Du von hoch oben tief hinunter fliegen, um die Note rechtzeitig zu erreichen.	Spanish version of clip 08	French version of clip 08
+TutorialClip09	To aim at notes that may be hidden by the body of the OctaviCopter you can use Stealth Mode; press either of the triggers to make the OctaviCopter transparent.	Für den Fall, dass der Sprung zu hoch sein sollte und die Note nicht sichtbar ist, benutze den Durchblick Trick und drücke den Trigger!	Spanish version of clip 09	French version of clip 09
+TutorialClip10	Try it now to aim at the red note below.	Los geht’s! Versuche durch die rote Note unter dir durchzufliegen!	Spanish version of clip 10	French version of clip 10
+TutorialClip11	Excellent! Now, press the Y or the B button to return to the start.	Super! Nun drücke einen der oberen runden Knöpfe (Y oder B), um an den Start zurückzukehren. 	Spanish version of clip 11	French version of clip 11
+TutorialClip12	For each level, you will be presented with several sets of notes arranged in Tracks.	In jedem Level werden dir mehrere Noten gezeigt, angeordnet in einer Spur. 	Spanish version of clip 12	French version of clip 12
+TutorialClip13	One of these Tracks will match the notes that will be played at the beginning of the level, like this:	Einer dieser Spuren enthält die Noten, welche zu Beginn des Levels zu hören sind. Hörst du sie? 	Spanish version of clip 13	French version of clip 13
+TutorialClip14	Your job will be to select the correct Track.	Deine Aufgabe ist es, die richtige Spur zu finden.  	Spanish version of clip 14	French version of clip 14
+TutorialClip15	While you are still learning which colours go with which sounds, you will be able to use the keyboard in front of you to help.	Beim Üben kannst du die Tastatur vor dir verwenden. Du lernst, welche Farbe zu welchem Ton gehört.	Spanish version of clip 15	French version of clip 15
+TutorialClip16	Try playing any one of the keys now.	Schau und drücke eine der Tasten!	Spanish version of clip 16	French version of clip 16
+TutorialClip17	Each white key will display its matching colour when you play it.  This way, you can figure out which colours you need to collect.	Jede weiße Taste erleuchtet in der Farbe der jeweiligen Note. So kannst du herausfinden, welche Farbe zu welchem Ton gehört und das hilft dir, die richtige Spur zu finden.	Spanish version of clip 17	French version of clip 17
+TutorialClip18	If you can’t remember which tones were played, you can push one of the green buttons beside the keyboard to have them repeated.	Möchtest du die Töne nochmal hören? Drücke einfach eine der grünen Knöpfe (links oder rechts), um die Töne erneut zu hören.	Spanish version of clip 18	French version of clip 18
+TutorialClip19	Try it now.	Probiere es. Hörst du die Töne?	Spanish version of clip 19	French version of clip 19
+TutorialClip20	Now, see if you can find the keys that match those tones on the keyboard.  Go back and forth between the hint and the keyboard if you need to.	Findest du die gehörten Töne auf der Tastatur wieder? Höre und spiele, bis du sie findest!	Spanish version of clip 20	French version of clip 20
+TutorialClip21	Press A or X when you have figured out which note colours you need.	Sobald du sie gefunden hast, drücke einen der unteren runden Knöpfe (A oder X).	Spanish version of clip 21	French version of clip 21
+TutorialClip22	Now, determine which Track contains the notes you need to collect. You will need to place the OctaviCopter in front of that Track.	Nun ist es an der Zeit, auf Spur zu kommen! Finde die richtige Reihenfolge und platziere Dich vor der ersten Note!	Spanish version of clip 22	French version of clip 22
+TutorialClip23	You cycle through the start positions by pressing the Y or B button.  Try it now.	Drücke einen der oberen, runden Tasten (Y oder B) um zwischen den verschiedenen Möglichkeiten zu wählen.	Spanish version of clip 23	French version of clip 23
+TutorialClip24	Good! Keep pressing the Y or B button until you are in front of your chosen Track, then start flying!	Super! Drücke Solange, bist du wirklich richtig stehst und fliege los!	Spanish version of clip 24	French version of clip 24
+TutorialClip25	Oops! That was not the correct Track!  Don’t worry, you can try again.  Just press X or A to restart.	Schade! Das war die falsche Spur! Macht aber nichts! Einfach einen der unteren, runden Knöpfe (X oder A) drücken und schon geht es wieder los!	Spanish version of clip 25	French version of clip 25
+TutorialClip26	Excellent!  You have finished the tutorial! 	Mega! Du hast es geschafft!	Spanish version of clip 26	French version of clip 26
+TutorialClip27	If you got the Track right on the first try, you would have been awarded full points for the level.  You get half points for getting it in two tries.	Hast du es auf Anhieb geschafft, erhältst du die volle Punktzahl für das Level. Beim zweiten Versuch bekommst du die Hälfte der Punktzahl.	Spanish version of clip 27	French version of clip 27
+TutorialClip28	You have as many chances as you need to get the correct track, but you will not receive any points after the second try.	Du hast unendlich viele Versuche aber Punkte bekommst du nur in den ersten beiden Runden.	Spanish version of clip 28	French version of clip 28
+TutorialClip29	Good luck!  Press X or A to start the first level.	Drücke einen der unteren, runden Knöpfe (X oder A), um mit dem ersten Level zu starten! Guten Flug!	Spanish version of clip 29	French version of clip 29

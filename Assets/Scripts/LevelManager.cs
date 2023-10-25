@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using UnityEngine.InputSystem;
 
 public class LevelManager : MonoBehaviour
@@ -13,7 +10,6 @@ public class LevelManager : MonoBehaviour
     {
         None,
         LoadingLevel,
-        ReconaissanceFlying,
         FlyingTrack,
         EvaluatingLevel
       
@@ -22,10 +18,11 @@ public class LevelManager : MonoBehaviour
     public float LevelHeight => levelHeight;
     private float levelHeight;
     public bool HintIsPlaying => hintIsPlaying;
+    public bool CheckingLevel => CheckingLevel;
     public GameObject EnvironmentAsset => environmentAsset;
 
     [SerializeField] private InputActionReference cycleTrackActionReference;
-    [SerializeField] private InputActionReference startFlyingActionReference;
+    [SerializeField] private InputActionReference resetPositionActionReference;
 
     private GameManager gameManager;
     private LevelState currentState;
@@ -39,15 +36,14 @@ public class LevelManager : MonoBehaviour
     private List<float> trackXPositions = new List<float>();
     private List<float> trackYPositions = new List<float>();
     private List<GameObject> trackObjects = new List<GameObject>();
-    private int selectedTrack;
+    private Vector3 resetPosition;
     private bool cycleEnabled;
 
-    private TMP_Text levelTitle;
-    private TMP_Text levelInstructions;
     private UIDisplay uiDisplay;
     private string currentFeedbackText;
     private string lastNoteHit;
     private bool hintIsPlaying = false;
+    private bool checkingLevel = false;
 
     private void Awake()
     {
@@ -56,13 +52,8 @@ public class LevelManager : MonoBehaviour
     }
     private void Start()
     {
-        gameManager.NoteCollector.SetActive(false); // disable until a track is selected
-
         // Set the initial state and starting values of flags and indexes
         currentLevel = gameManager.CurrentLevel;
-
-        levelTitle = GameObject.Find("LevelTitle").GetComponent<TMP_Text>();
-        levelInstructions = GameObject.Find("LevelInstructions").GetComponent<TMP_Text>();
         uiDisplay = GameObject.FindObjectOfType<UIDisplay>();
 
         if (currentLevel.environmentAsset != null)
@@ -78,39 +69,23 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        if(currentState == LevelState.ReconaissanceFlying)
-        {
-
-            float buttonPressValue = cycleTrackActionReference.action.ReadValue<float>();
-            if (buttonPressValue > 0 && cycleEnabled)
-            {
-                cycleEnabled = false;
-                currentFeedbackText = "TrackSelect";
-                SendMessageToUI();
-                CycleThroughTracks();
-
-            }
-
-            float triggerPressValue = startFlyingActionReference.action.ReadValue<float>();
-            if (triggerPressValue > 0)
-            {
-                GotoState(LevelState.FlyingTrack);
-
-            }
-        }
-
         if(currentState == LevelState.FlyingTrack)
         {
-            float buttonPressValue = cycleTrackActionReference.action.ReadValue<float>();
-            if (buttonPressValue > 0)
+     
+            float secondaryPressValue = cycleTrackActionReference.action.ReadValue<float>();
+            if (secondaryPressValue > 0 && cycleEnabled)
             {
-                // move to start of selected track
-                float newPlayerXPosition = trackXPositions[selectedTrack];
-                float newPlayerYPosition = trackYPositions[selectedTrack];
-                float newPlayerZPostion = gameManager.PlayerStartPosition.z;
-
-                gameManager.player.transform.position = new Vector3(newPlayerXPosition, newPlayerYPosition, newPlayerZPostion);
+                cycleEnabled = false;
+                CycleThroughTracks();
             }
+
+            float primaryPressValue = resetPositionActionReference.action.ReadValue<float>();
+            if (primaryPressValue > 0)
+            {
+                gameManager.player.transform.position = resetPosition;
+                notesCollected = 0;
+            }
+
         }
 
     }
@@ -128,12 +103,6 @@ public class LevelManager : MonoBehaviour
                     LoadingLevelEntered();
                     break;
                 }
-            case LevelState.ReconaissanceFlying:
-                {
-                    ReconnaissanceFlyingEntered();
-                    break;
-                }
-
             case LevelState.FlyingTrack:
                 {
                     FlyingTrackEntered();
@@ -147,33 +116,9 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void OnStateLeft(LevelState state)
-    {
-        switch (state)
-        {
-            case LevelState.None:
-                {
-                    break;
-                }
-            case LevelState.LoadingLevel:
-                {
-                    break;
-                }
-
-            case LevelState.FlyingTrack:
-                {
-                    break;
-                }
-            case LevelState.EvaluatingLevel:
-                {
-                    break;
-                }
-        }
-    }
 
     public void GotoState(LevelState newState)
     {
-        OnStateLeft(currentState);
         currentState = newState;
         OnStateEntered(currentState);
     }
@@ -183,40 +128,8 @@ public class LevelManager : MonoBehaviour
     {
         // make sure we're starting with a clean slate
         InitializeLevel();
-
-        // collect a list of the tracks in the level
-        float playerPos = gameManager.PlayerStartPosition.x;
-        float startPosition = currentLevel.tracks.Length % 2 == 0 ?
-                                playerPos - (currentLevel.trackSpacing * (currentLevel.tracks.Length / 2)) - (currentLevel.trackSpacing / 2) :
-                                playerPos - (currentLevel.trackSpacing * (currentLevel.tracks.Length / 2));
-
-        List<Track> createTracks = new List<Track>();
-
-        for(int i = 0; i < currentLevel.tracks.Length; i++)
-        {
-            createTracks.Add(currentLevel.tracks[i]);
-        }
-
-        float currentTrackPosition = startPosition;
-
-        // instantiate the tracks for the level
-        for (int i = 0; i < currentLevel.tracks.Length; i++)
-        {
-            int randomTrack = Random.Range(0, createTracks.Count - 1);
-
-            notesPerTrack = 0;  // will keep the value found for the last track (all should be the same count)
-            InstantiateTrack(createTracks[randomTrack], currentTrackPosition);
-
-            trackXPositions.Add(currentTrackPosition);
-
-            createTracks.RemoveAt(randomTrack);
-            currentTrackPosition += currentLevel.trackSpacing;
-
-        } 
-
-        // Give player note clue
-        StartCoroutine(PerformTrackHint());
-
+        StartCoroutine(LoadingLevelSection());
+        
     }
 
     private void InitializeLevel()
@@ -231,34 +144,53 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    public void UpdateLevelUIFields()
+    private IEnumerator LoadingLevelSection()
     {
-        uiDisplay.UpdateLevelTitle(currentLevel.name);
-        uiDisplay.UpdateLevelInstructions(currentLevel.instructions);
-    }
+        // collect a list of the tracks in the level
+        float playerPos = gameManager.PlayerStartPosition.x;
+        float startPosition = currentLevel.tracks.Length % 2 == 0 ?
+                                playerPos - (currentLevel.trackSpacing * (currentLevel.tracks.Length / 2)) - (currentLevel.trackSpacing / 2) :
+                                playerPos - (currentLevel.trackSpacing * (currentLevel.tracks.Length / 2));
 
-    public void SendMessageToUI()
-    {
-        switch (currentFeedbackText)
+        List<Track> createTracks = new List<Track>();
+
+        for (int i = 0; i < currentLevel.tracks.Length; i++)
         {
-            case "TrackSelect":
-            case "RetryPrompt":
-            case "Recon":
-            case "FlyPrompt":
-                {
-                    uiDisplay.PresentFeedback(currentFeedbackText);
-                    break;
-                }
-            case "NoteHit":
-                {
-                    uiDisplay.PresentFeedback(currentFeedbackText, lastNoteHit);
-                    break;
-                }
+            createTracks.Add(currentLevel.tracks[i]);
+        }
+
+        float currentTrackPosition = startPosition;
+
+        // instantiate the tracks for the level
+        for (int i = 0; i < currentLevel.tracks.Length; i++)
+        {
+            yield return new WaitForSeconds(0.75f);
+
+            int randomTrack = Random.Range(0, createTracks.Count - 1);
+
+            notesPerTrack = 0;  // will keep the value found for the last track (all should be the same count)
+            InstantiateTrack(createTracks[randomTrack], currentTrackPosition);
+
+            trackXPositions.Add(currentTrackPosition);
+
+            createTracks.RemoveAt(randomTrack);
+            currentTrackPosition += currentLevel.trackSpacing;
 
         }
 
-
+        // Give player note clue, maybe...
+        if (gameManager.runningTutorial)
+        {
+            // It is the tutorial and the hint timing is handled by the Tutorial script; go right to flying track
+            if (currentState == LevelState.LoadingLevel) GotoState(LevelState.FlyingTrack);
+            
+        }
+        else
+        {
+            StartCoroutine(PerformTrackHint());
+        }
     }
+    
     private void InstantiateTrack(Track track, float trackXPosition)
     {
         float yPosition;
@@ -296,13 +228,81 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    private void ReconnaissanceFlyingEntered()
+    public IEnumerator PerformTrackHint()
     {
-        currentFeedbackText = "Recon";
-        SendMessageToUI();
+        hintIsPlaying = true;
+
+        yield return new WaitForSeconds(1);
+
+        // PresentFeedback($"Giving {currentLevel.name} hint");
+        List<Note> playNotes = new List<Note>();
+
+        foreach (Note note in levelNotes.Keys)
+        {
+            // if the Value of the note (needs to be collected) is true 
+            if (levelNotes[note]) playNotes.Add(note);
+
+        }
+
+        foreach (Note note in playNotes)
+        {
+            note.audioSource.Play();
+            // if visual clues become a thing (i.e., keyboard keys light up) it can go here too
+            yield return new WaitForSeconds(currentLevel.clueTiming);
+        }
+
+        if (currentState == LevelState.LoadingLevel) GotoState(LevelState.FlyingTrack);
+        hintIsPlaying = false;
+    }
+
+    public void FlyingTrackEntered()
+    {
         cycleEnabled = true;
+        if (!gameManager.runningTutorial)
+        {
+            currentFeedbackText = "TrackSelect";
+            SendMessageToUI();
+        }
 
     }
+
+    public void CycleThroughTracks()
+    {
+
+        // find out where the player is currently 
+        float currentPlayerX = gameManager.player.transform.position.x;
+        int positionIndex = 0; // start at the beginning if player is not in front of a track
+
+        // select the next position for the player
+        for (int i = 0; i < trackXPositions.Count; i++)
+        {
+            if (trackXPositions[i] == currentPlayerX)
+            {
+                positionIndex = i;
+            }
+        }
+
+        int selectedTrack = (positionIndex + 1) % trackXPositions.Count; // wrap around at the end
+
+        // move to next available track
+        float newPlayerXPosition = trackXPositions[selectedTrack];
+        float newPlayerYPosition = trackYPositions[selectedTrack];
+        float newPlayerZPostion = gameManager.PlayerStartPosition.z;
+
+        resetPosition = new Vector3(newPlayerXPosition, newPlayerYPosition, newPlayerZPostion);
+        gameManager.player.transform.position = resetPosition;
+
+        // delay the next cycle
+        StartCoroutine(TrackCycleDelay(0.5f));
+
+    }
+
+    private IEnumerator TrackCycleDelay(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        cycleEnabled = true;
+    }
+
     private void CheckNote(Note hitNote)
     {
         notesCollected++;
@@ -330,38 +330,12 @@ public class LevelManager : MonoBehaviour
 
     }
 
-
-    public IEnumerator PerformTrackHint()
-    {
-        hintIsPlaying = true;
-
-        yield return new WaitForSeconds(1); 
-
-        // PresentFeedback($"Giving {currentLevel.name} hint");
-        List<Note> playNotes = new List<Note>();
-
-        foreach (Note note in levelNotes.Keys)
-        {
-            // if the Value of the note (needs to be collected) is true 
-            if (levelNotes[note]) playNotes.Add(note);
-
-        }
-
-        foreach(Note note in playNotes)
-        {
-            note.audioSource.Play();
-            // if visual clues become a thing (i.e., keyboard keys light up) it can go here too
-            yield return new WaitForSeconds(currentLevel.clueTiming);
-        }
-
-        if(currentState == LevelState.LoadingLevel) GotoState(LevelState.ReconaissanceFlying);
-        hintIsPlaying = false;
-    }
-
     public IEnumerator CleanUpAndEndLevel()
     {
+        checkingLevel = true;
+
         yield return new WaitForSeconds(3); // time for sound from last note collected to decay
-        // destroy the notes, thereby also removing the subscriptions to them ;)
+                                            // destroy the notes, thereby also removing the subscriptions to them ;)
         Note[] notes = FindObjectsOfType<Note>();
         foreach (Note note in notes)
         {
@@ -387,49 +361,36 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    public void CycleThroughTracks()
+    
+
+    
+    
+
+    public void UpdateLevelUIFields()
     {
+        uiDisplay.UpdateLevelTitle(currentLevel.name);
+        uiDisplay.UpdateLevelInstructions(currentLevel.instructions);
+    }
 
-        // find out where the player is currently 
-        float currentPlayerX = gameManager.player.transform.position.x;
-        int positionIndex = 0; // start at the beginning if player is not in front of a track (i.e., was reconnaissance flying)
-
-        // select the next position for the player
-        for(int i = 0; i < trackXPositions.Count; i++)
+    public void SendMessageToUI()
+    {
+        switch (currentFeedbackText)
         {
-            if(trackXPositions[i] == currentPlayerX)
-            {
-                positionIndex = i;
-            }
+            case "TrackSelect":
+            case "RetryPrompt":
+            case "FlyPrompt":
+                {
+                    uiDisplay.PresentFeedback(currentFeedbackText);
+                    break;
+                }
+            case "NoteHit":
+                {
+                    uiDisplay.PresentFeedback(currentFeedbackText, lastNoteHit);
+                    break;
+                }
+
         }
-        selectedTrack = (positionIndex + 1) % trackXPositions.Count; // wrap around at the end
 
-        // move to next available track
-        float newPlayerXPosition = trackXPositions[selectedTrack];
-        float newPlayerYPosition = trackYPositions[selectedTrack];
-        float newPlayerZPostion = gameManager.PlayerStartPosition.z;
-
-        gameManager.player.transform.position = new Vector3(newPlayerXPosition, newPlayerYPosition, newPlayerZPostion);
-
-        // delay the next cycle
-        StartCoroutine(TrackCycleDelay(0.5f));
-        
-    }
-
-    private IEnumerator TrackCycleDelay(float delayTime)
-    {
-        yield return new WaitForSeconds(delayTime);
-        cycleEnabled = true;
-    }
-    public void FlyingTrackEntered()
-    {
-        currentFeedbackText = "FlyPrompt";
-        SendMessageToUI();
-
-        // disable strafe
-
-        // enable note collector
-        gameManager.NoteCollector.SetActive(true);
 
     }
 }

@@ -7,11 +7,12 @@ public class ScalometerControl : MonoBehaviour
 {
     public float speed = 1f;
     [SerializeField] Material rainbowScaleometer;
-    [SerializeField] private float levelHeight;
-
+    
+    private float levelHeight;
     private Transform thisTransform = null;
     private float startingHeight;
     private LevelManager levelManager;
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Awake()
@@ -24,25 +25,44 @@ public class ScalometerControl : MonoBehaviour
     private void Start()
     {
         rainbowScaleometer.SetFloat("_Height", startingHeight);
+        gameManager = FindObjectOfType<GameManager>();
 
     }
 
     private void Update()
     {
-        if (levelManager == null)
+
+        //if (levelManager == null)
+        //{
+        //    levelManager = FindObjectOfType<LevelManager>();
+        //}
+        //else
+        //{
+        //    if(levelHeight == 0)
+        //    {
+        //        levelHeight = levelManager.LevelHeight;
+        //    }
+
+        //    MoveScalometer();
+        //}
+        if(gameManager == null)
         {
-            levelManager = FindObjectOfType<LevelManager>();
+            gameManager = FindObjectOfType<GameManager>();
         }
         else
         {
-            if(levelHeight == 0)
+            if (gameManager.runningTutorial || gameManager.CurrentLevelManager == null)
             {
-                levelHeight = levelManager.LevelHeight;
+                levelHeight = 60;
+            }
+            else
+            {
+                levelHeight = gameManager.CurrentLevelManager.LevelHeight;
             }
 
             MoveScalometer();
+
         }
-        
 
     }
 

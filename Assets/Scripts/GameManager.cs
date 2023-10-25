@@ -7,7 +7,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public Level CurrentLevel => levels[currentLevelIndex];
+    public Level CurrentLevel;
     public LevelManager CurrentLevelManager => currentLevelManager;
     public GameObject NoteCollector => noteCollector;
     public string Mode
@@ -17,14 +17,20 @@ public class GameManager : MonoBehaviour
     }
 
     public Vector3 PlayerStartPosition => playerStartPosition;
+    public bool TutorialSuccessful => tutorialSuccessful;
+    public bool TutorialCompleted => tutorialCompleted;
+
     public GameObject player;
     public bool restartRequested = false;
+    public bool runningTutorial = false;
+    
 
     [SerializeField] private InputActionReference startLevelActionReference;
     [SerializeField] public List<Level> levels = new List<Level>();
     [SerializeField] private LevelManager levelManagerPrefab;
     [SerializeField] private float timeBetweenLevels;
     [SerializeField] private float timeBeforeRestartAllowed;
+    [SerializeField] private GameObject tutorialPrefab;
     [SerializeField] private GameObject backgroundAsset;
     [SerializeField] private ParticleSystem fireworks;
     [SerializeField] private AudioSource endingSong;
@@ -41,6 +47,9 @@ public class GameManager : MonoBehaviour
     public string currentFeedbackText;
     private List<string> pointList;
     private GameObject noteCollector;
+    private bool tutorialCompleted = false;
+    private bool tutorialSuccessful = false;
+    private GameObject tutorial;
 
     private void Awake()
     {
@@ -74,23 +83,62 @@ public class GameManager : MonoBehaviour
         endingSong.gameObject.SetActive(false);
         uiDisplay = GameObject.FindObjectOfType<UIDisplay>();
         restartAllowed = true;
-        currentFeedbackText = "StartPrompt";
-        SendMessageToUI();
+        if (!runningTutorial)
+        {
+            currentFeedbackText = "StartPrompt";
+            SendMessageToUI();
+        }
         levelAttempts = 1;
+        runningTutorial = false;
 
     }
 
     private void Update()
     {
-        float buttonPressValue = startLevelActionReference.action.ReadValue<float>();
-   
-        if ((buttonPressValue > 0) && restartAllowed)
+        if (runningTutorial)
         {
-            currentFeedbackText = "";
-            uiDisplay.PresentFeedback(currentFeedbackText);
-            StartLevel();
-            
+            if (currentFeedbackText != "")
+            {
+                currentFeedbackText = "";
+                uiDisplay.PresentFeedback(currentFeedbackText);
+            }
         }
+        else
+        {
+            float buttonPressValue = startLevelActionReference.action.ReadValue<float>();
+
+            if ((buttonPressValue > 0) && restartAllowed)
+            {
+                currentFeedbackText = "";
+                uiDisplay.PresentFeedback(currentFeedbackText);
+                StartLevel();
+
+            }
+        }
+        
+    }
+
+    public void RunTutorial()
+    {
+        if (runningTutorial)
+        {
+            // if tutorial is already running, destroy it
+            if (currentLevelManager != null)
+            {
+                Destroy(currentLevelManager.gameObject);
+                Destroy(tutorial.gameObject);
+                tutorialCompleted = false;
+                tutorialSuccessful = false;
+            }
+                
+        }
+        else
+        {
+            runningTutorial = true;
+        }
+
+        tutorial = Instantiate(tutorialPrefab, Vector3.zero, Quaternion.identity);
+
     }
 
     public void OnLevelCompleted(bool successful, int maxPoints)
@@ -102,59 +150,79 @@ public class GameManager : MonoBehaviour
 
         if (successful)
         {
-            currentLevelIndex++;
-            switch (levelAttempts)
+            if (runningTutorial)
             {
-                case 1:
-                    pointsEarned = maxPoints;
-                    break;
-                case 2:
-                    pointsEarned = maxPoints / 2;
-                    break;
-                default:
-                    pointsEarned = 0;
-                    break;
-            }
+                tutorialSuccessful = true;
+                tutorialCompleted = true;
+                InitiateGame();
 
-            sessionPoints += pointsEarned;
-            lifetimePoints += pointsEarned;
-
-            if (currentLevelIndex == levels.Count)
-            {
-                // There are no more levels
-                currentLevelIndex = -1;
-                GameOver();
             }
             else
             {
-                pointList = new List<string>();
-                pointList.Add(pointsEarned.ToString());
-                pointList.Add(sessionPoints.ToString());
-                currentFeedbackText = "PointsPlusTotal";
-                SendMessageToUI();
-                restartAllowed = true;
-                levelAttempts = 1;
+                currentLevelIndex++;
+                switch (levelAttempts)
+                {
+                    case 1:
+                        pointsEarned = maxPoints;
+                        break;
+                    case 2:
+                        pointsEarned = maxPoints / 2;
+                        break;
+                    default:
+                        pointsEarned = 0;
+                        break;
+                }
 
+                sessionPoints += pointsEarned;
+                lifetimePoints += pointsEarned;
+
+                if (currentLevelIndex == levels.Count)
+                {
+                    // There are no more levels
+                    currentLevelIndex = -1;
+                    GameOver();
+                }
+                else
+                {
+                    pointList = new List<string>();
+                    pointList.Add(pointsEarned.ToString());
+                    pointList.Add(sessionPoints.ToString());
+                    currentFeedbackText = "PointsPlusTotal";
+                    SendMessageToUI();
+                    restartAllowed = true;
+                    levelAttempts = 1;
+
+                }
             }
+            
         }
         else
         {
-            if (restartRequested) 
+            if (runningTutorial)
             {
-                currentLevelIndex = 0;
-                restartRequested = false;
-                currentFeedbackText = "StartPrompt";
-                restartAllowed = true;
-                sessionPoints = 0;
+                tutorialCompleted = true;
+                
             }
             else
             {
-                levelAttempts++;
-                currentFeedbackText = "RetryPrompt";
+                if (restartRequested)
+                {
+                    currentLevelIndex = 0;
+                    restartRequested = false;
+                    currentFeedbackText = "StartPrompt";
+                    restartAllowed = true;
+                    sessionPoints = 0;
+                }
+                else
+                {
+                    levelAttempts++;
+                    currentFeedbackText = "RetryPrompt";
+                }
+
+                uiDisplay.PresentFeedback(currentFeedbackText);
+                restartAllowed = true;
             }
             
-            uiDisplay.PresentFeedback(currentFeedbackText);
-            restartAllowed = true;
 
         }
 
@@ -168,11 +236,27 @@ public class GameManager : MonoBehaviour
         if (currentLevelManager != null) Destroy(currentLevelManager.gameObject);
 
         // create a new level
+        CurrentLevel = levels[currentLevelIndex];
         currentLevelManager = Instantiate(levelManagerPrefab);
 
         // reset player
         RelocatePlayer(playerStartPosition);
 
+    }
+
+    public void StartLevel(Level levelToStart)
+    {
+        tutorialCompleted = false;
+        backgroundAsset.SetActive(false);  // will be replaced by level environment asset
+
+        if (currentLevelManager != null) Destroy(currentLevelManager.gameObject);
+
+        // create a new level
+        CurrentLevel = levelToStart;
+        currentLevelManager = Instantiate(levelManagerPrefab);
+
+        // reset player
+        RelocatePlayer(playerStartPosition);
     }
 
     
@@ -187,14 +271,6 @@ public class GameManager : MonoBehaviour
         SendMessageToUI();
 
     }
-
-    private IEnumerator MinimumWaitForRestart(float restartDelay)
-    {
-        yield return new WaitForSeconds(restartDelay);
-        restartAllowed = true;
-
-    }
-
 
     public void SendMessageToUI()
     {
@@ -226,11 +302,6 @@ public class GameManager : MonoBehaviour
     {
 
         player.transform.position = newPosition;
-
-    }
-
-    private void UpdateLevelPoints(int points)
-    {
 
     }
 
