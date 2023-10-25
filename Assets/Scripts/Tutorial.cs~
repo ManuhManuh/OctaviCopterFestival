@@ -350,10 +350,11 @@ public class Tutorial : MonoBehaviour
             yield return null;
         }
 
-        // remove the showController and go to FlyingFirstNote state
+        // remove the C Major scale and go to FlyingFirstNote state
         Destroy(showController.gameObject);
         GotoTutorialState(TutorialState.FlyingFirstNote);
         
+
         EnableFlying();
 
         yield return new WaitForSeconds(narrationPauseInterval);
@@ -368,6 +369,7 @@ public class Tutorial : MonoBehaviour
     private void FlyingSecondNoteEntered()
     {
         StartCoroutine(FlyingSecondNoteSection());
+
     }
 
     private IEnumerator FlyingSecondNoteSection()

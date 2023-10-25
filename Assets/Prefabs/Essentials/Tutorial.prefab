@@ -58,6 +58,8 @@ MonoBehaviour:
   thirdExampleNotePrefab: {fileID: 268683940543836428, guid: 3a861c4342fe8ee43abb693546fba3fd,
     type: 3}
   tutorialLevel: {fileID: 11400000, guid: 412ba5f51f05c9348b4f09bdac627413, type: 2}
+  showConrollerPrefab: {fileID: 5352437441184032843, guid: 508e067e190f64874bad4a4b3bdd81ec,
+    type: 3}
   narrationPauseInterval: 0.75
   currentState: 0
 --- !u!82 &3571222972533778875
