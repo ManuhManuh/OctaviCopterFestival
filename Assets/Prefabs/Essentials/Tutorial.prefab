@@ -49,13 +49,13 @@ MonoBehaviour:
   secondaryButtonPress: {fileID: 7887114726999620171, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
   audioSource: {fileID: 3571222972533778875}
-  controllerAnimaions:
-  - {fileID: 3191104844497692991, guid: 39323ed1d3be342d2bc5625b125c812f, type: 3}
-  - {fileID: 3200759626306336909, guid: 4dc28697f96254b448a93af8d01ecfb4, type: 3}
-  - {fileID: 5194087744163766521, guid: b2e0f47f29f4c4ba8a19e89707fb8946, type: 3}
-  - {fileID: 307694821041537697, guid: 7cb0c697e08784cf9a93e690bd425da5, type: 3}
-  - {fileID: 5711078132403134661, guid: dec7fc4c5d0fb4a3685063d376ae11bf, type: 3}
-  - {fileID: 3534962245293318195, guid: 4d140d1ffd4884b7a8e55addca1753f4, type: 3}
+  controllerAnimations:
+  - {fileID: 9112000947872986160, guid: 39323ed1d3be342d2bc5625b125c812f, type: 3}
+  - {fileID: 4155159674745482367, guid: 4dc28697f96254b448a93af8d01ecfb4, type: 3}
+  - {fileID: 7098111349170410272, guid: b2e0f47f29f4c4ba8a19e89707fb8946, type: 3}
+  - {fileID: 8943732779072628416, guid: 7cb0c697e08784cf9a93e690bd425da5, type: 3}
+  - {fileID: 8565450273464666401, guid: dec7fc4c5d0fb4a3685063d376ae11bf, type: 3}
+  - {fileID: 3834749361469729213, guid: 4d140d1ffd4884b7a8e55addca1753f4, type: 3}
   scalePrefab: {fileID: 3403632369758014265, guid: 1db6a1e20c3e3ef4a9bc2017ba4cd028,
     type: 3}
   firstExampleNotePrefab: {fileID: 268683940543836428, guid: 3a861c4342fe8ee43abb693546fba3fd,

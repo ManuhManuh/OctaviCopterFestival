@@ -57,6 +57,9 @@ public class Tutorial : MonoBehaviour
     private Note secondExampleNote;
     private Note thirdExampleNote;
 
+    private GameObject yOrBChoose;
+    private GameObject xOrAChoose;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -81,8 +84,8 @@ public class Tutorial : MonoBehaviour
                     float buttonPressValue = secondaryButtonPress.action.ReadValue<float>();
                     if (buttonPressValue > 0 && !clipsPlaying)
                     {
+                        Destroy(yOrBChoose);
                         gameManager.player.transform.position = gameManager.PlayerStartPosition;
-                        DisableFlying();
                         GotoTutorialState(TutorialState.Tracks);
                     }
 
@@ -119,6 +122,7 @@ public class Tutorial : MonoBehaviour
                     float buttonPressValue = primaryButtonPress.action.ReadValue<float>();
                     if (buttonPressValue > 0)
                     {
+                        Destroy(xOrAChoose);
                         GotoTutorialState(TutorialState.TrackSelection);
                     }
                     break;
@@ -393,12 +397,24 @@ public class Tutorial : MonoBehaviour
         thirdExampleNote.transform.position = thirdNotePosition;
         thirdExampleNote.OnNoteCollected += OnThirdNoteHit;
 
-        string[] clips = { "07", "08", "09", "10" };
-        StartCoroutine(PlayAndDisplay(clips));
+        string[] clips1 = { "07", "08", "09" };
+        StartCoroutine(PlayAndDisplay(clips1));
         while (clipsPlaying)
         {
             yield return null;
         }
+
+        // show controller animation trigger trick
+        GameObject triggerTrick = Instantiate(controllerAnimations[3], Vector3.zero, Quaternion.identity);
+
+        string[] clips2 = { "10" };
+        StartCoroutine(PlayAndDisplay(clips2));
+        while (clipsPlaying)
+        {
+            yield return null;
+        }
+
+        Destroy(triggerTrick);
 
         EnableFlying();
 
@@ -424,6 +440,11 @@ public class Tutorial : MonoBehaviour
         {
             yield return null;
         }
+
+        DisableFlying();
+
+        // show controller animation Y or B
+        yOrBChoose = Instantiate(controllerAnimations[3], Vector3.zero, Quaternion.identity);
 
     }
 
@@ -501,8 +522,14 @@ public class Tutorial : MonoBehaviour
 
     private void ExperimentingEntered()
     {
-        string[] clips = { "20", "21" };
-        StartCoroutine(PlayAndDisplay(clips));
+        string[] clips1 = { "20" };
+        StartCoroutine(PlayAndDisplay(clips1));
+
+        // show controller animation X or A
+        xOrAChoose = Instantiate(controllerAnimations[0], Vector3.zero, Quaternion.identity);
+
+        string[] clips2 = { "21" };
+        StartCoroutine(PlayAndDisplay(clips2));
 
     }
 
