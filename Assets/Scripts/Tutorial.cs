@@ -444,7 +444,7 @@ public class Tutorial : MonoBehaviour
         DisableFlying();
 
         // show controller animation Y or B
-        yOrBChoose = Instantiate(controllerAnimations[3], Vector3.zero, Quaternion.identity);
+        yOrBChoose = Instantiate(controllerAnimations[1], Vector3.zero, Quaternion.identity);
 
     }
 
@@ -522,15 +522,25 @@ public class Tutorial : MonoBehaviour
 
     private void ExperimentingEntered()
     {
+
+        StartCoroutine(ExperimentingEnteredSection());
+
+    }
+
+    private IEnumerator ExperimentingEnteredSection()
+    {
         string[] clips1 = { "20" };
         StartCoroutine(PlayAndDisplay(clips1));
+        while (clipsPlaying)
+        {
+            yield return null;
+        }
 
         // show controller animation X or A
         xOrAChoose = Instantiate(controllerAnimations[0], Vector3.zero, Quaternion.identity);
 
         string[] clips2 = { "21" };
         StartCoroutine(PlayAndDisplay(clips2));
-
     }
 
     private void TrackSelectionEntered()
