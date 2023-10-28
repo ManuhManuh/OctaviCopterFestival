@@ -31,6 +31,8 @@ public class Tutorial : MonoBehaviour
 
     [SerializeField] AudioSource audioSource;
 
+    [SerializeField] List<GameObject> controllerAnimations;
+
     [SerializeField] GameObject scalePrefab;
     [SerializeField] Note firstExampleNotePrefab;
     [SerializeField] Note secondExampleNotePrefab;
@@ -315,12 +317,24 @@ public class Tutorial : MonoBehaviour
         secondExampleNote.transform.position = secondNotePosition;
         secondExampleNote.OnNoteCollected += OnSecondNoteHit;
 
-        string[] clips = { "04", "05" };
-        StartCoroutine(PlayAndDisplay(clips));
+        string[] clips1 = { "04" };
+        StartCoroutine(PlayAndDisplay(clips1));
         while (clipsPlaying)
         {
             yield return null;
         }
+
+        // show controller animation push joystick forward
+        GameObject joystickForward = Instantiate(controllerAnimations[2], Vector3.zero, Quaternion.identity);
+
+        string[] clips2 = { "05" };
+        StartCoroutine(PlayAndDisplay(clips2));
+        while (clipsPlaying)
+        {
+            yield return null;
+        }
+
+        Destroy(joystickForward);
 
         EnableFlying();
 
