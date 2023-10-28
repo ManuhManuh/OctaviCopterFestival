@@ -37,16 +37,13 @@ public class Tutorial : MonoBehaviour
     [SerializeField] Note thirdExampleNotePrefab;
     [SerializeField] Level tutorialLevel;
 
-    // ShowController
-    [SerializeField] GameObject showConrollerPrefab;
-
     [SerializeField] float narrationPauseInterval = 0.5f;
 
     private GameManager gameManager;
     public TutorialState currentState;
     private GameObject locomotionControls;
     private GameObject[] keys;
-    
+
     private bool hintStarted = false;
     private bool clipsPlaying = true;
     private bool firstLevelAttempt = true;
@@ -71,24 +68,24 @@ public class Tutorial : MonoBehaviour
         GotoTutorialState(TutorialState.Introduction);
     }
 
-    
+
     void Update()
     {
         // state changes triggered by controller input
         switch (currentState)
         {
             case TutorialState.WaitingForReset:
-            {
-                float buttonPressValue = secondaryButtonPress.action.ReadValue<float>();
-                if (buttonPressValue > 0 && !clipsPlaying)
                 {
-                    gameManager.player.transform.position = gameManager.PlayerStartPosition;
-                    DisableFlying();
-                    GotoTutorialState(TutorialState.Tracks);
-                }
+                    float buttonPressValue = secondaryButtonPress.action.ReadValue<float>();
+                    if (buttonPressValue > 0 && !clipsPlaying)
+                    {
+                        gameManager.player.transform.position = gameManager.PlayerStartPosition;
+                        DisableFlying();
+                        GotoTutorialState(TutorialState.Tracks);
+                    }
 
-                break;
-            }
+                    break;
+                }
 
             case TutorialState.WaitingForKeyboardPlay:
                 {
@@ -100,8 +97,8 @@ public class Tutorial : MonoBehaviour
                             keyPlayed = true;
                         }
                     }
-                    
-                    if(keyPlayed) GotoTutorialState(TutorialState.WaitingForHintPlay);
+
+                    if (keyPlayed) GotoTutorialState(TutorialState.WaitingForHintPlay);
                     break;
                 }
 
@@ -133,7 +130,7 @@ public class Tutorial : MonoBehaviour
                     {
                         EnableFlying();
                         GotoTutorialState(TutorialState.TestDrive);
-                        
+
                     }
 
                     break;
@@ -150,7 +147,7 @@ public class Tutorial : MonoBehaviour
                         {
                             GotoTutorialState(TutorialState.TryAgainFeedback);
                         }
-                        
+
                     }
                     break;
                 }
@@ -287,8 +284,8 @@ public class Tutorial : MonoBehaviour
             yield return null;
         }
 
-        
-        string[] clips2 = { "02", "03"};
+
+        string[] clips2 = { "02", "03" };
         StartCoroutine(PlayAndDisplay(clips2));
         while (clipsPlaying)
         {
@@ -325,35 +322,6 @@ public class Tutorial : MonoBehaviour
             yield return null;
         }
 
-        
-        // show showController
-        GameObject showController = Instantiate(scalePrefab, Vector3.zero, Quaternion.identity);
-        Animator animator = showController.GetComponent<Animator>();
-        yield return new WaitForEndOfFrame();
-
-        float nTime = 0;
-        AnimatorStateInfo animatorStateInfo;
-
-        // wait for animation to complete
-        while (nTime < 1.0f)
-        {
-            animatorStateInfo = animator.GetCurrentAnimatorStateInfo(0);
-            nTime = animatorStateInfo.normalizedTime;
-            yield return null;
-        }
-
-        
-        string[] clips2 = { "06"};
-        StartCoroutine(PlayAndDisplay(clips2));
-        while (clipsPlaying)
-        {
-            yield return null;
-        }
-
-        // remove the showController and go to FlyingFirstNote state
-        Destroy(showController.gameObject);
-        GotoTutorialState(TutorialState.FlyingFirstNote);
-        
         EnableFlying();
 
         yield return new WaitForSeconds(narrationPauseInterval);
@@ -362,12 +330,13 @@ public class Tutorial : MonoBehaviour
     private void OnFirstNoteHit(Note hitNote)
     {
         GotoTutorialState(TutorialState.FlyingSecondNote);
-        
+
     }
 
     private void FlyingSecondNoteEntered()
     {
         StartCoroutine(FlyingSecondNoteSection());
+
     }
 
     private IEnumerator FlyingSecondNoteSection()
@@ -395,7 +364,7 @@ public class Tutorial : MonoBehaviour
     private void FlyingThirdNoteEntered()
     {
         StartCoroutine(FlyingThirdNoteSection());
-        
+
 
     }
 
@@ -452,7 +421,7 @@ public class Tutorial : MonoBehaviour
         Destroy(thirdExampleNote.gameObject);
 
         StartCoroutine(TrackSection());
-            
+
     }
 
     private IEnumerator TrackSection()
@@ -540,7 +509,7 @@ public class Tutorial : MonoBehaviour
         {
             uiDisplay.PresentFeedback("TrackSelect");
         }
-        
+
     }
 
     private void TryAgainFeedbackEntered()
@@ -558,29 +527,29 @@ public class Tutorial : MonoBehaviour
         {
             yield return null;
         }
-        
+
         GotoTutorialState(TutorialState.WaitingForLevelRestart);
     }
 
     private void SuccessFeedbackEntered()
     {
-        string[] clips = { "26","27", "28", "29"};
+        string[] clips = { "26", "27", "28", "29" };
         StartCoroutine(PlayAndDisplay(clips));
 
     }
 
     private IEnumerator PlayAndDisplay(string[] clips)
     {
-        
+
         clipsPlaying = true;
 
         yield return new WaitForSeconds(narrationPauseInterval);
 
-        foreach(string clip in clips)
+        foreach (string clip in clips)
         {
             int clipNumber = Int32.Parse(clip);
             // update UI with text
-            uiDisplay.PresentFeedback("TutorialClip"+clip);
+            uiDisplay.PresentFeedback("TutorialClip" + clip);
             yield return new WaitForEndOfFrame();
 
             // play audio clip
