@@ -31,13 +31,14 @@ public class Tutorial : MonoBehaviour
 
     [SerializeField] AudioSource audioSource;
 
-    [SerializeField] List<GameObject> controllerAnimations;
-
     [SerializeField] GameObject scalePrefab;
     [SerializeField] Note firstExampleNotePrefab;
     [SerializeField] Note secondExampleNotePrefab;
     [SerializeField] Note thirdExampleNotePrefab;
     [SerializeField] Level tutorialLevel;
+
+    // ShowController
+    [SerializeField] GameObject showConrollerPrefab;
 
     [SerializeField] float narrationPauseInterval = 0.5f;
 
@@ -45,7 +46,7 @@ public class Tutorial : MonoBehaviour
     public TutorialState currentState;
     private GameObject locomotionControls;
     private GameObject[] keys;
-
+    
     private bool hintStarted = false;
     private bool clipsPlaying = true;
     private bool firstLevelAttempt = true;
@@ -56,9 +57,6 @@ public class Tutorial : MonoBehaviour
     private Note firstExampleNote;
     private Note secondExampleNote;
     private Note thirdExampleNote;
-
-    private GameObject yOrBChoose;
-    private GameObject xOrAChoose;
 
     // Start is called before the first frame update
     void Start()
@@ -73,24 +71,24 @@ public class Tutorial : MonoBehaviour
         GotoTutorialState(TutorialState.Introduction);
     }
 
-
+    
     void Update()
     {
         // state changes triggered by controller input
         switch (currentState)
         {
             case TutorialState.WaitingForReset:
+            {
+                float buttonPressValue = secondaryButtonPress.action.ReadValue<float>();
+                if (buttonPressValue > 0 && !clipsPlaying)
                 {
-                    float buttonPressValue = secondaryButtonPress.action.ReadValue<float>();
-                    if (buttonPressValue > 0 && !clipsPlaying)
-                    {
-                        Destroy(yOrBChoose);
-                        gameManager.player.transform.position = gameManager.PlayerStartPosition;
-                        GotoTutorialState(TutorialState.Tracks);
-                    }
-
-                    break;
+                    gameManager.player.transform.position = gameManager.PlayerStartPosition;
+                    DisableFlying();
+                    GotoTutorialState(TutorialState.Tracks);
                 }
+
+                break;
+            }
 
             case TutorialState.WaitingForKeyboardPlay:
                 {
@@ -102,8 +100,8 @@ public class Tutorial : MonoBehaviour
                             keyPlayed = true;
                         }
                     }
-
-                    if (keyPlayed) GotoTutorialState(TutorialState.WaitingForHintPlay);
+                    
+                    if(keyPlayed) GotoTutorialState(TutorialState.WaitingForHintPlay);
                     break;
                 }
 
@@ -122,7 +120,6 @@ public class Tutorial : MonoBehaviour
                     float buttonPressValue = primaryButtonPress.action.ReadValue<float>();
                     if (buttonPressValue > 0)
                     {
-                        Destroy(xOrAChoose);
                         GotoTutorialState(TutorialState.TrackSelection);
                     }
                     break;
@@ -136,7 +133,7 @@ public class Tutorial : MonoBehaviour
                     {
                         EnableFlying();
                         GotoTutorialState(TutorialState.TestDrive);
-
+                        
                     }
 
                     break;
@@ -153,7 +150,7 @@ public class Tutorial : MonoBehaviour
                         {
                             GotoTutorialState(TutorialState.TryAgainFeedback);
                         }
-
+                        
                     }
                     break;
                 }
@@ -290,8 +287,8 @@ public class Tutorial : MonoBehaviour
             yield return null;
         }
 
-
-        string[] clips2 = { "02", "03" };
+        
+        string[] clips2 = { "02", "03"};
         StartCoroutine(PlayAndDisplay(clips2));
         while (clipsPlaying)
         {
@@ -321,24 +318,42 @@ public class Tutorial : MonoBehaviour
         secondExampleNote.transform.position = secondNotePosition;
         secondExampleNote.OnNoteCollected += OnSecondNoteHit;
 
-        string[] clips1 = { "04" };
-        StartCoroutine(PlayAndDisplay(clips1));
+        string[] clips = { "04", "05" };
+        StartCoroutine(PlayAndDisplay(clips));
         while (clipsPlaying)
         {
             yield return null;
         }
 
-        // show controller animation push joystick forward
-        GameObject joystickForward = Instantiate(controllerAnimations[2], Vector3.zero, Quaternion.identity);
+        
+        // show showController
+        GameObject showController = Instantiate(scalePrefab, Vector3.zero, Quaternion.identity);
+        Animator animator = showController.GetComponent<Animator>();
+        yield return new WaitForEndOfFrame();
 
-        string[] clips2 = { "05" };
+        float nTime = 0;
+        AnimatorStateInfo animatorStateInfo;
+
+        // wait for animation to complete
+        while (nTime < 1.0f)
+        {
+            animatorStateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            nTime = animatorStateInfo.normalizedTime;
+            yield return null;
+        }
+
+        
+        string[] clips2 = { "06"};
         StartCoroutine(PlayAndDisplay(clips2));
         while (clipsPlaying)
         {
             yield return null;
         }
 
-        Destroy(joystickForward);
+        // remove the C Major scale and go to FlyingFirstNote state
+        Destroy(showController.gameObject);
+        GotoTutorialState(TutorialState.FlyingFirstNote);
+        
 
         EnableFlying();
 
@@ -348,7 +363,7 @@ public class Tutorial : MonoBehaviour
     private void OnFirstNoteHit(Note hitNote)
     {
         GotoTutorialState(TutorialState.FlyingSecondNote);
-
+        
     }
 
     private void FlyingSecondNoteEntered()
@@ -382,7 +397,7 @@ public class Tutorial : MonoBehaviour
     private void FlyingThirdNoteEntered()
     {
         StartCoroutine(FlyingThirdNoteSection());
-
+        
 
     }
 
@@ -397,24 +412,12 @@ public class Tutorial : MonoBehaviour
         thirdExampleNote.transform.position = thirdNotePosition;
         thirdExampleNote.OnNoteCollected += OnThirdNoteHit;
 
-        string[] clips1 = { "07", "08", "09" };
-        StartCoroutine(PlayAndDisplay(clips1));
+        string[] clips = { "07", "08", "09", "10" };
+        StartCoroutine(PlayAndDisplay(clips));
         while (clipsPlaying)
         {
             yield return null;
         }
-
-        // show controller animation trigger trick
-        GameObject triggerTrick = Instantiate(controllerAnimations[3], Vector3.zero, Quaternion.identity);
-
-        string[] clips2 = { "10" };
-        StartCoroutine(PlayAndDisplay(clips2));
-        while (clipsPlaying)
-        {
-            yield return null;
-        }
-
-        Destroy(triggerTrick);
 
         EnableFlying();
 
@@ -441,11 +444,6 @@ public class Tutorial : MonoBehaviour
             yield return null;
         }
 
-        DisableFlying();
-
-        // show controller animation Y or B
-        yOrBChoose = Instantiate(controllerAnimations[1], Vector3.zero, Quaternion.identity);
-
     }
 
     private void TracksEntered()
@@ -456,7 +454,7 @@ public class Tutorial : MonoBehaviour
         Destroy(thirdExampleNote.gameObject);
 
         StartCoroutine(TrackSection());
-
+            
     }
 
     private IEnumerator TrackSection()
@@ -522,25 +520,9 @@ public class Tutorial : MonoBehaviour
 
     private void ExperimentingEntered()
     {
+        string[] clips = { "20", "21" };
+        StartCoroutine(PlayAndDisplay(clips));
 
-        StartCoroutine(ExperimentingEnteredSection());
-
-    }
-
-    private IEnumerator ExperimentingEnteredSection()
-    {
-        string[] clips1 = { "20" };
-        StartCoroutine(PlayAndDisplay(clips1));
-        while (clipsPlaying)
-        {
-            yield return null;
-        }
-
-        // show controller animation X or A
-        xOrAChoose = Instantiate(controllerAnimations[0], Vector3.zero, Quaternion.identity);
-
-        string[] clips2 = { "21" };
-        StartCoroutine(PlayAndDisplay(clips2));
     }
 
     private void TrackSelectionEntered()
@@ -560,7 +542,7 @@ public class Tutorial : MonoBehaviour
         {
             uiDisplay.PresentFeedback("TrackSelect");
         }
-
+        
     }
 
     private void TryAgainFeedbackEntered()
@@ -578,29 +560,29 @@ public class Tutorial : MonoBehaviour
         {
             yield return null;
         }
-
+        
         GotoTutorialState(TutorialState.WaitingForLevelRestart);
     }
 
     private void SuccessFeedbackEntered()
     {
-        string[] clips = { "26", "27", "28", "29" };
+        string[] clips = { "26","27", "28", "29"};
         StartCoroutine(PlayAndDisplay(clips));
 
     }
 
     private IEnumerator PlayAndDisplay(string[] clips)
     {
-
+        
         clipsPlaying = true;
 
         yield return new WaitForSeconds(narrationPauseInterval);
 
-        foreach (string clip in clips)
+        foreach(string clip in clips)
         {
             int clipNumber = Int32.Parse(clip);
             // update UI with text
-            uiDisplay.PresentFeedback("TutorialClip" + clip);
+            uiDisplay.PresentFeedback("TutorialClip"+clip);
             yield return new WaitForEndOfFrame();
 
             // play audio clip

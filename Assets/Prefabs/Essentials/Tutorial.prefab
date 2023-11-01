@@ -49,6 +49,13 @@ MonoBehaviour:
   secondaryButtonPress: {fileID: 7887114726999620171, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
   audioSource: {fileID: 3571222972533778875}
+  controllerAnimations:
+  - {fileID: 6405867617776463585, guid: 69b46a406065fd141aa65ce6e4e056ea, type: 3}
+  - {fileID: 15523202501957424, guid: 406f0d00aeb7431468126d362512c694, type: 3}
+  - {fileID: 2476869501365034206, guid: d1898539d966242348ff30d323c9ee1d, type: 3}
+  - {fileID: 6519610033139042953, guid: 3d81f9a8d1c8d0b40baeba1d8f3ce8d6, type: 3}
+  - {fileID: 6562173640522176125, guid: e71e56141a947414f8787e8f9b13ea48, type: 3}
+  - {fileID: 4121564718414490033, guid: f178cd41957b149798e61e731b4adf24, type: 3}
   scalePrefab: {fileID: 3403632369758014265, guid: 1db6a1e20c3e3ef4a9bc2017ba4cd028,
     type: 3}
   firstExampleNotePrefab: {fileID: 268683940543836428, guid: 3a861c4342fe8ee43abb693546fba3fd,
