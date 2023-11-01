@@ -76,5 +76,5 @@ TutorialClip31	Y or B to in between choose tracks.	Y oder B, um zwischen den Spu
 TutorialClip32	Push the joystick forward to fly. 	Bewege den Joystick nach vorne, um zu fliegen.	Spanish version of clip 32	French version of clip 32
 TutorialClip33	You will steer with your head.	Du wirst mit Deinem Kopf steuern.	Spanish version of clip 33	French version of clip 33
 TutorialClip34	Push the trigger for the stealth mode.	Drücke den Trigger, für den Durchblicktrick.	Spanish version of clip 34	French version of clip 34
-TutorialClip35	Push the menu button to open the menu.	Drücke den Menu Knopf, um das Menu zu öffnen.	Spanish version of clip 35	French version of clip 35
-TutorialClip36	Push the home button to set yourself in position again.	Drücke den Home Knopf, um Dich richtig zu positionieren.	Spanish version of clip 36	French version of clip 36
+TutorialClip35	Push the home button to set yourself in position again.	Drücke den Home Knopf, um Dich richtig zu positionieren.	Spanish version of clip 35	French version of clip 35
+TutorialClip36	Push the menu button to open the menu.	Drücke den Menu Knopf, um das Menu zu öffnen.	Spanish version of clip 36	French version of clip 36
