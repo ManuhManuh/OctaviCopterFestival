@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
-using static Tutorial;
+
 
 public class SCTour : MonoBehaviour
 {
@@ -15,8 +15,12 @@ public class SCTour : MonoBehaviour
         YBChoose
     }
 
+    [SerializeField] public InputActionReference primaryButtonPress;
+    [SerializeField] public InputActionReference secondaryButtonPress;
+
+
     [SerializeField] AudioSource audioSource;
-    //[SerializeField] List<GameObject> csTourAnimations;
+    // [SerializeField] List<GameObject> csTourAnimations;
     [SerializeField] List<GameObject> csTourPrefabs;
 
     [SerializeField] float narrationPauseInterval = 0.5f;
@@ -29,7 +33,8 @@ public class SCTour : MonoBehaviour
     private AudioClip[] currentClipArray;
     private UIDisplay uiDisplay;
 
-
+    private GameObject xaStart;
+    private GameObject ybChoose;
 
     // Start is called before the first frame update
     void Start()
@@ -48,8 +53,27 @@ public class SCTour : MonoBehaviour
         switch (currentState)
         {
             case TourState.XAStart:
-                {                  
-                    GameObject xaStart = Instantiate(csTourPrefabs[0], Vector3.zero, Quaternion.identity);
+                {
+                    float buttonPressValue = primaryButtonPress.action.ReadValue<float>();
+                    if(buttonPressValue > 0 && !clipsPlaying)
+                    {
+                        Destroy(xaStart);
+                        GotoTourState(TourState.YBChoose);
+                       
+                    }
+                    
+                }
+                break;
+
+            case TourState.YBChoose:
+                {
+                    float buttonPressValue = secondaryButtonPress.action.ReadValue<float>();
+                    if (buttonPressValue > 0 && !clipsPlaying)
+                    {
+                        Destroy(ybChoose);
+                        GotoTourState(TourState.YBChoose);
+                    }
+
                 }
                 break;
         }
@@ -96,6 +120,7 @@ public class SCTour : MonoBehaviour
             yield return null;
         }
 
+        /*
         GameObject XAStart = Instantiate(csTourPrefabs[0], Vector3.zero, Quaternion.identity);
         Animator animator = XAStart.GetComponent<Animator>();
         yield return new WaitForEndOfFrame();
@@ -110,9 +135,16 @@ public class SCTour : MonoBehaviour
             nTime = animatorStateInfo.normalizedTime;
             yield return null;
         }
+        */
 
-        Destroy(XAStart.gameObject);
+        xaStart = Instantiate(csTourPrefabs[0], Vector3.zero, Quaternion.identity);
+        
         GotoTourState(TourState.YBChoose);
+    }
+
+    private void YBChooseEntered()
+    {
+        StartCoroutine(YBChoose());
     }
 
     private IEnumerator YBChoose()
@@ -124,6 +156,7 @@ public class SCTour : MonoBehaviour
             yield return null;
         }
 
+        /*
         GameObject YBChoose = Instantiate(csTourPrefabs[1], Vector3.zero, Quaternion.identity);
         Animator animator = YBChoose.GetComponent<Animator>();
         yield return new WaitForEndOfFrame();
@@ -138,8 +171,10 @@ public class SCTour : MonoBehaviour
             nTime = animatorStateInfo.normalizedTime;
             yield return null;
         }
+        */
 
-        Destroy(YBChoose.gameObject);
+        ybChoose = Instantiate(csTourPrefabs[1], Vector3.zero, Quaternion.identity);
+        
         GotoTourState(TourState.YBChoose);
     }
 
