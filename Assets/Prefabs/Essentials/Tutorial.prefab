@@ -50,12 +50,12 @@ MonoBehaviour:
     type: 3}
   audioSource: {fileID: 3571222972533778875}
   controllerAnimations:
-  - {fileID: 9112000947872986160, guid: 39323ed1d3be342d2bc5625b125c812f, type: 3}
-  - {fileID: 4155159674745482367, guid: 4dc28697f96254b448a93af8d01ecfb4, type: 3}
-  - {fileID: 7098111349170410272, guid: b2e0f47f29f4c4ba8a19e89707fb8946, type: 3}
-  - {fileID: 8943732779072628416, guid: 7cb0c697e08784cf9a93e690bd425da5, type: 3}
-  - {fileID: 8565450273464666401, guid: dec7fc4c5d0fb4a3685063d376ae11bf, type: 3}
-  - {fileID: 3834749361469729213, guid: 4d140d1ffd4884b7a8e55addca1753f4, type: 3}
+  - {fileID: 6405867617776463585, guid: 69b46a406065fd141aa65ce6e4e056ea, type: 3}
+  - {fileID: 15523202501957424, guid: 406f0d00aeb7431468126d362512c694, type: 3}
+  - {fileID: 2476869501365034206, guid: d1898539d966242348ff30d323c9ee1d, type: 3}
+  - {fileID: 6519610033139042953, guid: 3d81f9a8d1c8d0b40baeba1d8f3ce8d6, type: 3}
+  - {fileID: 6562173640522176125, guid: e71e56141a947414f8787e8f9b13ea48, type: 3}
+  - {fileID: 4121564718414490033, guid: f178cd41957b149798e61e731b4adf24, type: 3}
   scalePrefab: {fileID: 3403632369758014265, guid: 1db6a1e20c3e3ef4a9bc2017ba4cd028,
     type: 3}
   firstExampleNotePrefab: {fileID: 268683940543836428, guid: 3a861c4342fe8ee43abb693546fba3fd,
