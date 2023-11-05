@@ -54,35 +54,35 @@ public class SCTour : MonoBehaviour
     void Update()
     {
 
-        //switch (currentState)
-        //{
-        //    case TourState.XAStart:
-        //        {
-        //            float buttonPressValue = primaryButtonPress.action.ReadValue<float>();
-        //            if (buttonPressValue > 0 && !clipsPlaying)
-        //            {
-        //                //Destroy(xaStart);
-        //                GotoTourState(TourState.YBChoose);
+        switch (currentState)
+        {
+            case TourState.XAStart:
+                {
+                    float buttonPressValue = primaryButtonPress.action.ReadValue<float>();
+                    if (buttonPressValue > 0 && !clipsPlaying)
+                    {
+                        Destroy(xaStart);
+                        GotoTourState(TourState.YBChoose);
 
-        //            }
+                    }
 
-        //        }
-        //        break;
+                }
+                break;
 
-        //    case TourState.YBChoose:
-        //        {
-        //            float buttonPressValue = secondaryButtonPress.action.ReadValue<float>();
-        //            if (buttonPressValue > 0 && !clipsPlaying)
-        //            {
-        //                //Destroy(ybChoose);
-        //                GotoTourState(TourState.None);
-        //            }
+            case TourState.YBChoose:
+                {
+                    float buttonPressValue = secondaryButtonPress.action.ReadValue<float>();
+                    if (buttonPressValue > 0 && !clipsPlaying)
+                    {
+                        Destroy(ybChoose);
+                        GotoTourState(TourState.None);
+                    }
 
-        //        }
-        //        break;
+                }
+                break;
 
 
-        //}
+        }
     }
 
     public void GotoTourState(TourState newState)
@@ -128,8 +128,8 @@ public class SCTour : MonoBehaviour
             yield return null;
         }
         
-        Destroy(xaStart.gameObject);
-        GotoTourState(TourState.YBChoose);
+        // Destroy(xaStart.gameObject);
+        // GotoTourState(TourState.YBChoose);
     }
 
     private void YBChooseEntered()
@@ -148,8 +148,8 @@ public class SCTour : MonoBehaviour
             yield return null;
         }
       
-        Destroy(ybChoose.gameObject);      
-        GotoTourState(TourState.None);
+       // Destroy(ybChoose.gameObject);      
+       // GotoTourState(TourState.None);
     }
  
     private IEnumerator PlayAndDisplay(string[] clips)
