@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1304624376799700618}
+  csTourAnimations:
+  - {fileID: 9112000947872986160, guid: 39323ed1d3be342d2bc5625b125c812f, type: 3}
+  - {fileID: 4155159674745482367, guid: 4dc28697f96254b448a93af8d01ecfb4, type: 3}
   csTourPrefabs:
   - {fileID: 9112000947872986160, guid: 39323ed1d3be342d2bc5625b125c812f, type: 3}
   - {fileID: 4155159674745482367, guid: 4dc28697f96254b448a93af8d01ecfb4, type: 3}

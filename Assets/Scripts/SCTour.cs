@@ -13,6 +13,8 @@ public class SCTour : MonoBehaviour
         None,
         XAStart,
         YBChoose
+
+
     }
 
     [SerializeField] public InputActionReference primaryButtonPress;
@@ -20,7 +22,7 @@ public class SCTour : MonoBehaviour
 
 
     [SerializeField] AudioSource audioSource;
-    // [SerializeField] List<GameObject> csTourAnimations;
+    [SerializeField] List<GameObject> csTourAnimations;
     [SerializeField] List<GameObject> csTourPrefabs;
 
     [SerializeField] float narrationPauseInterval = 0.5f;
@@ -47,12 +49,14 @@ public class SCTour : MonoBehaviour
         GotoTourState(TourState.XAStart);
     }
 
+    
     // Update is called once per frame
     void Update()
     {
+        
         switch (currentState)
         {
-            case TourState.XAStart:
+            case TourState.XAStartPress:
                 {
                     float buttonPressValue = primaryButtonPress.action.ReadValue<float>();
                     if(buttonPressValue > 0 && !clipsPlaying)
@@ -76,16 +80,18 @@ public class SCTour : MonoBehaviour
 
                 }
                 break;
-        }
+            
+        
+
     }
 
     public void GotoTourState(TourState newState)
     {
         currentState = newState;
-        OnStayedEntered(currentState);
+        OnStateEntered(currentState);
     }
 
-    private void OnStayedEntered(TourState state)
+    private void OnStateEntered(TourState state)
     {
         switch (state)
         {
@@ -94,13 +100,13 @@ public class SCTour : MonoBehaviour
                     break;
                 }
             case TourState.XAStart:
-                {
-                    PlayAnimation();
+                {                
+                    XAStartEntered();
                     break;
                 }
             case TourState.YBChoose:
                 {
-                    PlayAnimation();
+                    YBChooseEntered();
                     break;
                 }
         }
@@ -108,10 +114,10 @@ public class SCTour : MonoBehaviour
 
     private void XAStartEntered()
     {
-        StartCoroutine(XAStart());
+        StartCoroutine(XAStartSection());
     }
 
-    private IEnumerator XAStart()
+    private IEnumerator XAStartSection()
     {
         string[] clips = { "30" };
         StartCoroutine(PlayAndDisplay(clips));
@@ -119,12 +125,13 @@ public class SCTour : MonoBehaviour
         {
             yield return null;
         }
-
-        /*
-        GameObject XAStart = Instantiate(csTourPrefabs[0], Vector3.zero, Quaternion.identity);
-        Animator animator = XAStart.GetComponent<Animator>();
+        
+        GameObject xaStart = Instantiate(csTourPrefabs[0], Vector3.zero, Quaternion.identity);
+        
+        Animator animator = xaStart.GetComponent<Animator>();
         yield return new WaitForEndOfFrame();
 
+        
         float nTime = 0;
         AnimatorStateInfo animatorStateInfo;
 
@@ -135,19 +142,17 @@ public class SCTour : MonoBehaviour
             nTime = animatorStateInfo.normalizedTime;
             yield return null;
         }
-        */
-
-        xaStart = Instantiate(csTourPrefabs[0], Vector3.zero, Quaternion.identity);
         
+        Destroy(xaStart.gameObject);
         GotoTourState(TourState.YBChoose);
     }
 
     private void YBChooseEntered()
     {
-        StartCoroutine(YBChoose());
+        StartCoroutine(YBChooseSection());
     }
 
-    private IEnumerator YBChoose()
+    private IEnumerator YBChooseSection()
     {
         string[] clips = { "31" };
         StartCoroutine(PlayAndDisplay(clips));
@@ -155,10 +160,9 @@ public class SCTour : MonoBehaviour
         {
             yield return null;
         }
-
-        /*
-        GameObject YBChoose = Instantiate(csTourPrefabs[1], Vector3.zero, Quaternion.identity);
-        Animator animator = YBChoose.GetComponent<Animator>();
+      
+        GameObject ybChoose = Instantiate(csTourPrefabs[1], Vector3.zero, Quaternion.identity);
+        Animator animator = ybChoose.GetComponent<Animator>();
         yield return new WaitForEndOfFrame();
 
         float nTime = 0;
@@ -171,14 +175,11 @@ public class SCTour : MonoBehaviour
             nTime = animatorStateInfo.normalizedTime;
             yield return null;
         }
-        */
 
-        ybChoose = Instantiate(csTourPrefabs[1], Vector3.zero, Quaternion.identity);
-        
-        GotoTourState(TourState.YBChoose);
+        Destroy(ybChoose.gameObject);      
+        GotoTourState(TourState.None);
     }
-
-
+ 
     private string PlayAndDisplay(string[] clips3)
     {
         throw new NotImplementedException();
@@ -186,10 +187,15 @@ public class SCTour : MonoBehaviour
     
     private void PlayAnimation()
     {
-
         PlayAnimation();
-
-    }
-
-
+    }    
 }
+
+
+// gpt change color every second
+// To use this extension, you need an OpenAI account and provide it's API key to this extension
+// https://platform.openai.com/account/api-keys
+// Provide key by one of the below
+// * Create an environment variable called OPENAI_API_KEY with the API key
+// * Create a file with name .openai under user profile directory with the API key
+// * Set API key in options, Tools->Options->Comment2GPT->General->Authentication
