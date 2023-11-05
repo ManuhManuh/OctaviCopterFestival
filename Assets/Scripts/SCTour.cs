@@ -53,36 +53,36 @@ public class SCTour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        switch (currentState)
-        {
-            case TourState.XAStartPress:
-                {
-                    float buttonPressValue = primaryButtonPress.action.ReadValue<float>();
-                    if(buttonPressValue > 0 && !clipsPlaying)
-                    {
-                        Destroy(xaStart);
-                        GotoTourState(TourState.YBChoose);
-                       
-                    }
-                    
-                }
-                break;
 
-            case TourState.YBChoose:
-                {
-                    float buttonPressValue = secondaryButtonPress.action.ReadValue<float>();
-                    if (buttonPressValue > 0 && !clipsPlaying)
-                    {
-                        Destroy(ybChoose);
-                        GotoTourState(TourState.YBChoose);
-                    }
+        //switch (currentState)
+        //{
+        //    case TourState.XAStart:
+        //        {
+        //            float buttonPressValue = primaryButtonPress.action.ReadValue<float>();
+        //            if (buttonPressValue > 0 && !clipsPlaying)
+        //            {
+        //                //Destroy(xaStart);
+        //                GotoTourState(TourState.YBChoose);
 
-                }
-                break;
-            
-        
+        //            }
 
+        //        }
+        //        break;
+
+        //    case TourState.YBChoose:
+        //        {
+        //            float buttonPressValue = secondaryButtonPress.action.ReadValue<float>();
+        //            if (buttonPressValue > 0 && !clipsPlaying)
+        //            {
+        //                //Destroy(ybChoose);
+        //                GotoTourState(TourState.None);
+        //            }
+
+        //        }
+        //        break;
+
+
+        //}
     }
 
     public void GotoTourState(TourState newState)
@@ -119,27 +119,12 @@ public class SCTour : MonoBehaviour
 
     private IEnumerator XAStartSection()
     {
+        GameObject xaStart = Instantiate(csTourPrefabs[0], Vector3.zero, Quaternion.identity);
+
         string[] clips = { "30" };
         StartCoroutine(PlayAndDisplay(clips));
         while(clipsPlaying)
         {
-            yield return null;
-        }
-        
-        GameObject xaStart = Instantiate(csTourPrefabs[0], Vector3.zero, Quaternion.identity);
-        
-        Animator animator = xaStart.GetComponent<Animator>();
-        yield return new WaitForEndOfFrame();
-
-        
-        float nTime = 0;
-        AnimatorStateInfo animatorStateInfo;
-
-        // wait for animation to complete
-        while (nTime < 1.0f)
-        {
-            animatorStateInfo = animator.GetCurrentAnimatorStateInfo(0);
-            nTime = animatorStateInfo.normalizedTime;
             yield return null;
         }
         
@@ -154,6 +139,8 @@ public class SCTour : MonoBehaviour
 
     private IEnumerator YBChooseSection()
     {
+        GameObject ybChoose = Instantiate(csTourPrefabs[1], Vector3.zero, Quaternion.identity);
+
         string[] clips = { "31" };
         StartCoroutine(PlayAndDisplay(clips));
         while (clipsPlaying)
@@ -161,34 +148,37 @@ public class SCTour : MonoBehaviour
             yield return null;
         }
       
-        GameObject ybChoose = Instantiate(csTourPrefabs[1], Vector3.zero, Quaternion.identity);
-        Animator animator = ybChoose.GetComponent<Animator>();
-        yield return new WaitForEndOfFrame();
-
-        float nTime = 0;
-        AnimatorStateInfo animatorStateInfo;
-
-        // wait for animation to complete
-        while (nTime < 1.0f)
-        {
-            animatorStateInfo = animator.GetCurrentAnimatorStateInfo(0);
-            nTime = animatorStateInfo.normalizedTime;
-            yield return null;
-        }
-
         Destroy(ybChoose.gameObject);      
         GotoTourState(TourState.None);
     }
  
-    private string PlayAndDisplay(string[] clips3)
+    private IEnumerator PlayAndDisplay(string[] clips)
     {
-        throw new NotImplementedException();
+        clipsPlaying = true;
+
+        yield return new WaitForSeconds(narrationPauseInterval);
+
+        foreach (string clip in clips)
+        {
+            int clipNumber = Int32.Parse(clip);
+            // update UI with text
+            uiDisplay.PresentFeedback("TutorialClip" + clip);
+            yield return new WaitForEndOfFrame();
+
+            // play audio clip
+            audioSource.PlayOneShot(currentClipArray[clipNumber]);
+            while (audioSource.isPlaying)
+            {
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(narrationPauseInterval);
+
+        }
+
+        clipsPlaying = false;
     }
-    
-    private void PlayAnimation()
-    {
-        PlayAnimation();
-    }    
+
 }
 
 
