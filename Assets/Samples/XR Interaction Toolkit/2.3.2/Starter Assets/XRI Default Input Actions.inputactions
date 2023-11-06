@@ -2131,6 +2131,134 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "ControllerTour",
+            "id": "01db6bef-4458-4feb-968a-96e97492975b",
+            "actions": [
+                {
+                    "name": "PressAX",
+                    "type": "Button",
+                    "id": "c0396e3c-9433-449a-9236-8c3b71cdd88f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PressYB",
+                    "type": "Button",
+                    "id": "76abc6a9-ac96-4cef-9d75-53a7b9328143",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TriggerTrick",
+                    "type": "Button",
+                    "id": "90734278-38ed-4d3a-918c-37ce33650301",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "JoystickForward",
+                    "type": "Button",
+                    "id": "6ceeb737-bc8d-4efb-a692-55f5c6919a10",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "HomeButton",
+                    "type": "Button",
+                    "id": "0780cd76-71fb-432d-ab81-8994d5079249",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MenuButtonLeft",
+                    "type": "Button",
+                    "id": "0530645d-63d5-424b-bcf2-f6dd59f58e0a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "34edc42e-3b4a-4742-982f-82b239a5fdaa",
+                    "path": "<OculusTouchController>/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PressAX",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0acac4f4-eacf-40a9-96d9-cee368b9ce5c",
+                    "path": "<OculusTouchController>/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PressYB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4d0382f4-e57a-40f6-9eab-7d98b28a6110",
+                    "path": "<OculusTouchController>/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TriggerTrick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f5ae051a-a074-4e50-8210-caa2971a885c",
+                    "path": "<OculusTouchController>/thumbstickTouched",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Continuous Move",
+                    "action": "JoystickForward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "34b79539-8a5d-4352-b225-18926cbc14ec",
+                    "path": "<OculusTouchController>{RightHand}/menu",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HomeButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "de41a8aa-e75f-4ef4-bc8c-3ec7bd3b611d",
+                    "path": "<OculusTouchController>{LeftHand}/menu",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MenuButtonLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

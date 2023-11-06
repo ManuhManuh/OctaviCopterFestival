@@ -44,13 +44,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea8828a0193234757b3db1e7f99b17a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  primaryButtonPress: {fileID: -6389469272176030285, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  secondaryButtonPress: {fileID: 6179897406698848909, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  joystickButtonPress: {fileID: -518749075552475960, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  triggerButtonPress: {fileID: 690212918356455174, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  homeButtonPress: {fileID: 4520519817937927010, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  menuButtonPress: {fileID: 8119074546922157219, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
   audioSource: {fileID: 1304624376799700618}
   csTourAnimations:
   - {fileID: 9112000947872986160, guid: 39323ed1d3be342d2bc5625b125c812f, type: 3}
   - {fileID: 4155159674745482367, guid: 4dc28697f96254b448a93af8d01ecfb4, type: 3}
+  - {fileID: 7098111349170410272, guid: b2e0f47f29f4c4ba8a19e89707fb8946, type: 3}
+  - {fileID: 8943732779072628416, guid: 7cb0c697e08784cf9a93e690bd425da5, type: 3}
+  - {fileID: 3834749361469729213, guid: 4d140d1ffd4884b7a8e55addca1753f4, type: 3}
+  - {fileID: 8565450273464666401, guid: dec7fc4c5d0fb4a3685063d376ae11bf, type: 3}
   csTourPrefabs:
   - {fileID: 9112000947872986160, guid: 39323ed1d3be342d2bc5625b125c812f, type: 3}
   - {fileID: 4155159674745482367, guid: 4dc28697f96254b448a93af8d01ecfb4, type: 3}
+  - {fileID: 7098111349170410272, guid: b2e0f47f29f4c4ba8a19e89707fb8946, type: 3}
+  - {fileID: 8943732779072628416, guid: 7cb0c697e08784cf9a93e690bd425da5, type: 3}
+  - {fileID: 3834749361469729213, guid: 4d140d1ffd4884b7a8e55addca1753f4, type: 3}
+  - {fileID: 8565450273464666401, guid: dec7fc4c5d0fb4a3685063d376ae11bf, type: 3}
   narrationPauseInterval: 0.5
   currentState: 0
 --- !u!82 &1304624376799700618

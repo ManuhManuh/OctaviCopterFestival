@@ -12,14 +12,20 @@ public class SCTour : MonoBehaviour
     {
         None,
         XAStart,
-        YBChoose
-
-
+        YBChoose,
+        JoystickForward,
+        TriggerTrick,
+        HomeButton,
+        MenuButton,
+        LastState
     }
 
-    [SerializeField] public InputActionReference primaryButtonPress;
-    [SerializeField] public InputActionReference secondaryButtonPress;
-
+    [SerializeField] private InputActionReference primaryButtonPress;
+    [SerializeField] private InputActionReference secondaryButtonPress;
+    [SerializeField] private InputActionReference joystickButtonPress;
+    [SerializeField] private InputActionReference triggerButtonPress;
+    [SerializeField] private InputActionReference homeButtonPress;
+    [SerializeField] private InputActionReference menuButtonPress;
 
     [SerializeField] AudioSource audioSource;
     [SerializeField] List<GameObject> csTourAnimations;
@@ -36,7 +42,11 @@ public class SCTour : MonoBehaviour
     private UIDisplay uiDisplay;
 
     private GameObject xaStart;
-    private GameObject ybChoose;
+    private GameObject ybChoose; 
+    private GameObject joystickPrefab;
+    private GameObject triggerTrickPrefab;
+    private GameObject homeButton;
+    private GameObject menuButton;
 
     // Start is called before the first frame update
     void Start()
@@ -53,7 +63,6 @@ public class SCTour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         switch (currentState)
         {
             case TourState.XAStart:
@@ -65,7 +74,6 @@ public class SCTour : MonoBehaviour
                         GotoTourState(TourState.YBChoose);
 
                     }
-
                 }
                 break;
 
@@ -75,13 +83,66 @@ public class SCTour : MonoBehaviour
                     if (buttonPressValue > 0 && !clipsPlaying)
                     {
                         Destroy(ybChoose);
-                        GotoTourState(TourState.None);
+                        GotoTourState(TourState.JoystickForward);
                     }
 
                 }
                 break;
 
+            case TourState.JoystickForward:
+                {
+                    float buttonPressValue = joystickButtonPress.action.ReadValue<float>();
+                    if (buttonPressValue > 0 && !clipsPlaying)
+                    {
+                        Destroy(joystickPrefab);
+                        GotoTourState(TourState.TriggerTrick);
+                    }
+                }
+                break;
 
+            case TourState.TriggerTrick:
+                {
+                    float buttonPressValue = triggerButtonPress.action.ReadValue<float>();
+                    if(buttonPressValue > 0 && !clipsPlaying)
+                    {
+                        Destroy(triggerTrickPrefab);
+                        GotoTourState(TourState.HomeButton);
+                            
+                    }
+                    break;                    
+                }
+           
+            
+            case TourState.HomeButton:
+                {
+                    /*
+                    float buttonPressValue = homeButtonPress.action.ReadValue<float>();
+                    if(buttonPressValue > 0 && !clipsPlaying)
+                    {
+                        Destroy(homeButton);
+                        GotoTourState(TourState.MenuButton);
+                    }
+                    */
+
+                    if (!clipsPlaying)
+                    { 
+                        Destroy(homeButton);
+                        GotoTourState(TourState.MenuButton);
+                    }                   
+                    break;
+                }
+            
+            case TourState.MenuButton:
+                {
+                    float buttonPressValue = menuButtonPress.action.ReadValue<float>(); 
+                    if(buttonPressValue > 0 && !clipsPlaying)
+                    {
+                        Destroy(menuButton);
+                        GotoTourState(TourState.None);
+                       
+                    }
+                    break;
+                }          
         }
     }
 
@@ -109,6 +170,26 @@ public class SCTour : MonoBehaviour
                     YBChooseEntered();
                     break;
                 }
+            case TourState.JoystickForward:
+                {
+                    JoystickEntered();
+                    break;
+                }
+            case TourState.TriggerTrick:
+                {
+                    TriggerTrickEntered();
+                    break;
+                }
+            case TourState.HomeButton:
+                {
+                    HomeButtonEntered();
+                    break;
+                }
+            case TourState.MenuButton:
+                {
+                    MenuButtonEntered();
+                    break;
+                }       
         }
     }
 
@@ -119,7 +200,7 @@ public class SCTour : MonoBehaviour
 
     private IEnumerator XAStartSection()
     {
-        GameObject xaStart = Instantiate(csTourPrefabs[0], Vector3.zero, Quaternion.identity);
+        xaStart = Instantiate(csTourPrefabs[0], Vector3.zero, Quaternion.identity);
 
         string[] clips = { "30" };
         StartCoroutine(PlayAndDisplay(clips));
@@ -139,7 +220,7 @@ public class SCTour : MonoBehaviour
 
     private IEnumerator YBChooseSection()
     {
-        GameObject ybChoose = Instantiate(csTourPrefabs[1], Vector3.zero, Quaternion.identity);
+        ybChoose = Instantiate(csTourPrefabs[1], Vector3.zero, Quaternion.identity);
 
         string[] clips = { "31" };
         StartCoroutine(PlayAndDisplay(clips));
@@ -147,11 +228,73 @@ public class SCTour : MonoBehaviour
         {
             yield return null;
         }
-      
-       // Destroy(ybChoose.gameObject);      
-       // GotoTourState(TourState.None);
     }
- 
+
+    private void JoystickEntered()
+    {
+        StartCoroutine(JoystickSection());
+    }
+
+    private IEnumerator JoystickSection()
+    {
+        joystickPrefab = Instantiate(csTourPrefabs[2], Vector3.zero, Quaternion.identity);
+
+        string[] clips = { "32", "33" };
+        StartCoroutine(PlayAndDisplay(clips));
+        while (clipsPlaying)
+        {
+            yield return null;
+        }
+    }
+
+    private void TriggerTrickEntered()
+    {
+        StartCoroutine(TriggerSection());
+    }
+
+    private IEnumerator TriggerSection()
+    {
+        triggerTrickPrefab = Instantiate(csTourPrefabs[3], Vector3.zero, Quaternion.identity);
+
+        string[] clips = { "34" };
+        StartCoroutine(PlayAndDisplay(clips));
+        while (clipsPlaying)
+        {
+            yield return null;
+        }
+    }
+
+    private void HomeButtonEntered()
+    {
+        StartCoroutine(HomeButtonSection());
+    }
+    private IEnumerator HomeButtonSection()
+    {
+        homeButton = Instantiate(csTourPrefabs[4], Vector3.zero, Quaternion.identity);
+        string[] clips = { "35" };
+        StartCoroutine(PlayAndDisplay(clips));
+        while (clipsPlaying)
+        { 
+            yield return null;
+        }            
+    }
+
+    private void MenuButtonEntered()
+    {
+        StartCoroutine(MenuButtonSection());
+    }
+
+    private IEnumerator MenuButtonSection()
+    {
+        menuButton = Instantiate(csTourPrefabs[5], Vector3.zero, Quaternion.identity);
+        string[] clips = { "36" };
+        StartCoroutine(PlayAndDisplay(clips));
+        while (clipsPlaying)
+        {
+            yield return null;
+        }      
+    }
+
     private IEnumerator PlayAndDisplay(string[] clips)
     {
         clipsPlaying = true;
@@ -175,17 +318,6 @@ public class SCTour : MonoBehaviour
             yield return new WaitForSeconds(narrationPauseInterval);
 
         }
-
         clipsPlaying = false;
     }
-
 }
-
-
-// gpt change color every second
-// To use this extension, you need an OpenAI account and provide it's API key to this extension
-// https://platform.openai.com/account/api-keys
-// Provide key by one of the below
-// * Create an environment variable called OPENAI_API_KEY with the API key
-// * Create a file with name .openai under user profile directory with the API key
-// * Set API key in options, Tools->Options->Comment2GPT->General->Authentication
