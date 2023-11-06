@@ -13,6 +13,8 @@ public class MenuDisplay : MonoBehaviour
     [SerializeField] private Slider speedSlider;
     [SerializeField] private Button TutorialButton;
 
+    [SerializeField] private Button ContollerTourButton; // added
+
     [SerializeField] private GameObject instructionPanel;
     [SerializeField] private TMP_Text backButtonText;
 
@@ -39,7 +41,7 @@ public class MenuDisplay : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         leftMenuButton = FindObjectOfType<LeftMenuButton>();
 
-        if(PlayerPrefs.GetInt("LastLanguageUsed") != (int)Locale.en)
+        if (PlayerPrefs.GetInt("LastLanguageUsed") != (int)Locale.en)
         {
             LocalizeSelections();
         }
@@ -51,19 +53,19 @@ public class MenuDisplay : MonoBehaviour
         moveProvider = FindObjectOfType<ActionBasedContinuousMoveProvider>();
         UpdateSpeedRanges();
         UpdateSpeedSlider();
-        
+
 
     }
     public void DisplayInstructions()
     {
- 
+
         instructionPanel.SetActive(true);
         mainPanel.SetActive(false);
     }
 
     public void BackToMain()
     {
-  
+
         mainPanel.SetActive(true);
         instructionPanel.SetActive(false);
         UpdateSpeedRanges();
@@ -99,10 +101,10 @@ public class MenuDisplay : MonoBehaviour
     public void LocalizeSelections()
     {
         Locale oldLocale = Localization.currentLocale;
-        Locale newLocale = localizationInitialized? Localization.FindLocaleFromButtonText(languageButtonText.text): (Locale)PlayerPrefs.GetInt("LastLanguageUsed");
+        Locale newLocale = localizationInitialized ? Localization.FindLocaleFromButtonText(languageButtonText.text) : (Locale)PlayerPrefs.GetInt("LastLanguageUsed");
 
         Localization.currentLocale = newLocale;
-        PlayerPrefs.SetInt("LastLanguageUsed",(int)newLocale);
+        PlayerPrefs.SetInt("LastLanguageUsed", (int)newLocale);
 
         // update mode selection 
         string modeKey = Localization.FindKeyFromValue(oldLocale, modeButtonText.text);
@@ -119,12 +121,12 @@ public class MenuDisplay : MonoBehaviour
         {
             string textKey = Localization.FindKeyFromValue(oldLocale, modes[i]);
             Localization.currentLocalizationTable.TryGetValue(textKey, out string newModeText);
- 
-            if(newModeText != null)
+
+            if (newModeText != null)
             {
                 modes[i] = newModeText;
             }
-            
+
         }
 
         // start the language selector on the right language
@@ -147,7 +149,7 @@ public class MenuDisplay : MonoBehaviour
 
         }
 
-        
+
 
         gameManager.SendMessageToUI();
 
@@ -164,7 +166,7 @@ public class MenuDisplay : MonoBehaviour
     private void OnEnable()
     {
         // prevent the tutorial from being run in the middle of a level (must restart to run tutorial)
-        if(gameManager == null)
+        if (gameManager == null)
         {
             TutorialButton.enabled = true;
         }
@@ -223,14 +225,14 @@ public class MenuDisplay : MonoBehaviour
         {
             newSliderValue = speedPortion / speedRange;
         }
- 
-        speedSlider.value = Mathf.Clamp(newSliderValue,0,1);
+
+        speedSlider.value = Mathf.Clamp(newSliderValue, 0, 1);
 
     }
 
     public void RestartGame()
     {
-        if(gameManager.CurrentLevelManager == null)
+        if (gameManager.CurrentLevelManager == null)
         {
             gameManager.InitiateGame();
         }
@@ -239,7 +241,7 @@ public class MenuDisplay : MonoBehaviour
             gameManager.restartRequested = true;
             gameManager.CurrentLevelManager.GotoState(LevelManager.LevelState.EvaluatingLevel);
         }
-        
+
     }
 
     public void RunTutorial()
@@ -248,6 +250,13 @@ public class MenuDisplay : MonoBehaviour
         leftMenuButton.CloseWithoutButtonPress();
     }
 
+    public void RunControllerTour()
+    {
+        gameManager.RunControllerTour();
+        leftMenuButton.CloseWithoutButtonPress();
+       
+    }
+    
     public void ExitGame()
     {
         Application.Quit();

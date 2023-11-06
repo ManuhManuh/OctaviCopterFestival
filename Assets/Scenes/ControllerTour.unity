@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0014457961, g: 0.00096123194, b: 0.00023574336, a: 1}
+  m_IndirectSpecularColor: {r: 0.0014452504, g: 0.00096075534, b: 0.00023557333, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -496,6 +496,7 @@ MonoBehaviour:
   player: {fileID: 2118515032950969002}
   restartRequested: 0
   runningTutorial: 0
+  runningControllerTour: 0
   startLevelActionReference: {fileID: 3049924841469882078, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
   levels:
@@ -511,10 +512,13 @@ MonoBehaviour:
   timeBeforeRestartAllowed: 10
   tutorialPrefab: {fileID: 7419633889644547261, guid: 0f0751fc05393774893f7c92d15ec76c,
     type: 3}
+  controllerTourPrefab: {fileID: 4892458542128698037, guid: 9dec76dfd1dea4941a0bdcbd2e026b77,
+    type: 3}
   backgroundAsset: {fileID: 405820956}
   fireworks: {fileID: 1473118096}
   endingSong: {fileID: 297750292}
   currentFeedbackText: 
+  controllerTour: {fileID: 0}
 --- !u!4 &457355963
 Transform:
   m_ObjectHideFlags: 0
@@ -1882,7 +1886,7 @@ PrefabInstance:
     - target: {fileID: 4155159674745482367, guid: 4dc28697f96254b448a93af8d01ecfb4,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4dc28697f96254b448a93af8d01ecfb4, type: 3}
@@ -2101,46 +2105,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3137375980820430083}
     m_Modifications:
-    - target: {fileID: 783001369629064649, guid: 94594c68300b4124fbd5cd83f7f0415a,
-        type: 3}
-      propertyPath: m_Name
-      value: ControlsInstructions
-      objectReference: {fileID: 0}
-    - target: {fileID: 2210553561790774405, guid: 94594c68300b4124fbd5cd83f7f0415a,
-        type: 3}
-      propertyPath: m_text
-      value: Pull either trigger for Stealth Mode; press X or A to reset level
-      objectReference: {fileID: 0}
     - target: {fileID: 2507651125026322764, guid: 94594c68300b4124fbd5cd83f7f0415a,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3184895211693892052, guid: 94594c68300b4124fbd5cd83f7f0415a,
-        type: 3}
-      propertyPath: tutorialPrefab
-      value: 
-      objectReference: {fileID: 7419633889644547261, guid: 0f0751fc05393774893f7c92d15ec76c,
-        type: 3}
-    - target: {fileID: 5189127048297667455, guid: 94594c68300b4124fbd5cd83f7f0415a,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5459697838709398258, guid: 94594c68300b4124fbd5cd83f7f0415a,
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6714614020864692736, guid: 94594c68300b4124fbd5cd83f7f0415a,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6894871337715721022, guid: 94594c68300b4124fbd5cd83f7f0415a,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RunTutorial
       objectReference: {fileID: 0}
     - target: {fileID: 8915515325670297668, guid: 94594c68300b4124fbd5cd83f7f0415a,
         type: 3}
@@ -2251,16 +2224,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MainMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 8915515325670297672, guid: 94594c68300b4124fbd5cd83f7f0415a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8915515325776168199, guid: 94594c68300b4124fbd5cd83f7f0415a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94594c68300b4124fbd5cd83f7f0415a, type: 3}
@@ -3476,6 +3439,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SC_HomeButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 3834749361469729213, guid: 4d140d1ffd4884b7a8e55addca1753f4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6698683179124109330, guid: 4d140d1ffd4884b7a8e55addca1753f4,
         type: 3}
