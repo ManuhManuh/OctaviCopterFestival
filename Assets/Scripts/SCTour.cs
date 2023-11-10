@@ -72,7 +72,6 @@ public class SCTour : MonoBehaviour
                     {
                         Destroy(xaStart);
                         GotoTourState(TourState.YBChoose);
-
                     }
                 }
                 break;
@@ -85,7 +84,6 @@ public class SCTour : MonoBehaviour
                         Destroy(ybChoose);
                         GotoTourState(TourState.JoystickForward);
                     }
-
                 }
                 break;
 
@@ -106,12 +104,10 @@ public class SCTour : MonoBehaviour
                     if(buttonPressValue > 0 && !clipsPlaying)
                     {
                         Destroy(triggerTrickPrefab);
-                        GotoTourState(TourState.HomeButton);
-                            
+                        GotoTourState(TourState.HomeButton);                          
                     }
                     break;                    
                 }
-           
             
             case TourState.HomeButton:
                 {
@@ -142,7 +138,18 @@ public class SCTour : MonoBehaviour
                        
                     }
                     break;
-                }          
+                }
+
+            case TourState.LastState:
+                {
+                    float buttonPressValue = triggerButtonPress.action.ReadValue<float>();
+                    if (buttonPressValue > 0 && !clipsPlaying)
+                    {
+                        Destroy(menuButton);
+                        GotoTourState(TourState.None);
+                    }
+                    break;
+                }
         }
     }
 

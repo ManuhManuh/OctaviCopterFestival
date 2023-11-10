@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     private bool tutorialSuccessful = false;
     private GameObject tutorial;
 
-    public GameObject controllerTour; //
+    private GameObject controllerTour; //
 
     private void Awake()
     {
@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (runningTutorial)
+        if (runningTutorial || runningControllerTour) // 
         {
             if (currentFeedbackText != "")
             {
@@ -120,7 +120,6 @@ public class GameManager : MonoBehaviour
 
             }
         }
-        
     }
 
     public void RunTutorial()
