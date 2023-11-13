@@ -15,8 +15,6 @@ public class SCTour : MonoBehaviour
         YBChoose,
         JoystickForward,
         TriggerTrick,
-        HomeButton,
-        MenuButton,
         LastState
     }
 
@@ -24,8 +22,6 @@ public class SCTour : MonoBehaviour
     [SerializeField] private InputActionReference secondaryButtonPress;
     [SerializeField] private InputActionReference joystickButtonPress;
     [SerializeField] private InputActionReference triggerButtonPress;
-    [SerializeField] private InputActionReference homeButtonPress;
-    [SerializeField] private InputActionReference menuButtonPress;
 
     [SerializeField] AudioSource audioSource;
     [SerializeField] List<GameObject> csTourAnimations;
@@ -45,8 +41,8 @@ public class SCTour : MonoBehaviour
     private GameObject ybChoose; 
     private GameObject joystickPrefab;
     private GameObject triggerTrickPrefab;
-    private GameObject homeButton;
-    private GameObject menuButton;
+
+    private GameObject locomotionControls;
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +50,7 @@ public class SCTour : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         currentClipArray = Localization.currentVOTable;
         uiDisplay = GameObject.FindObjectOfType<UIDisplay>();
+        locomotionControls = GameObject.Find("Locomotion");
 
         currentState = TourState.None;
         GotoTourState(TourState.XAStart);
@@ -104,52 +101,13 @@ public class SCTour : MonoBehaviour
                     if(buttonPressValue > 0 && !clipsPlaying)
                     {
                         Destroy(triggerTrickPrefab);
-                        GotoTourState(TourState.HomeButton);                          
+                        GotoTourState(TourState.LastState);                          
                     }
                     break;                    
                 }
             
-            case TourState.HomeButton:
-                {
-                    /*
-                    float buttonPressValue = homeButtonPress.action.ReadValue<float>();
-                    if(buttonPressValue > 0 && !clipsPlaying)
-                    {
-                        Destroy(homeButton);
-                        GotoTourState(TourState.MenuButton);
-                    }
-                    */
 
-                    if (!clipsPlaying)
-                    { 
-                        Destroy(homeButton);
-                        GotoTourState(TourState.MenuButton);
-                    }                   
-                    break;
-                }
             
-            case TourState.MenuButton:
-                {
-                    float buttonPressValue = menuButtonPress.action.ReadValue<float>(); 
-                    if(buttonPressValue > 0 && !clipsPlaying)
-                    {
-                        Destroy(menuButton);
-                        GotoTourState(TourState.None);
-                       
-                    }
-                    break;
-                }
-
-            case TourState.LastState:
-                {
-                    float buttonPressValue = triggerButtonPress.action.ReadValue<float>();
-                    if (buttonPressValue > 0 && !clipsPlaying)
-                    {
-                        Destroy(menuButton);
-                        GotoTourState(TourState.None);
-                    }
-                    break;
-                }
         }
     }
 
@@ -168,7 +126,7 @@ public class SCTour : MonoBehaviour
                     break;
                 }
             case TourState.XAStart:
-                {                
+                {      
                     XAStartEntered();
                     break;
                 }
@@ -187,21 +145,18 @@ public class SCTour : MonoBehaviour
                     TriggerTrickEntered();
                     break;
                 }
-            case TourState.HomeButton:
+            case TourState.LastState:
                 {
-                    HomeButtonEntered();
+                    // may use this to remind player to use menu button to return to menu
+                    LastStateEntered();
                     break;
                 }
-            case TourState.MenuButton:
-                {
-                    MenuButtonEntered();
-                    break;
-                }       
         }
     }
 
     private void XAStartEntered()
     {
+        DisableFlying();
         StartCoroutine(XAStartSection());
     }
 
@@ -216,8 +171,6 @@ public class SCTour : MonoBehaviour
             yield return null;
         }
         
-        // Destroy(xaStart.gameObject);
-        // GotoTourState(TourState.YBChoose);
     }
 
     private void YBChooseEntered()
@@ -271,35 +224,10 @@ public class SCTour : MonoBehaviour
         }
     }
 
-    private void HomeButtonEntered()
+    private void LastStateEntered()
     {
-        StartCoroutine(HomeButtonSection());
-    }
-    private IEnumerator HomeButtonSection()
-    {
-        homeButton = Instantiate(csTourPrefabs[4], Vector3.zero, Quaternion.identity);
-        string[] clips = { "35" };
-        StartCoroutine(PlayAndDisplay(clips));
-        while (clipsPlaying)
-        { 
-            yield return null;
-        }            
-    }
-
-    private void MenuButtonEntered()
-    {
-        StartCoroutine(MenuButtonSection());
-    }
-
-    private IEnumerator MenuButtonSection()
-    {
-        menuButton = Instantiate(csTourPrefabs[5], Vector3.zero, Quaternion.identity);
-        string[] clips = { "36" };
-        StartCoroutine(PlayAndDisplay(clips));
-        while (clipsPlaying)
-        {
-            yield return null;
-        }      
+        uiDisplay.PresentFeedback("PressMenuButton");
+        EnableFlying();
     }
 
     private IEnumerator PlayAndDisplay(string[] clips)
@@ -327,4 +255,19 @@ public class SCTour : MonoBehaviour
         }
         clipsPlaying = false;
     }
+
+    private void EnableFlying()
+    {
+        locomotionControls.SetActive(true);
+
+    }
+
+
+    private void DisableFlying()
+    {
+        locomotionControls.SetActive(false);
+
+    }
+
+
 }
