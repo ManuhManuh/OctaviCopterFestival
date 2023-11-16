@@ -1,0 +1,83 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SCTour : MonoBehaviour
+{
+    public enum CSTourState
+    {
+        None,
+        XAStart,
+        YACHoose
+
+    }
+
+    [SerializeField] AudioSource audioSource;
+
+    [SerializeField] List<GameObject> csTourAnimations;
+
+    [SerializeField] List<GameObject> csTourPrefabs;
+
+    [SerializeField] float narrationPauseInterval = 0.5f;
+
+    private GameManager gameManager;
+    public CSTourState currentState;
+
+    private bool clipsPlaying = true;
+
+    private AudioClip[] currentClipArray;
+    // private UIDisplay uiDisplay;
+
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+
+        currentState = CSTourState.None;
+        GotoCSTourState(CSTourState.XAStart);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        switch (currentState)
+        {
+            case CSTourState.XAStart:
+                {
+                    GetComponent<GameObject>();
+                }
+                break;
+        }
+    }
+
+    public void GotoCSTourState(CSTourState newState)
+    {
+        currentState = newState;
+        OnStayedEntered(currentState);
+    }
+
+    private void OnStayedEntered(CSTourState state)
+    {
+        switch (state)
+        {
+            case CSTourState.None:
+                {
+                    break;
+                }
+            case CSTourState.XAStart:
+                {
+                    PlayAnimation();
+                    break;
+                }
+        }
+    }
+
+    private void PlayAnimation()
+    {
+
+        PlayAnimation();
+
+    }
+}

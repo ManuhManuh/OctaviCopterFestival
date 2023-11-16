@@ -71,10 +71,9 @@ TutorialClip26	Excellent!  You have finished the tutorial! 	Mega! Du hast es ges
 TutorialClip27	If you got the Track right on the first try, you would have been awarded full points for the level.  You get half points for getting it in two tries.	Hast Du es auf Anhieb geschafft, erhältst Du die volle Punktzahl für das Level. Beim zweiten Versuch bekommst Du die Hälfte der Punktzahl.	Spanish version of clip 27	French version of clip 27
 TutorialClip28	You have as many chances as you need to get the correct track, but you will not receive any points after the second try.	Du hast unendlich viele Versuche aber Punkte bekommst Du nur in den ersten beiden Runden.	Spanish version of clip 28	French version of clip 28
 TutorialClip29	Good luck!  Press X or A to start the first level.	Drücke einen der unteren, runden Knöpfe (X oder A), um mit dem ersten Level zu starten! Guten Flug!	Spanish version of clip 29	French version of clip 29
-TutorialClip30	X or A to start the level.	X oder A, um das Level zu starten.	Spanish version of clip 30	French version of clip 30
-TutorialClip31	Y or B to in between choose tracks.	Y oder B, um zwischen den Spuren zu wählen.	Spanish version of clip 31	French version of clip 31
+TutorialClip30	Press X or A to start the level.	X oder A, um das Level zu starten.	Spanish version of clip 30	French version of clip 30
+TutorialClip31	Press Y or B to move between tracks.	Y oder B, um zwischen den Spuren zu wählen.	Spanish version of clip 31	French version of clip 31
 TutorialClip32	Push the joystick forward to fly. 	Bewege den Joystick nach vorne, um zu fliegen.	Spanish version of clip 32	French version of clip 32
-TutorialClip33	You will steer with your head.	Du wirst mit Deinem Kopf steuern.	Spanish version of clip 33	French version of clip 33
-TutorialClip34	Push the trigger for the stealth mode.	Drücke den Trigger, für den Durchblicktrick.	Spanish version of clip 34	French version of clip 34
-TutorialClip35	With the home button to set yourself in position again.	Mit dem Homebutton kannst Du Dich richtig positionieren.	Spanish version of clip 35	French version of clip 35
-TutorialClip36	Push the menu button to open the menu.	Drücke den Menu Knopf, um das Menu zu öffnen.	Spanish version of clip 36	French version of clip 36
+TutorialClip33	Steer with your head.	Du wirst mit Deinem Kopf steuern.	Spanish version of clip 33	French version of clip 33
+TutorialClip34	Pull the trigger for Stealth Mode.	Drücke den Trigger, für den Durchblicktrick.	Spanish version of clip 34	French version of clip 34
+PressMenuButton	You have completed the Controller tour! Press the menu button to return.	(G) You have completed the Controller tour! Press the menu button to return.	(S) You have completed the Controller tour! Press the menu button to return.	(F) You have completed the Controller tour! Press the menu button to return.

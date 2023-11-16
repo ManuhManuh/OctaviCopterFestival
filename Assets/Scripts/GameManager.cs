@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public bool restartRequested = false;
     public bool runningTutorial = false;
+
+    public bool runningControllerTour = false; //
     
 
     [SerializeField] private InputActionReference startLevelActionReference;
@@ -31,6 +33,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float timeBetweenLevels;
     [SerializeField] private float timeBeforeRestartAllowed;
     [SerializeField] private GameObject tutorialPrefab;
+    [SerializeField] private GameObject controllerTourPrefab;
     [SerializeField] private GameObject backgroundAsset;
     [SerializeField] private ParticleSystem fireworks;
     [SerializeField] private AudioSource endingSong;
@@ -50,6 +53,8 @@ public class GameManager : MonoBehaviour
     private bool tutorialCompleted = false;
     private bool tutorialSuccessful = false;
     private GameObject tutorial;
+
+    private GameObject controllerTour; //
 
     private void Awake()
     {
@@ -83,7 +88,7 @@ public class GameManager : MonoBehaviour
         endingSong.gameObject.SetActive(false);
         uiDisplay = GameObject.FindObjectOfType<UIDisplay>();
         restartAllowed = true;
-        if (!runningTutorial)
+        if (!runningTutorial && !runningControllerTour)
         {
             currentFeedbackText = "StartPrompt";
             SendMessageToUI();
@@ -95,7 +100,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (runningTutorial)
+        if (runningTutorial || runningControllerTour) // 
         {
             if (currentFeedbackText != "")
             {
@@ -115,7 +120,6 @@ public class GameManager : MonoBehaviour
 
             }
         }
-        
     }
 
     public void RunTutorial()
@@ -138,6 +142,28 @@ public class GameManager : MonoBehaviour
         }
 
         tutorial = Instantiate(tutorialPrefab, Vector3.zero, Quaternion.identity);
+
+    }
+
+    public void RunControllerTour()
+    {
+        if (runningControllerTour)
+        {
+            // if tutorial is already running, destroy it
+            if (currentLevelManager != null)
+            {
+                Destroy(currentLevelManager.gameObject);
+                Destroy(controllerTour.gameObject);
+                
+            }
+
+        }
+        else
+        {
+            runningControllerTour = true;
+        }
+
+        controllerTour = Instantiate(controllerTourPrefab, Vector3.zero, Quaternion.identity);
 
     }
 

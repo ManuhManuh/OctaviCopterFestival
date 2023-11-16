@@ -1,0 +1,46 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using static Tutorial;
+
+public class CSTour : MonoBehaviour
+{
+    public enum CSTourState
+    {
+        None,
+        XAStart,
+        YBChoose,
+        TriggerTrick,
+        MenuButton,
+        HomeButton
+    }
+
+    [SerializeField] AudioSource audioSource;
+    
+
+    [SerializeField] GameObject CSTourPrefab;
+
+    private GameManager gameManager;
+    public CSTourState currentState;
+
+    private AudioClip[] currentClipArray;
+    private UIDisplay uiDisplay;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+
+        currentState = CSTourState.None;
+        GotoCSTourState(CSTourState.Introduction);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        switch (currentState)
+        {
+            case CSTourState.WaitingForReset
+        }    
+    }
+}

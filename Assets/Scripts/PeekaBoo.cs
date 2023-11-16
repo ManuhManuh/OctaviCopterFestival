@@ -25,7 +25,7 @@ public class PeekaBoo : MonoBehaviour
 
     private void Update()
     {
-        if(gameManager.CurrentLevelManager != null || gameManager.runningTutorial)
+        if(gameManager.CurrentLevelManager != null || gameManager.runningTutorial || gameManager.runningControllerTour) //
         {
             float leftTriggerValue = leftTriggerReference.action.ReadValue<float>();
             float rightTriggerValue = rightTriggerReference.action.ReadValue<float>();
