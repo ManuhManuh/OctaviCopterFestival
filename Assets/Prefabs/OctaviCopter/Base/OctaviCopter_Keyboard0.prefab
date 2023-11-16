@@ -430,9 +430,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   peekDuration: 1
   peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
-  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+  leftTriggerReference: {fileID: -4289430672226363583, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+  rightTriggerReference: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
 --- !u!1 &2369292633948301912
 GameObject:
@@ -864,9 +864,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   peekDuration: 1
   peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
-  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+  leftTriggerReference: {fileID: -4289430672226363583, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+  rightTriggerReference: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
 --- !u!1 &2546109231392215409
 GameObject:
@@ -1298,9 +1298,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   peekDuration: 1
   peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
-  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+  leftTriggerReference: {fileID: -4289430672226363583, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+  rightTriggerReference: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
 --- !u!1 &2832769404463972098
 GameObject:
@@ -1680,9 +1680,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   peekDuration: 1
   peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
-  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+  leftTriggerReference: {fileID: -4289430672226363583, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+  rightTriggerReference: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
 --- !u!1 &4092661189020154968
 GameObject:
@@ -2062,9 +2062,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   peekDuration: 1
   peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
-  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+  leftTriggerReference: {fileID: -4289430672226363583, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+  rightTriggerReference: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
 --- !u!1 &4872712461268846240
 GameObject:
@@ -2444,9 +2444,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   peekDuration: 1
   peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
-  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+  leftTriggerReference: {fileID: -4289430672226363583, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+  rightTriggerReference: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
 --- !u!1 &5087982575656383146
 GameObject:
@@ -2826,9 +2826,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   peekDuration: 1
   peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
-  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+  leftTriggerReference: {fileID: -4289430672226363583, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+  rightTriggerReference: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
 --- !u!1 &5099700924125233749
 GameObject:
@@ -3260,9 +3260,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   peekDuration: 1
   peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
-  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+  leftTriggerReference: {fileID: -4289430672226363583, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+  rightTriggerReference: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
 --- !u!1 &5250236006401276991
 GameObject:
@@ -3694,9 +3694,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   peekDuration: 1
   peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
-  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+  leftTriggerReference: {fileID: -4289430672226363583, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+  rightTriggerReference: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
 --- !u!1 &6474932610236511603
 GameObject:
@@ -4130,9 +4130,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   peekDuration: 1
   peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
-  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+  leftTriggerReference: {fileID: -4289430672226363583, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+  rightTriggerReference: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
 --- !u!1 &7892059080462213617
 GameObject:
@@ -4512,9 +4512,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   peekDuration: 1
   peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
-  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+  leftTriggerReference: {fileID: -4289430672226363583, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+  rightTriggerReference: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
 --- !u!1 &8203088029247546203
 GameObject:
@@ -4626,9 +4626,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   peekDuration: 1
   peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
-  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+  leftTriggerReference: {fileID: -4289430672226363583, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+  rightTriggerReference: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
 --- !u!1 &8570663407390828726
 GameObject:
@@ -5117,7 +5117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   peekDuration: 1
   peekaBooMaterial: {fileID: 2100000, guid: 0a44964621349d84b989dc3ea075f80a, type: 2}
-  leftGripReference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f,
+  leftTriggerReference: {fileID: -4289430672226363583, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  rightGripReference: {fileID: -1758520528963094988, guid: c348712bda248c246b8c49b3db54643f,
+  rightTriggerReference: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
